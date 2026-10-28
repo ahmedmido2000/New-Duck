@@ -182,20 +182,24 @@ export default function Services() {
       }
 
       const isMobile = window.innerWidth < 640;
-      const cardHeight = isMobile ? 360 : 400;
-      const peekOffset = isMobile ? 48 : 56;
+      const cardHeight = isMobile ? 335 : 365;
+      const containerHeight = isMobile ? 480 : 520;
+      const peekY = containerHeight - (isMobile ? 45 : 55);
       const stackGap = isMobile ? 12 : 15;
 
       // ── Step 1: Initial Positions ──
+      // Card 0 sits at resting top position (0 to cardHeight)
+      // Card 1 peeks at the bottom of the container, leaving ample clear space so Card 0's bottom row is 100% visible!
       gsap.set(cards[0], { y: 0 });
-      gsap.set(cards[1], { y: cardHeight - peekOffset });
+      gsap.set(cards[1], { y: peekY });
 
+      // Remaining cards (2..5) wait below the container frame
       for (let i = 2; i < cards.length; i++) {
-        gsap.set(cards[i], { y: cardHeight + 80 });
+        gsap.set(cards[i], { y: containerHeight + 80 });
       }
 
       // ── Step 2: Main Scrub Timeline Pinned to Main Page Scroll ──
-      const scrollDistancePerCard = window.innerHeight * 0.75;
+      const scrollDistancePerCard = window.innerHeight * 0.85;
       const totalScroll = scrollDistancePerCard * (cards.length - 1);
 
       const tl = gsap.timeline({
@@ -214,24 +218,32 @@ export default function Services() {
       for (let i = 1; i < cards.length; i++) {
         const targetY = i * stackGap;
 
+        // Dwell / Pause phase: keeps the current card 100% visible and readable before the next card starts moving
+        tl.to({}, { duration: 0.35 });
+
+        // Animate Card i from peek position up to its stacked position over the previous card
         tl.to(cards[i], {
           y: targetY,
-          ease: "none",
+          ease: "power1.inOut",
           duration: 1,
         });
 
+        // Simultaneously, bring Card i+1 into the peeking slot from below (if it exists)
         if (i + 1 < cards.length) {
           tl.to(
             cards[i + 1],
             {
-              y: cardHeight - peekOffset + (i * stackGap * 0.3),
-              ease: "none",
+              y: peekY,
+              ease: "power1.inOut",
               duration: 1,
             },
             "<"
           );
         }
       }
+
+      // Final dwell phase for the last card
+      tl.to({}, { duration: 0.4 });
     }, section);
 
     return () => ctx.revert();
@@ -284,10 +296,10 @@ export default function Services() {
 
           {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame (Left in RTL) ═══════════════ */}
           <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2 lg:order-2">
-            {/* Card Frame: clips cards outside its bounds, exactly like Masar Agency */}
+            {/* Card Frame: Extra height allows each active card to be 100% completely visible including button & description before next card starts rising */}
             <div
               ref={cardFrameRef}
-              className="relative w-full max-w-[540px] h-[410px] sm:h-[450px] overflow-hidden rounded-[30px] sm:rounded-[36px]"
+              className="relative w-full max-w-[540px] h-[480px] sm:h-[520px] overflow-hidden rounded-[30px] sm:rounded-[36px]"
             >
               {services.map((svc, index) => {
                 const zIndex = (index + 1) * 10;
@@ -303,7 +315,7 @@ export default function Services() {
                   >
                     {/* The Visual Card */}
                     <div
-                      className="group relative w-full h-[360px] sm:h-[400px] rounded-[26px] sm:rounded-[30px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden"
+                      className="group relative w-full h-[335px] sm:h-[365px] rounded-[26px] sm:rounded-[30px] p-6 sm:p-7 flex flex-col justify-between overflow-hidden"
                       style={{
                         background: svc.gradient,
                         border: `1.5px solid ${svc.borderColor}`,
@@ -312,7 +324,7 @@ export default function Services() {
                       }}
                     >
                       {/* Head Content */}
-                      <div className="relative z-10 flex flex-col items-start gap-3 sm:gap-4">
+                      <div className="relative z-10 flex flex-col items-start gap-2.5 sm:gap-3">
                         {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
                         <div
                           className="inline-block px-5 sm:px-6 py-1.5 sm:py-2 rounded-xl font-black text-xs sm:text-sm tracking-[4px] shadow-sm"
@@ -326,15 +338,15 @@ export default function Services() {
 
                         {/* Service Title */}
                         <h3
-                          className="text-xl sm:text-2xl lg:text-[32px] font-black leading-snug mt-1"
+                          className="text-xl sm:text-2xl lg:text-[28px] font-black leading-snug mt-1"
                           style={{ color: svc.titleColor }}
                         >
                           {svc.title}
                         </h3>
                       </div>
 
-                      {/* Body Content */}
-                      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 pt-4 border-t border-black/10 dark:border-white/10">
+                      {/* Body Content: Description + Read More Button fully visible! */}
+                      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-black/10 dark:border-white/10">
                         {/* Description */}
                         <p
                           className="text-xs sm:text-sm leading-relaxed max-w-full sm:max-w-[70%] font-medium"

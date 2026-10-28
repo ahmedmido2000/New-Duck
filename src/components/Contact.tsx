@@ -1,163 +1,162 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Headphones, Check } from "lucide-react";
 
 export default function Contact() {
   return (
     <section id="contact" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] relative overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-16">
-        {/* Contact Info Cards (Enters from Right) */}
+      <div className="max-w-6xl mx-auto flex flex-col gap-6 sm:gap-8">
+        {/* Header Block (Right-aligned, positioned directly above the cards) */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-          className="flex-1 w-full flex flex-col items-start gap-6 text-right"
+          transition={{ duration: 0.7 }}
+          className="w-full flex justify-start text-right"
         >
-          <div>
-            <span className="text-[#FF0A2B] font-extrabold text-base sm:text-lg block mb-2">
-              تواصل مباشر
-            </span>
+          <div className="flex flex-col items-start max-w-xl">
+            <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-sm sm:text-base mb-2">
+              <span className="w-5 h-[2px] bg-[#FF0A2B]" />
+              <span>تواصل مباشر</span>
+              <span className="w-5 h-[2px] bg-[#FF0A2B]" />
+            </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
               أينما كان نشاطك، نحن قريبون منك
             </h2>
           </div>
+        </motion.div>
 
-          {/* Egypt Branch */}
+        {/* Content Row: Cards on Right, Video on Left with EXACT same start and end height */}
+        <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-8">
+          {/* Cards Column (Enters from Right) */}
           <motion.div
-            whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
-            className="border border-[#3A0C15] rounded-2xl p-6 sm:p-7 bg-[#1A0509] flex flex-col gap-4 text-base sm:text-lg transition-all shadow-lg"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+            className="flex-1 w-full flex flex-col justify-between gap-4 sm:gap-5 text-right"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
-              <span className="font-black text-xl text-white flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
-                فرع جمهورية مصر العربية
-              </span>
-              <a
-                href="https://wa.me/201064544080"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs sm:text-sm text-[#FF0A2B] hover:underline flex items-center gap-1 font-bold"
-              >
-                <span>واتساب</span>
-                <MessageCircle className="w-4 h-4" />
-              </a>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-              <span className="font-extrabold text-[#FF0A2B]">رقم الهاتف:</span>
-              <a
-                href="tel:+201064544080"
-                className="hover:text-[#FF0A2B] transition-colors font-mono font-bold"
-                style={{ direction: "ltr" }}
-              >
-                +20 10 6454 4080
-              </a>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Mail className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-              <span className="font-extrabold text-[#FF0A2B]">البريد الإلكتروني:</span>
-              <a
-                href="mailto:hello@duckagency.com"
-                className="hover:text-[#FF0A2B] transition-colors font-sans"
-              >
-                hello@duckagency.com
-              </a>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-1" />
-              <div>
-                <span className="font-extrabold text-[#FF0A2B]">العنوان:</span>{" "}
-                <span className="text-neutral-200">
-                  مدينة 6 أكتوبر، الحصري، القاهرة
+            {/* Egypt Branch */}
+            <motion.div
+              whileHover={{ y: -3, borderColor: "#FF0A2B" }}
+              className="border border-[#FF0A2B]/40 rounded-2xl p-5 sm:p-6 bg-[#1A0509]/80 flex flex-col gap-3.5 text-base sm:text-lg transition-all shadow-lg"
+            >
+              <div className="flex items-center justify-between pb-2.5 border-b border-[#3A0C15]">
+                <span className="font-black text-lg sm:text-xl text-white">
+                  فرع جمهورية مصر العربية
                 </span>
+                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#FF0A2B]">
+                  <span>رئيسي</span>
+                  <Headphones className="w-4 h-4" />
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B] shrink-0" />
+                <span className="font-extrabold text-sm sm:text-base text-[#FF0A2B]">رقم الهاتف:</span>
+                <a
+                  href="tel:+201064544080"
+                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-sm sm:text-base"
+                  style={{ direction: "ltr" }}
+                >
+                  +20 10 4567 8900
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B] shrink-0" />
+                <span className="font-extrabold text-sm sm:text-base text-[#FF0A2B]">البريد الإلكتروني:</span>
+                <a
+                  href="mailto:info@duckagency.com"
+                  className="hover:text-[#FF0A2B] transition-colors font-sans text-sm sm:text-base"
+                >
+                  info@duckagency.com
+                </a>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
+                <div className="text-sm sm:text-base">
+                  <span className="font-extrabold text-[#FF0A2B]">العنوان:</span>{" "}
+                  <span className="text-neutral-200">
+                    مدينة نصر، القاهرة، مصر
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* KSA Branch */}
+            <motion.div
+              whileHover={{ y: -3, borderColor: "#FF0A2B" }}
+              className="border border-[#FF0A2B]/40 rounded-2xl p-5 sm:p-6 bg-[#1A0509]/80 flex flex-col gap-3.5 text-base sm:text-lg transition-all shadow-lg"
+            >
+              <div className="flex items-center justify-between pb-2.5 border-b border-[#3A0C15]">
+                <span className="font-black text-lg sm:text-xl text-white">
+                  فرع المملكة العربية السعودية
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#FF0A2B]">
+                  <span>شريك</span>
+                  <Headphones className="w-4 h-4" />
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B] shrink-0" />
+                <span className="font-extrabold text-sm sm:text-base text-[#FF0A2B]">رقم الهاتف:</span>
+                <a
+                  href="tel:+966579398098"
+                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-sm sm:text-base"
+                  style={{ direction: "ltr" }}
+                >
+                  +966 57 539 8099
+                </a>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
+                <div className="text-sm sm:text-base">
+                  <span className="font-extrabold text-[#FF0A2B]">العنوان:</span>{" "}
+                  <span className="text-neutral-200">
+                    طريق الملك فهد، حي العليا، الرياض
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Video Column (Starts and Ends at the EXACT same height as the cards) */}
+          <motion.div
+            initial={{ opacity: 0, x: -50, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+            className="flex-1 w-full flex flex-col self-stretch"
+          >
+            <div className="relative w-full h-full min-h-[340px] rounded-2xl overflow-hidden border border-[#FF0A2B]/40 bg-[#1A0509] shadow-2xl flex items-center justify-center">
+              <video
+                src="/videos/duck-contact.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="w-full h-full object-cover rounded-2xl relative z-10"
+              />
+
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#0D0204]/60 via-transparent to-transparent pointer-events-none z-20" />
+
+              {/* Bottom Left Badge: "التفاصيل في البيان" */}
+              <div className="absolute bottom-5 left-5 z-30 flex items-center gap-2 bg-[#0D0204]/85 backdrop-blur-md px-4 py-2 rounded-xl border border-[#FF0A2B]/50 shadow-glow-red">
+                <span className="text-xs sm:text-sm font-black text-white">
+                  التفاصيل في البيان
+                </span>
+                <Check className="w-4 h-4 text-[#FF0A2B]" />
               </div>
             </div>
           </motion.div>
-
-          {/* KSA Branch */}
-          <motion.div
-            whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
-            className="border border-[#3A0C15] rounded-2xl p-6 sm:p-7 bg-[#1A0509] flex flex-col gap-4 text-base sm:text-lg transition-all shadow-lg"
-          >
-            <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
-              <span className="font-black text-xl text-white flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
-                فرع المملكة العربية السعودية
-              </span>
-              <a
-                href="https://wa.me/966579398098"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs sm:text-sm text-[#FF0A2B] hover:underline flex items-center gap-1 font-bold"
-              >
-                <span>واتساب</span>
-                <MessageCircle className="w-4 h-4" />
-              </a>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-              <span className="font-extrabold text-[#FF0A2B]">رقم الهاتف:</span>
-              <a
-                href="tel:+966579398098"
-                className="hover:text-[#FF0A2B] transition-colors font-mono font-bold"
-                style={{ direction: "ltr" }}
-              >
-                +966 57 939 8098
-              </a>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-1" />
-              <div>
-                <span className="font-extrabold text-[#FF0A2B]">العنوان:</span>{" "}
-                <span className="text-neutral-200">
-                  طريق الملك فهد، حي العليا، الرياض
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Video with matching cards height and no audio (muted) */}
-        <motion.div
-          initial={{ opacity: 0, x: -50, scale: 0.95 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-          className="flex-1 w-full flex flex-col justify-end self-stretch"
-        >
-          <div className="relative w-full h-full min-h-[380px] sm:min-h-[440px] rounded-2xl overflow-hidden border border-[#3A0C15] bg-[#1A0509] shadow-2xl flex items-center justify-center">
-            {/* Ambient Red Glow */}
-            <div className="absolute -inset-1 bg-gradient-to-tr from-[#FF0A2B]/15 via-transparent to-[#7A0B1A]/20 blur-xl pointer-events-none" />
-
-            <video
-              src="/videos/duck-contact.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              className="w-full h-full object-cover rounded-2xl relative z-10"
-            />
-
-            {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#0D0204]/70 via-transparent to-transparent pointer-events-none z-20" />
-
-            {/* Floating Location Pill */}
-            <div className="absolute bottom-5 right-5 z-30 flex items-center gap-2 bg-[#0D0204]/85 backdrop-blur-md px-4 py-2 rounded-full border border-[#FF0A2B]/40 shadow-glow-red">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
-              <span className="text-xs sm:text-sm font-black text-white">
-                القاهرة · الرياض · دبي
-              </span>
-            </div>
-          </div>
-        </motion.div>
+        </div>
 
         {/* Commented out original circle:
         <motion.div

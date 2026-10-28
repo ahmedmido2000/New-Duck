@@ -182,7 +182,7 @@ export default function Services() {
       }
 
       const isMobile = window.innerWidth < 640;
-      const containerHeight = isMobile ? 440 : 480;
+      const containerHeight = isMobile ? 470 : 510;
       const stackGap = isMobile ? 12 : 14;
 
       // ── Step 1: Initial Positions ──
@@ -281,10 +281,10 @@ export default function Services() {
 
           {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame (Left in RTL) ═══════════════ */}
           <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2 lg:order-2">
-            {/* Card Frame: clips cards outside its bounds, guaranteeing clean entry from bottom */}
+            {/* Card Frame: Extra vertical height guarantees full button visibility on all stacked cards */}
             <div
               ref={cardFrameRef}
-              className="relative w-full max-w-[540px] h-[440px] sm:h-[480px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
+              className="relative w-full max-w-[540px] h-[470px] sm:h-[510px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
             >
               {services.map((svc, index) => {
                 const zIndex = (index + 1) * 10;
@@ -300,7 +300,7 @@ export default function Services() {
                   >
                     {/* The Visual Card: Compact, perfectly proportioned so button & description are always 100% visible */}
                     <div
-                      className="group relative w-full h-[320px] sm:h-[345px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
+                      className="group relative w-full h-[295px] sm:h-[315px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
                       style={{
                         background: svc.gradient,
                         border: `1.5px solid ${svc.borderColor}`,

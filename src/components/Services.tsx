@@ -176,26 +176,23 @@ export default function Services() {
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
         cards.forEach((card, i) => {
-          gsap.set(card, { y: i * 15 });
+          gsap.set(card, { y: i * 14 });
         });
         return;
       }
 
       const isMobile = window.innerWidth < 640;
-      const cardHeight = isMobile ? 335 : 365;
-      const containerHeight = isMobile ? 480 : 520;
-      const peekY = containerHeight - (isMobile ? 45 : 55);
-      const stackGap = isMobile ? 12 : 15;
+      const containerHeight = isMobile ? 440 : 480;
+      const stackGap = isMobile ? 12 : 14;
 
       // ── Step 1: Initial Positions ──
-      // Card 0 sits at resting top position (0 to cardHeight)
-      // Card 1 peeks at the bottom of the container, leaving ample clear space so Card 0's bottom row is 100% visible!
+      // Card 0 rests at y: 0. It is 100% visible with its button and description completely unobstructed!
       gsap.set(cards[0], { y: 0 });
-      gsap.set(cards[1], { y: peekY });
 
-      // Remaining cards (2..5) wait below the container frame
-      for (let i = 2; i < cards.length; i++) {
-        gsap.set(cards[i], { y: containerHeight + 80 });
+      // All remaining cards (1..5) wait completely below the container frame!
+      // No card peeks inside the viewing area, guaranteeing ZERO overlap on any button!
+      for (let i = 1; i < cards.length; i++) {
+        gsap.set(cards[i], { y: containerHeight + 40 });
       }
 
       // ── Step 2: Main Scrub Timeline Pinned to Main Page Scroll ──
@@ -218,32 +215,20 @@ export default function Services() {
       for (let i = 1; i < cards.length; i++) {
         const targetY = i * stackGap;
 
-        // Dwell / Pause phase: keeps the current card 100% visible and readable before the next card starts moving
-        tl.to({}, { duration: 0.35 });
+        // 1. Dwell Phase: The current card remains 100% fully visible, readable, and clickable with its button
+        // before the next card even starts moving!
+        tl.to({}, { duration: 0.45 });
 
-        // Animate Card i from peek position up to its stacked position over the previous card
+        // 2. Rising Phase: Card i enters from below the container and slides smoothly over the previous card
         tl.to(cards[i], {
           y: targetY,
-          ease: "power1.inOut",
-          duration: 1,
+          ease: "power2.inOut",
+          duration: 1.0,
         });
-
-        // Simultaneously, bring Card i+1 into the peeking slot from below (if it exists)
-        if (i + 1 < cards.length) {
-          tl.to(
-            cards[i + 1],
-            {
-              y: peekY,
-              ease: "power1.inOut",
-              duration: 1,
-            },
-            "<"
-          );
-        }
       }
 
       // Final dwell phase for the last card
-      tl.to({}, { duration: 0.4 });
+      tl.to({}, { duration: 0.6 });
     }, section);
 
     return () => ctx.revert();
@@ -296,10 +281,10 @@ export default function Services() {
 
           {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame (Left in RTL) ═══════════════ */}
           <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2 lg:order-2">
-            {/* Card Frame: Extra height allows each active card to be 100% completely visible including button & description before next card starts rising */}
+            {/* Card Frame: clips cards outside its bounds, guaranteeing clean entry from bottom */}
             <div
               ref={cardFrameRef}
-              className="relative w-full max-w-[540px] h-[480px] sm:h-[520px] overflow-hidden rounded-[30px] sm:rounded-[36px]"
+              className="relative w-full max-w-[540px] h-[440px] sm:h-[480px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
             >
               {services.map((svc, index) => {
                 const zIndex = (index + 1) * 10;
@@ -313,21 +298,21 @@ export default function Services() {
                     className="absolute inset-x-0 top-0 will-change-transform"
                     style={{ zIndex }}
                   >
-                    {/* The Visual Card */}
+                    {/* The Visual Card: Compact, perfectly proportioned so button & description are always 100% visible */}
                     <div
-                      className="group relative w-full h-[335px] sm:h-[365px] rounded-[26px] sm:rounded-[30px] p-6 sm:p-7 flex flex-col justify-between overflow-hidden"
+                      className="group relative w-full h-[320px] sm:h-[345px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
                       style={{
                         background: svc.gradient,
                         border: `1.5px solid ${svc.borderColor}`,
                         boxShadow:
-                          "0 -10px 30px rgba(0, 0, 0, 0.65), 0 16px 36px rgba(0, 0, 0, 0.45)",
+                          "0 -10px 28px rgba(0, 0, 0, 0.65), 0 14px 32px rgba(0, 0, 0, 0.45)",
                       }}
                     >
                       {/* Head Content */}
-                      <div className="relative z-10 flex flex-col items-start gap-2.5 sm:gap-3">
+                      <div className="relative z-10 flex flex-col items-start gap-2 sm:gap-2.5">
                         {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
                         <div
-                          className="inline-block px-5 sm:px-6 py-1.5 sm:py-2 rounded-xl font-black text-xs sm:text-sm tracking-[4px] shadow-sm"
+                          className="inline-block px-4 sm:px-5 py-1 sm:py-1.5 rounded-lg font-black text-xs sm:text-xs tracking-[3px] shadow-sm"
                           style={{
                             backgroundColor: svc.pillBg,
                             color: svc.pillColor,
@@ -338,18 +323,18 @@ export default function Services() {
 
                         {/* Service Title */}
                         <h3
-                          className="text-xl sm:text-2xl lg:text-[28px] font-black leading-snug mt-1"
+                          className="text-lg sm:text-2xl font-black leading-snug mt-0.5"
                           style={{ color: svc.titleColor }}
                         >
                           {svc.title}
                         </h3>
                       </div>
 
-                      {/* Body Content: Description + Read More Button fully visible! */}
+                      {/* Body Content: Description + Read More Button 100% visible and unobstructed */}
                       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-black/10 dark:border-white/10">
                         {/* Description */}
                         <p
-                          className="text-xs sm:text-sm leading-relaxed max-w-full sm:max-w-[70%] font-medium"
+                          className="text-xs sm:text-[13px] leading-relaxed max-w-full sm:max-w-[70%] font-medium"
                           style={{ color: svc.descColor }}
                         >
                           {svc.description}
@@ -359,14 +344,14 @@ export default function Services() {
                         <button
                           type="button"
                           onClick={() => setActiveModal(svc)}
-                          className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-xs transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
                           style={{
                             backgroundColor: svc.btnBg,
                             color: svc.btnColor,
                           }}
                         >
                           <span>اقرأ المزيد</span>
-                          <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover/btn:-translate-x-1" />
+                          <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover/btn:-translate-x-1" />
                         </button>
                       </div>
                     </div>

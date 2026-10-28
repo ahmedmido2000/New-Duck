@@ -182,22 +182,31 @@ export default function Services() {
       }
 
       const isMobile = window.innerWidth < 640;
-      const containerHeight = isMobile ? 440 : 480;
+      const cardHeight = isMobile ? 310 : 335;
+      const containerHeight = isMobile ? 435 : 475;
       const stackGap = isMobile ? 12 : 14;
 
+      // Calculate tight peek position for the incoming card so cards are close to each other
+      // while ensuring the docked card's button is 100% visible
+      const getPeekY = (cardIndex: number) => {
+        const prevCardBottom = (cardIndex - 1) * stackGap + cardHeight;
+        return Math.min(containerHeight - 55, prevCardBottom + 12);
+      };
+
       // ── Step 1: Initial Positions ──
-      // Card 0 rests at y: 0. It is 100% visible with its button and description completely unobstructed!
+      // Card 0 rests at y: 0. Its button and description are 100% visible!
       gsap.set(cards[0], { y: 0 });
 
-      // All remaining cards (1..5) wait completely below the container frame!
-      // No card peeks inside the viewing area, guaranteeing ZERO overlap on any button!
-      for (let i = 1; i < cards.length; i++) {
-        gsap.set(cards[i], { y: containerHeight + 40 });
+      // Card 1 peeks immediately below Card 0 (close to each other, exactly like Image 1!)
+      gsap.set(cards[1], { y: getPeekY(1) });
+
+      // Cards 2..5 wait below the container
+      for (let i = 2; i < cards.length; i++) {
+        gsap.set(cards[i], { y: containerHeight + 80 });
       }
 
-      // ── Step 2: Main Scrub Timeline Pinned to Main Page Scroll ──
-      // Fast, snappy, responsive scroll distance per card (~340px)
-      const scrollDistancePerCard = Math.min(window.innerHeight * 0.36, 360);
+      // ── Step 2: Responsive, Fast, Snappy Scrub Timeline ──
+      const scrollDistancePerCard = Math.min(window.innerHeight * 0.42, 380);
       const totalScroll = scrollDistancePerCard * (cards.length - 1);
 
       const tl = gsap.timeline({
@@ -216,16 +225,32 @@ export default function Services() {
       for (let i = 1; i < cards.length; i++) {
         const targetY = i * stackGap;
 
-        // Card i slides smoothly and immediately from below into its stacked position
+        // Dwell phase: Card (i - 1) stays visible with button clearly visible
+        tl.to({}, { duration: 0.2 });
+
+        // Card i slides up from its peek position into its docked stack slot
         tl.to(cards[i], {
           y: targetY,
-          ease: "none",
+          ease: "power1.inOut",
           duration: 1.0,
         });
+
+        // Simultaneously, if there is a next card (i + 1), bring it smoothly into its peek position!
+        if (i + 1 < cards.length) {
+          tl.to(
+            cards[i + 1],
+            {
+              y: getPeekY(i + 1),
+              ease: "power1.inOut",
+              duration: 1.0,
+            },
+            "<" // Run in parallel so cards are always close to each other
+          );
+        }
       }
 
-      // Small smooth buffer for the last card before natural unpinning
-      tl.to({}, { duration: 0.15 });
+      // Small unpin cushion
+      tl.to({}, { duration: 0.25 });
     }, section);
 
     return () => ctx.revert();
@@ -278,10 +303,10 @@ export default function Services() {
 
           {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame (Left in RTL) ═══════════════ */}
           <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2 lg:order-2">
-            {/* Card Frame: clips cards outside its bounds, guaranteeing clean entry from bottom */}
+            {/* Card Frame: Clips cards outside its bounds, keeping cards close and cohesive */}
             <div
               ref={cardFrameRef}
-              className="relative w-full max-w-[540px] h-[440px] sm:h-[480px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
+              className="relative w-full max-w-[540px] h-[435px] sm:h-[475px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
             >
               {services.map((svc, index) => {
                 const zIndex = (index + 1) * 10;
@@ -295,9 +320,9 @@ export default function Services() {
                     className="absolute inset-x-0 top-0 will-change-transform"
                     style={{ zIndex }}
                   >
-                    {/* The Visual Card: Compact, perfectly proportioned so button & description are always 100% visible */}
+                    {/* The Visual Card: Compact, cohesive spacing, button 100% visible */}
                     <div
-                      className="group relative w-full h-[320px] sm:h-[345px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
+                      className="group relative w-full h-[310px] sm:h-[335px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
                       style={{
                         background: svc.gradient,
                         border: `1.5px solid ${svc.borderColor}`,
@@ -309,7 +334,7 @@ export default function Services() {
                       <div className="relative z-10 flex flex-col items-start gap-2 sm:gap-2.5">
                         {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
                         <div
-                          className="inline-block px-4 sm:px-5 py-1 sm:py-1.5 rounded-lg font-black text-xs sm:text-xs tracking-[3px] shadow-sm"
+                          className="inline-block px-4 sm:px-5 py-1 sm:py-1.5 rounded-lg font-black text-xs tracking-[3px] shadow-sm"
                           style={{
                             backgroundColor: svc.pillBg,
                             color: svc.pillColor,
@@ -327,7 +352,7 @@ export default function Services() {
                         </h3>
                       </div>
 
-                      {/* Body Content: Description + Read More Button 100% visible and unobstructed */}
+                      {/* Body Content: Description + Read More Button fully visible and unobstructed */}
                       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-black/10 dark:border-white/10">
                         {/* Description */}
                         <p

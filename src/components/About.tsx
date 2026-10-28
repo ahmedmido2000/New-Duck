@@ -5,15 +5,15 @@ import { Target, CheckCircle2, Compass } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0D0204] relative overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+    <section id="about" className="py-20 sm:py-28 bg-[#0D0204] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
         {/* Text Content (Enters from Right) */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-          className="flex-1 flex flex-col gap-6 text-right"
+          className="flex-1 w-full flex flex-col items-start gap-6 text-right"
         >
           <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg">
             <Compass className="w-5 h-5" />
@@ -30,13 +30,13 @@ export default function About() {
 
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-[#FF0A2B] text-white py-3.5 px-6 rounded-xl font-extrabold text-base sm:text-xl text-center shadow-glow-red shimmer-hover cursor-default"
+            className="w-full bg-[#FF0A2B] text-white py-3.5 px-6 rounded-xl font-extrabold text-base sm:text-xl text-center shadow-glow-red shimmer-hover cursor-default"
           >
             هدفنا أن نكون الشريك الذي يسير معك في المسار الصحيح
           </motion.div>
 
           {/* Core Values */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 w-full">
             <motion.div
               whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
               className="flex items-start gap-3 bg-[#1A0509] p-4 rounded-xl border border-[#3A0C15] transition-all"

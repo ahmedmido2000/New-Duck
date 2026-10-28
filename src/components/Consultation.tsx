@@ -35,8 +35,8 @@ export default function Consultation() {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#12030A] to-[#3A0610] text-center overflow-hidden">
-      <div className="max-w-4xl mx-auto flex flex-col items-center">
+    <section id="faq" className="py-20 sm:py-28 bg-gradient-to-b from-[#12030A] to-[#3A0610] text-center overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Kicker */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

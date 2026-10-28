@@ -34,7 +34,7 @@ export default function Hero() {
     <section
       ref={heroRef}
       id="top"
-      className="relative min-h-[94vh] flex items-center justify-center pt-28 pb-20 sm:pt-36 sm:pb-28 px-4 sm:px-8 lg:px-16 overflow-hidden"
+      className="relative min-h-[94vh] flex items-center justify-center pt-28 pb-20 sm:pt-36 sm:pb-28 overflow-hidden"
       style={{
         background:
           "radial-gradient(ellipse at 20% 80%, #3A0610 0%, #0D0204 68%)",
@@ -136,7 +136,8 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-5xl mx-auto w-full flex flex-col items-start gap-6 sm:gap-8"      >
+        className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col items-start gap-6 sm:gap-8"
+      >
         {/* Kicker Tag */}
         <motion.div
           variants={itemVariants}

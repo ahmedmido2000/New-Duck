@@ -13,8 +13,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0A0103] border-t border-[#3A0C15] py-16 px-4 sm:px-8 lg:px-16 text-neutral-300 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <footer className="bg-[#0A0103] border-t border-[#3A0C15] py-16 text-neutral-300 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-14 text-right">
           {/* Brand Info */}

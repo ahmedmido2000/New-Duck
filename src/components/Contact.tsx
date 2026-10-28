@@ -5,15 +5,15 @@ import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#12030A] relative overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+    <section id="contact" className="py-20 sm:py-28 bg-[#12030A] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
         {/* Contact Info Cards (Enters from Right) */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-          className="flex-1 w-full flex flex-col gap-6 text-right"
+          className="flex-1 w-full flex flex-col items-start gap-6 text-right"
         >
           <div>
             <span className="text-[#FF0A2B] font-extrabold text-base sm:text-lg block mb-2">

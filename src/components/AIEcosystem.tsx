@@ -14,8 +14,8 @@ export default function AIEcosystem() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0D0204] relative overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col items-center">
+    <section className="py-20 sm:py-28 bg-[#0D0204] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -44,7 +44,7 @@ export default function AIEcosystem() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
-          className="w-full max-w-5xl overflow-hidden rounded-2xl bg-[#12030A]/40 border border-[#3A0C15]/70 p-2 sm:p-6 shadow-2xl relative"
+          className="w-full overflow-hidden rounded-2xl bg-[#12030A]/40 border border-[#3A0C15]/70 p-2 sm:p-6 shadow-2xl relative"
         >
           {/* Ambient Corner Glows */}
           <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF0A2B]/10 rounded-full blur-3xl pointer-events-none" />

@@ -40,8 +40,8 @@ export default function Integrations() {
   };
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#0D0204] border-t border-[#3A0C15]/50 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 sm:py-24 bg-[#0D0204] border-t border-[#3A0C15]/50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

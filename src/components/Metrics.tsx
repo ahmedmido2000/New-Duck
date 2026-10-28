@@ -29,8 +29,8 @@ export default function Metrics() {
   };
 
   return (
-    <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#0D0204] overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 sm:py-24 bg-[#0D0204] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"

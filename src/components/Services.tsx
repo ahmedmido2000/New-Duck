@@ -93,15 +93,15 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#12030A] relative overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section id="services" className="py-20 sm:py-28 bg-[#12030A] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Block */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-          className="flex flex-col gap-5 max-w-3xl mb-14 sm:mb-20 text-right"
+          className="flex flex-col items-start gap-5 max-w-3xl mb-14 sm:mb-20 text-right"
         >
           <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg">
             <Sparkles className="w-5 h-5" />

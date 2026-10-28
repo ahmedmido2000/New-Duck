@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Lightbulb, CheckCheck, Headphones } from "lucide-react";
 
 export default function Features() {
@@ -18,39 +19,49 @@ export default function Features() {
     },
     {
       num: "03",
-      title: "دعم مستمر",
+      title: "دعم مستمر وشراكة حقيقية",
       desc: "متابعة وتقارير وتحسين دائم لضمان استمرار نجاح مشروعك ونموه على المدى الطويل.",
       icon: Headphones,
     },
   ];
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A]">
+    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] overflow-hidden">
       <div className="max-w-6xl mx-auto border border-[#3A0C15] rounded-3xl overflow-hidden bg-[#0D0204]/60 shadow-2xl">
         <div className="flex flex-col lg:flex-row items-stretch">
           {/* Features Side */}
           <div className="flex-1 flex flex-col justify-between">
             {/* Heading Header */}
-            <div className="p-6 sm:p-10 border-b border-[#3A0C15]">
-              <h2 className="text-3xl sm:text-5xl font-black text-[#FF0A2B] mb-3">
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="p-6 sm:p-10 border-b border-[#3A0C15]"
+            >
+              <h2 className="text-3xl sm:text-5xl font-black text-[#FF0A2B] mb-3 text-glow-red">
                 مميزات تصنع الفرق
               </h2>
               <p className="text-base sm:text-lg text-[#C9A4A8] leading-relaxed max-w-xl">
                 نحوّل أفكارك إلى مشاريع ناجحة بخدمات احترافية تجمع بين الإبداع الفني والتقنية المتطورة والاستراتيجية المدروسة.
               </p>
-            </div>
+            </motion.div>
 
             {/* Features 01 & 02 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x sm:divide-x-reverse divide-[#3A0C15] border-b border-[#3A0C15]">
-              {features.slice(0, 2).map((item) => {
+              {features.slice(0, 2).map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <div
+                  <motion.div
                     key={item.num}
-                    className="p-6 sm:p-8 flex flex-col gap-3.5 hover:bg-[#FF0A2B]/5 transition-colors group"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: idx * 0.15 }}
+                    className="p-6 sm:p-8 flex flex-col gap-3.5 hover:bg-[#FF0A2B]/5 transition-colors group cursor-default"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8A0F20] to-[#2A0309] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-md">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8A0F20] to-[#2A0309] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-md group-hover:scale-110 transition-transform">
                         {item.num}
                       </div>
                       <Icon className="w-6 h-6 text-[#6C4B50] group-hover:text-[#FF0A2B] transition-colors" />
@@ -61,14 +72,20 @@ export default function Features() {
                     <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
                       {item.desc}
                     </p>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
 
             {/* Feature 03 */}
-            <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:bg-[#FF0A2B]/5 transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8A0F20] to-[#2A0309] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-md shrink-0">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:bg-[#FF0A2B]/5 transition-colors group cursor-default"
+            >
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8A0F20] to-[#2A0309] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-md shrink-0 group-hover:scale-110 transition-transform">
                 03
               </div>
               <div className="flex-1">
@@ -79,10 +96,10 @@ export default function Features() {
                   متابعة ودعم دائم لضمان نجاح مشروعك، مع تقارير أداء دورية واجتماعات استراتيجية منتظمة.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Cybernetic AI Visual Side */}
+          {/* Cybernetic AI Visual Side with Animated Scanline */}
           <div className="lg:w-[420px] min-h-[340px] sm:min-h-[420px] bg-[#12030A] border-t lg:border-t-0 lg:border-r border-[#3A0C15] relative flex items-center justify-center p-8 overflow-hidden">
             {/* Scanlines Background Effect */}
             <div
@@ -92,6 +109,9 @@ export default function Features() {
                   "repeating-linear-gradient(0deg, rgba(255,10,43,0.15) 0px, rgba(255,10,43,0.15) 1px, transparent 1px, transparent 6px)",
               }}
             />
+
+            {/* Moving Laser Beam Sweep */}
+            <div className="absolute inset-x-0 h-10 bg-gradient-to-b from-transparent via-[#FF0A2B]/20 to-transparent animate-scanline pointer-events-none" />
 
             {/* Radial Core Glow */}
             <div className="absolute w-64 h-64 bg-[#FF0A2B]/20 rounded-full blur-3xl pointer-events-none" />
@@ -155,7 +175,7 @@ export default function Features() {
                 />
               </svg>
 
-              <div className="mt-4 font-mono text-xs tracking-widest text-[#FF0A2B] bg-[#2A0509] px-3 py-1 rounded-full border border-[#FF0A2B]/30">
+              <div className="mt-4 font-mono text-xs tracking-widest text-[#FF0A2B] bg-[#2A0509] px-3.5 py-1 rounded-full border border-[#FF0A2B]/30 shadow-glow-red">
                 AI PERFORMANCE MONITOR
               </div>
               <div className="text-white font-extrabold text-base mt-2">

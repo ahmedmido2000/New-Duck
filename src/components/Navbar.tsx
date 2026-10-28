@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowLeft, MessageCircle } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,10 +44,13 @@ export default function Navbar() {
   ];
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0D0204]/90 backdrop-blur-md border-b border-[#3A0C15]/70 py-3 sm:py-4 shadow-lg shadow-black/40"
+          ? "bg-[#0D0204]/90 backdrop-blur-md border-b border-[#3A0C15]/80 py-3 sm:py-4 shadow-lg shadow-black/40"
           : "bg-transparent py-4 sm:py-6"
       }`}
     >
@@ -53,12 +58,20 @@ export default function Navbar() {
         {/* Brand Logo */}
         <Link
           href="#top"
-          className="text-3xl sm:text-4xl font-black tracking-tight select-none focus:outline-none"
+          className="group text-3xl sm:text-4xl font-black tracking-tight select-none focus:outline-none flex items-center"
           style={{ direction: "ltr" }}
           aria-label="Duck Agency"
         >
-          <span className="text-[#FF0A2B]">d</span>
-          <span className="text-white">uck</span>
+          <motion.span
+            whileHover={{ scale: 1.15, rotate: -5 }}
+            transition={{ type: "spring", stiffness: 300, damping: 10 }}
+            className="text-[#FF0A2B] inline-block text-glow-red"
+          >
+            d
+          </motion.span>
+          <span className="text-white group-hover:text-neutral-200 transition-colors">
+            uck
+          </span>
         </Link>
 
         {/* Desktop Navigation Links */}
@@ -72,32 +85,36 @@ export default function Navbar() {
               <a
                 key={link.id}
                 href={link.href}
-                className={`relative py-1 transition-colors duration-200 ${
+                className={`relative py-1 transition-colors duration-200 group ${
                   isActive
                     ? "text-[#FF0A2B]"
                     : "text-neutral-300 hover:text-white"
                 }`}
               >
-                {link.name}
+                <span>{link.name}</span>
                 {isActive && (
-                  <span className="absolute bottom-0 right-0 left-0 h-[2px] bg-[#FF0A2B] rounded-full animate-fadeIn" />
+                  <motion.span
+                    layoutId="activeNavIndicator"
+                    className="absolute bottom-0 right-0 left-0 h-[2.5px] bg-[#FF0A2B] rounded-full shadow-glow-red"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
                 )}
               </a>
             );
           })}
         </nav>
 
-        {/* CTA Button (Desktop) */}
+        {/* CTA Button (Desktop) with Magnetic Effect */}
         <div className="hidden sm:flex items-center gap-3">
-          <a
+          <MagneticButton
             href="https://wa.me/201064544080"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 bg-[#7A0B1A] hover:bg-[#FF0A2B] text-white px-5 py-2.5 rounded-lg font-bold text-sm lg:text-base transition-all duration-300 shadow-md hover:shadow-[#FF0A2B]/30 hover:-translate-y-0.5 active:translate-y-0"
+            className="group flex items-center gap-2 bg-[#7A0B1A] hover:bg-[#FF0A2B] text-white px-5 py-2.5 rounded-lg font-bold text-sm lg:text-base transition-all duration-300 shadow-glow-red shimmer-hover"
           >
             <span>ابدأ مسارك الآن</span>
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          </a>
+          </MagneticButton>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -112,48 +129,57 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      <div
-        className={`md:hidden fixed inset-x-0 top-[65px] sm:top-[75px] bg-[#12030A]/95 backdrop-blur-xl border-b border-[#3A0C15] transition-all duration-300 ease-in-out overflow-hidden ${
-          isOpen ? "max-h-[420px] opacity-100 shadow-2xl py-6" : "max-h-0 opacity-0 py-0 border-none"
-        }`}
-      >
-        <div className="flex flex-col px-6 gap-4">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <a
-                key={link.id}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between py-2.5 px-3 rounded-lg text-lg font-bold transition-all ${
-                  isActive
-                    ? "text-[#FF0A2B] bg-[#2A0509]"
-                    : "text-neutral-200 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                <span>{link.name}</span>
-                {isActive && (
-                  <span className="w-2 h-2 rounded-full bg-[#FF0A2B]" />
-                )}
-              </a>
-            );
-          })}
+      {/* Mobile Drawer Menu with AnimatePresence */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
+            className="md:hidden bg-[#12030A]/95 backdrop-blur-xl border-b border-[#3A0C15] overflow-hidden shadow-2xl"
+          >
+            <div className="flex flex-col px-6 py-6 gap-3">
+              {navLinks.map((link, idx) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <motion.a
+                    key={link.id}
+                    href={link.href}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center justify-between py-2.5 px-3 rounded-lg text-lg font-bold transition-all ${
+                      isActive
+                        ? "text-[#FF0A2B] bg-[#2A0509]"
+                        : "text-neutral-200 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    {isActive && (
+                      <span className="w-2 h-2 rounded-full bg-[#FF0A2B] shadow-glow-red" />
+                    )}
+                  </motion.a>
+                );
+              })}
 
-          <div className="pt-2 border-t border-[#3A0C15] mt-2">
-            <a
-              href="https://wa.me/201064544080"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 w-full bg-[#FF0A2B] hover:bg-[#E00020] text-white py-3 rounded-lg font-extrabold text-base transition-colors shadow-lg shadow-[#FF0A2B]/20"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>ابدأ مسارك الآن عبر واتساب</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
+              <div className="pt-3 border-t border-[#3A0C15] mt-2">
+                <a
+                  href="https://wa.me/201064544080"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full bg-[#FF0A2B] hover:bg-[#E00020] text-white py-3 rounded-lg font-extrabold text-base transition-colors shadow-glow-red shimmer-hover"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span>ابدأ مسارك الآن عبر واتساب</span>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }

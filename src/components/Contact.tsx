@@ -1,13 +1,20 @@
 "use client";
 
-import { Phone, Mail, MapPin, MessageCircle, ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] relative">
+    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] relative overflow-hidden">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-        {/* Contact Info Cards */}
-        <div className="flex-1 w-full flex flex-col gap-6 text-right">
+        {/* Contact Info Cards (Enters from Right) */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+          className="flex-1 w-full flex flex-col gap-6 text-right"
+        >
           <div>
             <span className="text-[#FF0A2B] font-extrabold text-base sm:text-lg block mb-2">
               تواصل مباشر
@@ -18,10 +25,13 @@ export default function Contact() {
           </div>
 
           {/* Egypt Branch */}
-          <div className="border border-[#3A0C15] rounded-2xl p-6 sm:p-7 bg-[#1A0509] flex flex-col gap-4 text-base sm:text-lg hover:border-[#FF0A2B]/40 transition-colors shadow-lg">
+          <motion.div
+            whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
+            className="border border-[#3A0C15] rounded-2xl p-6 sm:p-7 bg-[#1A0509] flex flex-col gap-4 text-base sm:text-lg transition-all shadow-lg"
+          >
             <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
               <span className="font-black text-xl text-white flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
                 فرع جمهورية مصر العربية
               </span>
               <a
@@ -67,13 +77,16 @@ export default function Contact() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* KSA Branch */}
-          <div className="border border-[#3A0C15] rounded-2xl p-6 sm:p-7 bg-[#1A0509] flex flex-col gap-4 text-base sm:text-lg hover:border-[#FF0A2B]/40 transition-colors shadow-lg">
+          <motion.div
+            whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
+            className="border border-[#3A0C15] rounded-2xl p-6 sm:p-7 bg-[#1A0509] flex flex-col gap-4 text-base sm:text-lg transition-all shadow-lg"
+          >
             <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
               <span className="font-black text-xl text-white flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
                 فرع المملكة العربية السعودية
               </span>
               <a
@@ -108,23 +121,29 @@ export default function Contact() {
                 </span>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Global Hub Floating Sphere */}
-        <div className="fl relative flex-1 max-w-[320px] sm:max-w-[380px] w-full aspect-square rounded-full flex items-center justify-center">
+        {/* Global Hub Floating Sphere (Enters from Left) */}
+        <motion.div
+          initial={{ opacity: 0, x: -50, scale: 0.9 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+          className="animate-float relative flex-1 max-w-[320px] sm:max-w-[380px] w-full aspect-square rounded-full flex items-center justify-center"
+        >
+          {/* Radar Ring */}
+          <div className="absolute inset-0 rounded-full border border-[#FF0A2B]/40 radar-ring pointer-events-none" />
+
           <div
             className="w-full h-full rounded-full flex flex-col items-center justify-center p-6 text-center text-white relative shadow-2xl transition-transform"
             style={{
               background:
                 "radial-gradient(circle at 35% 30%, #FF6B80, #FF0A2B 25%, #3A0610 65%, #12030A)",
-              boxShadow: "0 0 70px rgba(255, 10, 43, 0.45)",
+              boxShadow: "0 0 75px rgba(255, 10, 43, 0.5)",
             }}
           >
-            {/* Ambient Pulse Ring */}
-            <div className="absolute inset-0 rounded-full border border-white/30 animate-pulseGlow pointer-events-none" />
-
-            <div className="text-3xl sm:text-4xl font-black mb-2 tracking-tight">
+            <div className="text-3xl sm:text-4xl font-black mb-2 tracking-tight text-glow-red">
               Duck
             </div>
             <div className="text-base sm:text-xl font-black tracking-wide leading-relaxed">
@@ -134,7 +153,7 @@ export default function Contact() {
               تغطية تسويقية إقليمية شاملة لأسواق الشرق الأوسط
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

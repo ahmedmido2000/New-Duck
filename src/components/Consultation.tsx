@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle2, ChevronDown, HelpCircle, Sparkles } from "lucide-react";
 
 export default function Consultation() {
@@ -31,37 +32,62 @@ export default function Consultation() {
     e.preventDefault();
     if (!email || !email.includes("@")) return;
     setSubmitted(true);
-    setTimeout(() => {
-      // Open WhatsApp or keep confirmation
-    }, 1500);
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-gradient-to-b from-[#12030A] to-[#3A0610] text-center">
+    <section id="faq" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-gradient-to-b from-[#12030A] to-[#3A0610] text-center overflow-hidden">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
         {/* Kicker */}
-        <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg mb-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg mb-2"
+        >
           <Sparkles className="w-5 h-5" />
           <span>استشارة مجانية</span>
-        </div>
+        </motion.div>
 
         {/* Heading */}
-        <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">
+        <motion.h2
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-3xl sm:text-5xl font-black text-white leading-tight mb-4 text-glow-red"
+        >
           ابدأ مشروعك الآن
-        </h2>
+        </motion.h2>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-xl text-[#FFB3BE] leading-relaxed max-w-2xl mb-8 font-normal">
+        <motion.p
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-base sm:text-xl text-[#FFB3BE] leading-relaxed max-w-2xl mb-8 font-normal"
+        >
           احصل على استشارة تسويقية مجانية وحوّل أفكارك إلى واقع رقمي مربح. ادخل بريدك الإلكتروني وسيتواصل معك خبراؤنا خلال 24 ساعة.
-        </p>
+        </motion.p>
 
         {/* Email Consultation Form */}
-        <div className="w-full max-w-xl mb-16">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="w-full max-w-xl mb-16"
+        >
           {submitted ? (
-            <div className="bg-[#1A0509] border border-[#FF0A2B] rounded-2xl p-6 flex items-center justify-center gap-3 text-white text-lg font-bold shadow-xl animate-fadeIn">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-[#1A0509] border border-[#FF0A2B] rounded-2xl p-6 flex items-center justify-center gap-3 text-white text-lg font-bold shadow-glow-red"
+            >
               <CheckCircle2 className="w-6 h-6 text-[#FF0A2B] shrink-0" />
               <span>شكراً لتسجيلك! سيتواصل معك فريق Duck Agency قريباً.</span>
-            </div>
+            </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-stretch gap-2.5 sm:gap-0 shadow-2xl">
               <label htmlFor="emailInput" className="sr-only">
@@ -79,16 +105,16 @@ export default function Consultation() {
               />
               <button
                 type="submit"
-                className="min-h-[56px] bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 rounded-xl sm:rounded-r-none sm:rounded-l-xl font-extrabold text-base sm:text-lg transition-colors flex items-center justify-center gap-2 shrink-0 active:scale-95"
+                className="min-h-[56px] bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 rounded-xl sm:rounded-r-none sm:rounded-l-xl font-extrabold text-base sm:text-lg transition-colors flex items-center justify-center gap-2 shrink-0 active:scale-95 shadow-glow-red shimmer-hover"
               >
                 <span>سجّل الآن</span>
                 <Send className="w-4 h-4 rotate-180" />
               </button>
             </form>
           )}
-        </div>
+        </motion.div>
 
-        {/* FAQ Accordion Section */}
+        {/* FAQ Accordion Section with AnimatePresence */}
         <div className="w-full text-right mt-4 pt-12 border-t border-[#FF0A2B]/20">
           <div className="flex items-center gap-2 justify-center text-[#FF0A2B] font-extrabold text-base sm:text-lg mb-6">
             <HelpCircle className="w-5 h-5" />
@@ -101,7 +127,7 @@ export default function Consultation() {
               return (
                 <div
                   key={index}
-                  className="border border-[#3A0C15] rounded-xl bg-[#1A0509]/80 overflow-hidden transition-all"
+                  className="border border-[#3A0C15] rounded-xl bg-[#1A0509]/80 overflow-hidden transition-colors hover:border-[#FF0A2B]/40"
                 >
                   <button
                     type="button"
@@ -116,11 +142,21 @@ export default function Consultation() {
                     />
                   </button>
 
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-sm sm:text-base text-[#C9A4A8] leading-relaxed border-t border-[#3A0C15]/50 pt-3 animate-fadeIn">
-                      {faq.a}
-                    </div>
-                  )}
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 pb-5 text-sm sm:text-base text-[#C9A4A8] leading-relaxed border-t border-[#3A0C15]/50 pt-3">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}

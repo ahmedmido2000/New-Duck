@@ -1,9 +1,33 @@
 "use client";
 
-import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowLeft, Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 
 export default function Hero() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.85,
+        ease: [0.16, 1, 0.3, 1] as const,
+      },
+    },
+  };
+
   return (
     <section
       id="top"
@@ -92,80 +116,113 @@ export default function Hero() {
         </g>
       </svg>
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col items-start gap-6 sm:gap-8">
+      {/* Main Content with Staggered Framer Motion */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 max-w-5xl mx-auto w-full flex flex-col items-start gap-6 sm:gap-8"
+      >
         {/* Kicker Tag */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FF0A2B]/10 border border-[#FF0A2B]/30 backdrop-blur-sm">
-          <span className="w-2 h-2 rounded-full bg-[#FF0A2B] animate-ping" />
-          <span className="text-[#FF0A2B] font-extrabold text-sm sm:text-base tracking-wide">
+        <motion.div
+          variants={itemVariants}
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FF0A2B]/10 border border-[#FF0A2B]/30 backdrop-blur-sm shadow-glow-red"
+        >
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
+          <span className="text-[#FF0A2B] font-extrabold text-sm sm:text-base tracking-wide text-glow-red">
             من المتابعة إلى المبيعات
           </span>
           <Sparkles className="w-4 h-4 text-[#FF0A2B]" />
-        </div>
+        </motion.div>
 
         {/* Hero Title */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.3] sm:leading-[1.28] tracking-tight max-w-4xl text-right">
-          في <span className="text-[#FF0A2B] inline-block hover:scale-105 transition-transform cursor-default">Duck</span> نصنع محتوى وإعلانات تبني حضور قوي لعلامتك وتوصلك للعملاء الصح وتحوّل الاهتمام إلى نتائج حقيقية
-        </h1>
+        <motion.h1
+          variants={itemVariants}
+          className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.3] sm:leading-[1.28] tracking-tight max-w-4xl text-right"
+        >
+          في{" "}
+          <span className="text-[#FF0A2B] text-glow-red inline-block hover:scale-105 transition-transform cursor-default">
+            Duck
+          </span>{" "}
+          نصنع محتوى وإعلانات تبني حضور قوي لعلامتك وتوصلك للعملاء الصح وتحوّل الاهتمام إلى نتائج حقيقية
+        </motion.h1>
 
         {/* Hero Subtitle */}
-        <p className="text-base sm:text-xl text-[#E6CDD0] max-w-2xl leading-relaxed text-right font-medium">
+        <motion.p
+          variants={itemVariants}
+          className="text-base sm:text-xl text-[#E6CDD0] max-w-2xl leading-relaxed text-right font-medium"
+        >
           نحلل سلوك جمهورك، نصمم هويتك، وندير حملاتك الذكية لتحقيق أعلى عائد استثماري ونمو متواصل لمبيعاتك.
-        </p>
+        </motion.p>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full sm:w-auto">
-          <a
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full sm:w-auto"
+        >
+          <MagneticButton
             href="https://wa.me/201064544080"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center justify-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-black text-lg sm:text-xl transition-all duration-300 shadow-xl shadow-[#FF0A2B]/30 hover:shadow-[#FF0A2B]/50 hover:-translate-y-1 active:translate-y-0 text-center"
+            className="group flex items-center justify-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-black text-lg sm:text-xl transition-all duration-300 shadow-glow-red shimmer-hover hover:-translate-y-1 active:translate-y-0 text-center"
           >
             <span>خُد خطوتك الأولى معانا</span>
             <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1.5" />
-          </a>
+          </MagneticButton>
 
           <a
             href="#services"
-            className="flex items-center justify-center px-8 py-4 rounded-xl font-bold text-lg sm:text-xl text-white border-2 border-white/80 hover:bg-white/10 hover:border-white transition-all duration-300 text-center"
+            className="flex items-center justify-center px-8 py-4 rounded-xl font-bold text-lg sm:text-xl text-white border-2 border-white/70 hover:bg-white/10 hover:border-white transition-all duration-300 text-center"
           >
             شاهد ما صنعناه
           </a>
-        </div>
+        </motion.div>
 
         {/* Trust Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 pt-8 sm:pt-12 border-t border-[#3A0C15]/80 w-full text-right">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B]">
+        <motion.div
+          variants={itemVariants}
+          className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 pt-8 sm:pt-12 border-t border-[#3A0C15]/80 w-full text-right"
+        >
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="flex items-center gap-3 group cursor-default"
+          >
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors">
               <TrendingUp className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-black text-white">+380%</div>
+              <div className="text-xl sm:text-2xl font-black text-white text-glow-red">+380%</div>
               <div className="text-xs sm:text-sm text-[#C9A4A8]">متوسط نمو مبيعات عملائنا</div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B]">
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="flex items-center gap-3 group cursor-default"
+          >
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xl sm:text-2xl font-black text-white">100% مخصص</div>
               <div className="text-xs sm:text-sm text-[#C9A4A8]">استراتيجيات بدون قوالب جاهزة</div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="col-span-2 sm:col-span-1 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B]">
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="col-span-2 sm:col-span-1 flex items-center gap-3 group cursor-default"
+          >
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xl sm:text-2xl font-black text-white">مصر والسعودية</div>
               <div className="text-xs sm:text-sm text-[#C9A4A8]">خبرة عميقة بأسواق المنطقة</div>
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

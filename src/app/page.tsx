@@ -1,3 +1,5 @@
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,45 +12,54 @@ import Contact from "@/components/Contact";
 import Consultation from "@/components/Consultation";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0D0204] text-white overflow-hidden selection:bg-[#FF0A2B] selection:text-white">
-      {/* Header / Navbar */}
-      <Navbar />
+    <SmoothScrollProvider>
+      {/* Top Red Glow Scroll Progress */}
+      <ScrollProgress />
 
-      {/* Hero Section */}
-      <Hero />
+      <main className="min-h-screen bg-[#0D0204] text-white overflow-hidden selection:bg-[#FF0A2B] selection:text-white relative">
+        {/* Header / Navbar */}
+        <Navbar />
 
-      {/* About Section */}
-      <About />
+        {/* Hero Section */}
+        <Hero />
 
-      {/* Integrations & Supported Platforms */}
-      <Integrations />
+        {/* About Section */}
+        <About />
 
-      {/* Services Section */}
-      <Services />
+        {/* Integrations & Supported Platforms */}
+        <Integrations />
 
-      {/* AI Marketing Ecosystem Network */}
-      <AIEcosystem />
+        {/* Services Section with 3D Stack Cards */}
+        <Services />
 
-      {/* Features & Cybernetic AI Visual */}
-      <Features />
+        {/* AI Marketing Ecosystem Network */}
+        <AIEcosystem />
 
-      {/* Metrics & Performance Stats */}
-      <Metrics />
+        {/* Features & Cybernetic AI Visual */}
+        <Features />
 
-      {/* Contact & Regional Branches */}
-      <Contact />
+        {/* Metrics & Performance Stats */}
+        <Metrics />
 
-      {/* Free Consultation & FAQ */}
-      <Consultation />
+        {/* Contact & Regional Branches */}
+        <Contact />
 
-      {/* Footer */}
-      <Footer />
+        {/* Free Consultation & FAQ */}
+        <Consultation />
 
-      {/* Quick Floating WhatsApp Access */}
-      <FloatingWhatsApp />
-    </main>
+        {/* Footer */}
+        <Footer />
+
+        {/* Floating Quick WhatsApp Button */}
+        <FloatingWhatsApp />
+
+        {/* Floating Back to Top with Scroll Ring */}
+        <BackToTop />
+      </main>
+    </SmoothScrollProvider>
   );
 }

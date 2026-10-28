@@ -1,13 +1,20 @@
 "use client";
 
-import { Target, CheckCircle2, Compass, Award } from "lucide-react";
+import { motion } from "framer-motion";
+import { Target, CheckCircle2, Compass } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#0D0204] relative">
+    <section id="about" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#0D0204] relative overflow-hidden">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-        {/* Text Content */}
-        <div className="flex-1 flex flex-col gap-6 text-right">
+        {/* Text Content (Enters from Right) */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+          className="flex-1 flex flex-col gap-6 text-right"
+        >
           <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg">
             <Compass className="w-5 h-5" />
             <span>رؤيتنا ومنهجنا</span>
@@ -21,32 +28,50 @@ export default function About() {
             شريكك في بناء حضور رقمي يليق بطموحك. نؤمن أن لكل علامة طريقها الخاص، لذلك نعتمد أسلوبًا مخصصًا لكل علامة حسب هويتها واحتياجاتها، وليس بنهج واحد للجميع.
           </p>
 
-          <div className="bg-[#FF0A2B] text-white py-3.5 px-6 rounded-xl font-extrabold text-base sm:text-xl text-center shadow-lg shadow-[#FF0A2B]/20 transform hover:scale-[1.01] transition-transform">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="bg-[#FF0A2B] text-white py-3.5 px-6 rounded-xl font-extrabold text-base sm:text-xl text-center shadow-glow-red shimmer-hover cursor-default"
+          >
             هدفنا أن نكون الشريك الذي يسير معك في المسار الصحيح
-          </div>
+          </motion.div>
 
           {/* Core Values */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-            <div className="flex items-start gap-3 bg-[#1A0509] p-4 rounded-xl border border-[#3A0C15]">
+            <motion.div
+              whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
+              className="flex items-start gap-3 bg-[#1A0509] p-4 rounded-xl border border-[#3A0C15] transition-all"
+            >
               <CheckCircle2 className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-bold text-white text-base">استراتيجيات مبنية على بيانات</h4>
                 <p className="text-sm text-[#C9A4A8]">قرارات تسويقية تستند لأرقام حقيقية وسلوك الجمهور المستهدف.</p>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex items-start gap-3 bg-[#1A0509] p-4 rounded-xl border border-[#3A0C15]">
+            <motion.div
+              whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
+              className="flex items-start gap-3 bg-[#1A0509] p-4 rounded-xl border border-[#3A0C15] transition-all"
+            >
               <Target className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-bold text-white text-base">تركيز كامل على العائد (ROI)</h4>
                 <p className="text-sm text-[#C9A4A8]">كل قرش يُنفق في الإعلانات محسوب بهدف مضاعفة الأرباح.</p>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Circular Floating Brand Artwork (Replaces placeholder) */}
-        <div className="fl relative flex-1 max-w-[340px] sm:max-w-[420px] w-full aspect-square rounded-full border-2 border-dashed border-[#FF0A2B]/40 p-4 sm:p-6 flex items-center justify-center">
+        {/* Circular Floating Brand Artwork (Enters from Left) */}
+        <motion.div
+          initial={{ opacity: 0, x: -60, scale: 0.9 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+          className="animate-float relative flex-1 max-w-[340px] sm:max-w-[420px] w-full aspect-square rounded-full border-2 border-dashed border-[#FF0A2B]/40 p-4 sm:p-6 flex items-center justify-center"
+        >
+          {/* Pulsing Radar Ring */}
+          <div className="absolute inset-0 rounded-full border border-[#FF0A2B]/30 radar-ring pointer-events-none" />
+
           <div
             className="w-full h-full rounded-full flex flex-col items-center justify-center p-6 text-center relative overflow-hidden shadow-2xl shadow-[#FF0A2B]/20"
             style={{
@@ -120,7 +145,7 @@ export default function About() {
               </span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

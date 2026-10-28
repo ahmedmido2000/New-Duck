@@ -19,61 +19,200 @@ body {
   font-family: var(--font-cairo), 'Cairo', Tahoma, sans-serif;
   overflow-x: hidden;
   direction: rtl;
+  overscroll-behavior: none;
 }
 
-/* Custom Scrollbar */
+/* Custom Red Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #0D0204;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3A0C15;
+  background: #FF0A2B;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF0A2B;
+  background: #E00020;
 }
 
-/* Animations */
+/* Brand Glows */
+.text-glow-red {
+  text-shadow: 0 0 25px rgba(255, 10, 43, 0.6), 0 0 45px rgba(255, 10, 43, 0.3);
+}
+.shadow-glow-red {
+  box-shadow: 0 8px 30px rgba(255, 10, 43, 0.35);
+}
+.border-glow-red {
+  box-shadow: 0 0 15px rgba(255, 10, 43, 0.45);
+}
+
+/* Pulse Glow Animation */
+.pulse-glow {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 10, 43, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 10, 43, 0.85);
+    transform: scale(1.03);
+  }
+}
+
+/* Laser Scanline Effect */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(1000%);
+    opacity: 0;
+  }
+}
+
+.animate-scanline {
+  animation: scanline 7s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Floating Physics Animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.6deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-0.6deg);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 6s ease-in-out infinite;
+}
+
+/* Shimmer Light Reflection */
+@keyframes shimmerReflection {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.shimmer-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.shimmer-hover:hover::after {
+  animation: shimmerReflection 1.2s ease-in-out;
+}
+
+/* Radar Wave Propagation */
+@keyframes radarWave {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+.radar-ring {
+  animation: radarWave 2.8s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+
+.radar-ring-delayed {
+  animation: radarWave 2.8s cubic-bezier(0.2, 0.8, 0.4, 1) 1.4s infinite;
+}
+
+/* Data Stream Flow */
+@keyframes dashStream {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-data-stream {
+  stroke-dasharray: 6 6;
+  animation: dashStream 1.5s linear infinite;
+}
+
+/* Spotlight Card Hover Support */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  top: var(--mouse-y, -1000px);
+  left: var(--mouse-x, -1000px);
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(255, 10, 43, 0.12) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Original laser and custom styles */
 @keyframes flow {
   from {
     stroke-dashoffset: 1.4;
   }
   to {
     stroke-dashoffset: 0;
-  }
-}
-
-@keyframes fl {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-@keyframes pulseGlow {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -92,11 +231,6 @@ body {
   animation-delay: -4s;
 }
 
-.fl {
-  animation: fl 5s ease-in-out infinite;
-}
-
-/* Services card stacked effect */
 .svc-odd {
   background: #FF0A2B;
   box-shadow: 0 -10px 0 -5px #ffffff, 0 -20px 0 -10px #7A0B1A;
@@ -114,21 +248,4 @@ body {
   .svc-even {
     box-shadow: 0 -14px 0 -7px #FF0A2B, 0 -28px 0 -14px #ffffff;
   }
-}
-
-/* Platform cell hover */
-.platform-cell {
-  border: 1px solid #2E0A11;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.35s ease;
-  background: linear-gradient(135deg, transparent, transparent);
-}
-
-.platform-cell:hover {
-  color: #ffffff;
-  border-color: #FF0A2B66;
-  background: linear-gradient(135deg, rgba(255, 10, 43, 0.22), transparent);
-  transform: translateY(-2px);
 }

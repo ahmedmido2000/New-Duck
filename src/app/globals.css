@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cairo: 'Cairo', Tahoma, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0D0204;
+  color: #ffffff;
+  font-family: var(--font-cairo), 'Cairo', Tahoma, sans-serif;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0D0204;
+}
+::-webkit-scrollbar-thumb {
+  background: #3A0C15;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF0A2B;
+}
+
+/* Animations */
+@keyframes flow {
+  from {
+    stroke-dashoffset: 1.4;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fl {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.st {
+  stroke-dasharray: 0.3 1.1;
+  animation: flow 5s linear infinite;
+}
+
+.st2 {
+  animation-duration: 7s;
+  animation-delay: -2s;
+}
+
+.st3 {
+  animation-duration: 6s;
+  animation-delay: -4s;
+}
+
+.fl {
+  animation: fl 5s ease-in-out infinite;
+}
+
+/* Services card stacked effect */
+.svc-odd {
+  background: #FF0A2B;
+  box-shadow: 0 -10px 0 -5px #ffffff, 0 -20px 0 -10px #7A0B1A;
+}
+
+.svc-even {
+  background: #7A0B1A;
+  box-shadow: 0 -10px 0 -5px #FF0A2B, 0 -20px 0 -10px #ffffff;
+}
+
+@media (min-width: 640px) {
+  .svc-odd {
+    box-shadow: 0 -14px 0 -7px #ffffff, 0 -28px 0 -14px #7A0B1A;
+  }
+  .svc-even {
+    box-shadow: 0 -14px 0 -7px #FF0A2B, 0 -28px 0 -14px #ffffff;
+  }
+}
+
+/* Platform cell hover */
+.platform-cell {
+  border: 1px solid #2E0A11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.35s ease;
+  background: linear-gradient(135deg, transparent, transparent);
+}
+
+.platform-cell:hover {
+  color: #ffffff;
+  border-color: #FF0A2B66;
+  background: linear-gradient(135deg, rgba(255, 10, 43, 0.22), transparent);
+  transform: translateY(-2px);
+}

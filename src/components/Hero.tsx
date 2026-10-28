@@ -1,0 +1,171 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowLeft, Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
+
+export default function Hero() {
+  return (
+    <section
+      id="top"
+      className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-20 sm:pt-36 sm:pb-28 px-4 sm:px-8 lg:px-16 overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(ellipse at 20% 80%, #3A0610 0%, #0D0204 68%)",
+      }}
+    >
+      {/* Background Animated SVG Laser Streams */}
+      <svg
+        viewBox="0 0 1360 640"
+        preserveAspectRatio="xMinYMax slice"
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full opacity-90 pointer-events-none"
+      >
+        <defs>
+          <linearGradient id="laserGrad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stopColor="#FF0A2B" stopOpacity="0" />
+            <stop offset="50%" stopColor="#FF0A2B" stopOpacity="1" />
+            <stop offset="100%" stopColor="#FFB3BE" stopOpacity="1" />
+          </linearGradient>
+          <filter id="laserGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <g fill="none" stroke="url(#laserGrad)" strokeLinecap="round">
+          {/* Static Guides */}
+          <path
+            d="M-40 640 C300 560 560 300 1360 90"
+            strokeWidth="2"
+            opacity="0.3"
+          />
+          <path
+            d="M-40 620 C340 520 640 250 1360 40"
+            strokeWidth="2"
+            opacity="0.3"
+          />
+          <path
+            d="M-40 600 C380 540 600 360 1360 150"
+            strokeWidth="2"
+            opacity="0.3"
+          />
+
+          {/* Animated Flowing Laser Lines with Blur Filter */}
+          <path
+            className="st"
+            pathLength="1"
+            d="M-40 640 C300 560 560 300 1360 90"
+            strokeWidth="5"
+            filter="url(#laserGlow)"
+          />
+          <path
+            className="st st2"
+            pathLength="1"
+            d="M-40 620 C340 520 640 250 1360 40"
+            strokeWidth="4"
+            filter="url(#laserGlow)"
+          />
+          <path
+            className="st st3"
+            pathLength="1"
+            d="M-40 600 C380 540 600 360 1360 150"
+            strokeWidth="6"
+            filter="url(#laserGlow)"
+          />
+
+          {/* Crisp Core Overlays */}
+          <path
+            className="st"
+            pathLength="1"
+            d="M-40 640 C300 560 560 300 1360 90"
+            strokeWidth="2"
+          />
+          <path
+            className="st st2"
+            pathLength="1"
+            d="M-40 620 C340 520 640 250 1360 40"
+            strokeWidth="2"
+          />
+        </g>
+      </svg>
+
+      {/* Main Content */}
+      <div className="relative z-10 max-w-5xl mx-auto w-full flex flex-col items-start gap-6 sm:gap-8">
+        {/* Kicker Tag */}
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FF0A2B]/10 border border-[#FF0A2B]/30 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-[#FF0A2B] animate-ping" />
+          <span className="text-[#FF0A2B] font-extrabold text-sm sm:text-base tracking-wide">
+            من المتابعة إلى المبيعات
+          </span>
+          <Sparkles className="w-4 h-4 text-[#FF0A2B]" />
+        </div>
+
+        {/* Hero Title */}
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.3] sm:leading-[1.28] tracking-tight max-w-4xl text-right">
+          في <span className="text-[#FF0A2B] inline-block hover:scale-105 transition-transform cursor-default">Duck</span> نصنع محتوى وإعلانات تبني حضور قوي لعلامتك وتوصلك للعملاء الصح وتحوّل الاهتمام إلى نتائج حقيقية
+        </h1>
+
+        {/* Hero Subtitle */}
+        <p className="text-base sm:text-xl text-[#E6CDD0] max-w-2xl leading-relaxed text-right font-medium">
+          نحلل سلوك جمهورك، نصمم هويتك، وندير حملاتك الذكية لتحقيق أعلى عائد استثماري ونمو متواصل لمبيعاتك.
+        </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full sm:w-auto">
+          <a
+            href="https://wa.me/201064544080"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-black text-lg sm:text-xl transition-all duration-300 shadow-xl shadow-[#FF0A2B]/30 hover:shadow-[#FF0A2B]/50 hover:-translate-y-1 active:translate-y-0 text-center"
+          >
+            <span>خُد خطوتك الأولى معانا</span>
+            <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1.5" />
+          </a>
+
+          <a
+            href="#services"
+            className="flex items-center justify-center px-8 py-4 rounded-xl font-bold text-lg sm:text-xl text-white border-2 border-white/80 hover:bg-white/10 hover:border-white transition-all duration-300 text-center"
+          >
+            شاهد ما صنعناه
+          </a>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 pt-8 sm:pt-12 border-t border-[#3A0C15]/80 w-full text-right">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B]">
+              <TrendingUp className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xl sm:text-2xl font-black text-white">+380%</div>
+              <div className="text-xs sm:text-sm text-[#C9A4A8]">متوسط نمو مبيعات عملائنا</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B]">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xl sm:text-2xl font-black text-white">100% مخصص</div>
+              <div className="text-xs sm:text-sm text-[#C9A4A8]">استراتيجيات بدون قوالب جاهزة</div>
+            </div>
+          </div>
+
+          <div className="col-span-2 sm:col-span-1 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B]">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xl sm:text-2xl font-black text-white">مصر والسعودية</div>
+              <div className="text-xs sm:text-sm text-[#C9A4A8]">خبرة عميقة بأسواق المنطقة</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

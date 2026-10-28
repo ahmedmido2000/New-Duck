@@ -118,23 +118,7 @@ export default function Features() {
             {/* Moving Laser Beam Sweep */}
             <div className="absolute inset-x-0 h-12 bg-gradient-to-b from-transparent via-[#FF0A2B]/25 to-transparent animate-scanline pointer-events-none" />
 
-            {/* Top Right Floating Tech Pill */}
-            <div className="absolute top-5 right-5 z-10 flex items-center gap-2 bg-[#0D0204]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#FF0A2B]/40 shadow-glow-red">
-              <span className="w-2 h-2 rounded-full bg-[#FF0A2B] animate-ping" />
-              <span className="text-[11px] font-mono tracking-widest text-[#FF0A2B] font-bold">
-                AI ENGINE ACTIVE
-              </span>
-            </div>
 
-            {/* Bottom Floating Caption */}
-            <div className="absolute bottom-5 inset-x-5 z-10 bg-[#0D0204]/85 backdrop-blur-md p-3.5 rounded-xl border border-[#3A0C15] text-right">
-              <div className="text-white font-extrabold text-sm sm:text-base">
-                نظام Duck الذكي لإدارة وتحسين الحملات
-              </div>
-              <div className="text-xs text-[#C9A4A8] mt-0.5">
-                استهداف متقدم، تحليل لحظي، ونتائج إعلانية تتفوق على منافسيك
-              </div>
-            </div>
           </div>
         </div>
       </div>

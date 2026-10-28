@@ -2,12 +2,9 @@ import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import PartnersWall from "@/components/PartnersWall";
 import About from "@/components/About";
-import NumbersImpact from "@/components/NumbersImpact";
 import Integrations from "@/components/Integrations";
 import Services from "@/components/Services";
-import CostCalculator from "@/components/CostCalculator";
 import AIEcosystem from "@/components/AIEcosystem";
 import Features from "@/components/Features";
 import Metrics from "@/components/Metrics";
@@ -33,26 +30,17 @@ export default function Home() {
         {/* About Section */}
         <About />
 
-        {/* Regional Live Interactive Map & Impact Numbers */}
-        <NumbersImpact />
-
         {/* Integrations & Supported Platforms */}
         <Integrations />
 
         {/* Services Section with 3D Stack Cards & Modal */}
         <Services />
 
-        {/* Interactive Cost & Growth Calculator */}
-        <CostCalculator />
-
         {/* AI Marketing Ecosystem Network */}
         <AIEcosystem />
 
         {/* Features & Cybernetic AI Visual */}
         <Features />
-
-        {/* Partners Marquee Wall */}
-        <PartnersWall />
 
         {/* Metrics & Performance Stats */}
         <Metrics />

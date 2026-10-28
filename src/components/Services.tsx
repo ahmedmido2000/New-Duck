@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Check, Sparkles, X, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Check, Sparkles, X, MessageCircle } from "lucide-react";
 import MagneticButton from "./MagneticButton";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface ServiceItem {
   id: number;
@@ -29,7 +31,7 @@ const services: ServiceItem[] = [
       "ربط بوابات الدفع الإلكتروني وشركات الشحن",
       "تحسين سرعة التصفح وتجربة الشراء السريعة",
     ],
-    gradient: "linear-gradient(145deg, #7A0B1A 0%, #4A0610 50%, #240207 100%)",
+    gradient: "linear-gradient(145deg, #7A0B1A 0%, #4A0610 50%, #200206 100%)",
     borderColor: "rgba(255, 10, 43, 0.45)",
     pillColor: "#7A0B1A",
   },
@@ -46,7 +48,7 @@ const services: ServiceItem[] = [
       "مراعاة أعلى معايير سهولة الاستخدام والوصول",
     ],
     gradient: "linear-gradient(145deg, #FF0A2B 0%, #B80018 55%, #6B000D 100%)",
-    borderColor: "rgba(255, 255, 255, 0.3)",
+    borderColor: "rgba(255, 255, 255, 0.35)",
     pillColor: "#FF0A2B",
   },
   {
@@ -78,7 +80,7 @@ const services: ServiceItem[] = [
       "تقارير دورية وشفافة توضح العائد والمبيعات",
     ],
     gradient: "linear-gradient(145deg, #B8081E 0%, #750412 55%, #3D0108 100%)",
-    borderColor: "rgba(255, 255, 255, 0.25)",
+    borderColor: "rgba(255, 255, 255, 0.3)",
     pillColor: "#B8081E",
   },
   {
@@ -110,261 +112,233 @@ const services: ServiceItem[] = [
       "نبرة الصوت والرسائل التسويقية للعلامة",
     ],
     gradient: "linear-gradient(145deg, #E60021 0%, #990014 55%, #52000A 100%)",
-    borderColor: "rgba(255, 255, 255, 0.3)",
+    borderColor: "rgba(255, 255, 255, 0.35)",
     pillColor: "#FF0A2B",
   },
 ];
 
 export default function Services() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardFrameRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeModal, setActiveModal] = useState<ServiceItem | null>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Monitor scroll inside cards container to update indicator
   useEffect(() => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
+    if (typeof window === "undefined") return;
+    gsap.registerPlugin(ScrollTrigger);
 
-    const handleScroll = () => {
-      const scrollPos = el.scrollTop;
-      const cardHeight = 380;
-      const index = Math.min(
-        services.length - 1,
-        Math.max(0, Math.round(scrollPos / cardHeight))
-      );
-      setCurrentSlide(index);
-    };
+    const section = sectionRef.current;
+    const cardFrame = cardFrameRef.current;
+    if (!section || !cardFrame) return;
 
-    el.addEventListener("scroll", handleScroll, { passive: true });
-    return () => el.removeEventListener("scroll", handleScroll);
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (cards.length < 2) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const ctx = gsap.context(() => {
+      if (prefersReducedMotion) {
+        // Fallback for reduced motion: show static stacked deck
+        cards.forEach((card, i) => {
+          gsap.set(card, { y: i * 15 });
+        });
+        return;
+      }
+
+      // Responsive dimensions
+      const isMobile = window.innerWidth < 640;
+      const cardHeight = isMobile ? 360 : 400;
+      const peekOffset = isMobile ? 48 : 56; // Peeking tab height visible at bottom
+      const stackGap = isMobile ? 12 : 15; // Vertical offset per stacked card at top
+
+      // ── Step 1: Initial Positions ──
+      // Card 0 sits at resting top position
+      gsap.set(cards[0], { y: 0 });
+
+      // Card 1 starts peeking from the bottom (Image 1)
+      gsap.set(cards[1], { y: cardHeight - peekOffset });
+
+      // Remaining cards (2..5) wait below the visible frame
+      for (let i = 2; i < cards.length; i++) {
+        gsap.set(cards[i], { y: cardHeight + 80 });
+      }
+
+      // ── Step 2: Main Scrub Timeline Pinned to Main Page Scroll ──
+      const scrollDistancePerCard = window.innerHeight * 0.75;
+      const totalScroll = scrollDistancePerCard * (cards.length - 1);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: `+=${totalScroll}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // Chain card transitions sequentially
+      for (let i = 1; i < cards.length; i++) {
+        const targetY = i * stackGap; // Docked stack position at top
+
+        // Animate Card i from peek position up to its stacked position over the previous card
+        tl.to(cards[i], {
+          y: targetY,
+          ease: "none",
+          duration: 1,
+        });
+
+        // Simultaneously, bring Card i+1 into the peeking slot from below (if it exists)
+        if (i + 1 < cards.length) {
+          tl.to(
+            cards[i + 1],
+            {
+              y: cardHeight - peekOffset + (i * stackGap * 0.3),
+              ease: "none",
+              duration: 1,
+            },
+            "<" // Run in parallel with Card i moving up!
+          );
+        }
+      }
+    }, section);
+
+    return () => ctx.revert();
   }, []);
 
-  const scrollToSlide = (index: number) => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    const targetScroll = index * 390;
-    el.scrollTo({ top: targetScroll, behavior: "smooth" });
-  };
-
-  const handleNext = () => {
-    if (currentSlide < services.length - 1) {
-      scrollToSlide(currentSlide + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentSlide > 0) {
-      scrollToSlide(currentSlide - 1);
-    }
-  };
-
   return (
-    <section id="services" className="py-20 sm:py-28 bg-[#0D0204] relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="services"
+      className="bg-[#0D0204] relative overflow-hidden h-screen flex items-center justify-center"
+    >
       {/* Background Ambience */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#FF0A2B]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#7A0B1A]/15 rounded-full blur-[130px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          
-          {/* ═══════════════ RIGHT COLUMN: Sticky Information & CTA (RTL: Starts on Right) ═══════════════ */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-            className="w-full lg:w-[45%] flex flex-col items-start text-right gap-6 order-1 lg:order-2"
-          >
-            {/* Kicker badge */}
-            <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg">
-              <Sparkles className="w-5 h-5 text-[#FF0A2B]" />
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+
+          {/* ═══════════════ RIGHT COLUMN: Stationary Section Info & CTA ═══════════════ */}
+          <div className="w-full lg:w-[46%] flex flex-col items-start text-right gap-4 sm:gap-6 order-1 lg:order-2 shrink-0">
+            {/* Kicker */}
+            <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-sm sm:text-base">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B]" />
               <span>حوّل ميزانيتك إلى نمو</span>
               <span className="w-6 h-[2px] bg-[#FF0A2B]" />
             </div>
 
             {/* Main Section Heading */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-white leading-[1.3] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-black text-white leading-[1.3] tracking-tight">
               في عالم التسويق الرقمي، نكون الشريك الذي يبدأ معك من الفكرة الأولى، لا من مرحلة التنفيذ فقط
             </h2>
 
-            {/* Description */}
-            <p className="text-base sm:text-lg text-[#C9A4A8] leading-relaxed font-normal max-w-xl">
-              حيث نبدأ بفهم عميق لطبيعة نشاطك والسوق وجمهورك المستهدف، لنرسم لك اتجاهًا واضحًا نحو النمو المستدام ومضاعفة مبيعاتك وأرباحك.
+            {/* Subtitle / Description */}
+            <p className="text-sm sm:text-base lg:text-lg text-[#C9A4A8] leading-relaxed font-normal max-w-xl">
+              حيث نبدأ بفهم لطبيعة نشاطك والسوق السعودي وجمهورك المستهدف، لنرسم لك اتجاهًا واضحًا نحو النمو المستدام.
             </p>
 
-            {/* Primary Action Button */}
-            <div className="pt-2">
+            {/* CTA Button */}
+            <div className="pt-1">
               <MagneticButton
                 href="https://wa.me/201064544080"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-bold text-base sm:text-lg transition-all shadow-glow-red shimmer-hover"
+                className="inline-flex items-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
               >
-                <span>خُذ خطوتك الأولى معانا</span>
-                <ArrowLeft className="w-5 h-5" />
+                <span>خُذ خطوتك الأولى معنا</span>
+                <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </MagneticButton>
             </div>
+          </div>
 
-            {/* Helpful Scroll Tip & Step Indicator */}
-            <div className="pt-4 flex items-center gap-3 text-xs sm:text-sm text-[#E6CDD0]/80">
-              <span className="inline-block w-2 h-2 rounded-full bg-[#FF0A2B] animate-ping" />
-              <span>مرر على البطاقات لاستعراض كافة خدماتنا المبتكرة ({currentSlide + 1} من {services.length})</span>
-            </div>
-          </motion.div>
-
-          {/* ═══════════════ LEFT COLUMN: Masar-Style Stacking Sticky Cards ═══════════════ */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-            className="w-full lg:w-[55%] flex flex-col order-2 lg:order-1 relative"
-          >
-            {/* The Dedicated Scroll Parent (Masar Agency .custom-parent Architecture) */}
+          {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame ═══════════════ */}
+          <div className="w-full lg:w-[54%] flex justify-center order-2 lg:order-1">
+            {/* Card Frame: clips cards outside its bounds, exactly like Masar Agency */}
             <div
-              ref={scrollContainerRef}
-              data-lenis-prevent="true"
-              className="custom-parent relative w-full h-[540px] sm:h-[580px] overflow-y-auto overflow-x-hidden rounded-[32px] p-2 sm:p-3 select-none"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-                WebkitOverflowScrolling: "touch",
-              }}
+              ref={cardFrameRef}
+              className="relative w-full max-w-[540px] h-[410px] sm:h-[450px] overflow-hidden rounded-[30px] sm:rounded-[36px]"
             >
-              <style jsx>{`
-                .custom-parent::-webkit-scrollbar {
-                  display: none;
-                }
-                .sticky-slide-1 { top: 0px !important; z-index: 10; }
-                .sticky-slide-2 { top: 18px !important; z-index: 20; }
-                .sticky-slide-3 { top: 36px !important; z-index: 30; }
-                .sticky-slide-4 { top: 54px !important; z-index: 40; }
-                .sticky-slide-5 { top: 72px !important; z-index: 50; }
-                .sticky-slide-6 { top: 90px !important; z-index: 60; }
-              `}</style>
-
               {services.map((svc, index) => {
-                const stickyClass = `sticky-slide-${index + 1}`;
+                // Ascending z-index so later cards slide ON TOP of earlier cards
+                const zIndex = (index + 1) * 10;
 
                 return (
-                  <div key={svc.id}>
-                    {/* Sticky Card Slide Container */}
+                  <div
+                    key={svc.id}
+                    ref={(el) => {
+                      cardRefs.current[index] = el;
+                    }}
+                    className="absolute inset-x-0 top-0 will-change-transform"
+                    style={{ zIndex }}
+                  >
+                    {/* The Visual Card */}
                     <div
-                      className={`sticky ${stickyClass} w-full transition-transform duration-300`}
+                      className="group relative w-full h-[360px] sm:h-[400px] rounded-[26px] sm:rounded-[30px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden"
+                      style={{
+                        background: svc.gradient,
+                        border: `1.5px solid ${svc.borderColor}`,
+                        boxShadow:
+                          "0 -10px 30px rgba(0, 0, 0, 0.65), 0 16px 36px rgba(0, 0, 0, 0.45)",
+                      }}
                     >
-                      {/* Card Body (.all-content) */}
+                      {/* Ghost Watermark Text in Background */}
                       <div
-                        className="group relative w-full min-h-[380px] sm:min-h-[410px] rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1"
-                        style={{
-                          background: svc.gradient,
-                          border: `1.5px solid ${svc.borderColor}`,
-                          boxShadow:
-                            "0 -12px 30px rgba(0, 0, 0, 0.55), 0 16px 36px rgba(0, 0, 0, 0.4)",
-                        }}
+                        className="absolute -right-4 top-20 sm:top-24 text-[60px] sm:text-[84px] font-black whitespace-nowrap text-white/[0.08] pointer-events-none select-none transition-transform duration-700 group-hover:-translate-x-6"
+                        style={{ direction: "rtl" }}
                       >
-                        {/* ── Background Large Ghost Watermark Text (Masar style) ── */}
+                        {svc.ghost}
+                      </div>
+
+                      {/* Head Content */}
+                      <div className="relative z-10 flex flex-col items-start gap-3 sm:gap-4">
+                        {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
                         <div
-                          className="absolute -right-4 top-24 text-[65px] sm:text-[88px] font-black whitespace-nowrap text-white/[0.08] pointer-events-none select-none transition-transform duration-700 group-hover:-translate-x-6"
-                          style={{ direction: "rtl" }}
+                          className="inline-block bg-white px-5 sm:px-6 py-1.5 sm:py-2 rounded-xl font-black text-xs sm:text-sm tracking-[4px] shadow-sm"
+                          style={{ color: svc.pillColor }}
                         >
-                          {svc.ghost}
+                          خـــــــــــدمـــــــــــــــــــة
                         </div>
 
-                        {/* ── Head Content ── */}
-                        <div className="relative z-10 flex flex-col items-start gap-4">
-                          {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
-                          <div
-                            className="inline-block bg-white px-5 sm:px-6 py-1.5 sm:py-2 rounded-xl font-black text-sm sm:text-base tracking-[4px] shadow-sm"
-                            style={{ color: svc.pillColor }}
-                          >
-                            خـــــــــــدمـــــــــــــــــــة
-                          </div>
+                        {/* Service Title */}
+                        <h3 className="text-xl sm:text-2xl lg:text-[32px] font-black text-white leading-snug mt-1">
+                          {svc.title}
+                        </h3>
+                      </div>
 
-                          {/* Service Title */}
-                          <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-black text-white leading-snug mt-1">
-                            {svc.title}
-                          </h3>
-                        </div>
+                      {/* Body Content */}
+                      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 pt-4 border-t border-white/10">
+                        {/* Description */}
+                        <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-full sm:max-w-[70%] font-medium">
+                          {svc.description}
+                        </p>
 
-                        {/* ── Body Content ── */}
-                        <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mt-6 pt-4 border-t border-white/10">
-                          {/* Short Description */}
-                          <p className="text-xs sm:text-sm lg:text-[15px] text-white/90 leading-relaxed max-w-full sm:max-w-[70%] font-medium">
-                            {svc.description}
-                          </p>
-
-                          {/* Read More Button */}
-                          <button
-                            type="button"
-                            onClick={() => setActiveModal(svc)}
-                            className="inline-flex items-center gap-2 bg-white text-[#1A0509] hover:bg-neutral-100 px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
-                          >
-                            <span>اقرأ المزيد</span>
-                            <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
-                          </button>
-                        </div>
+                        {/* Read More Button */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveModal(svc)}
+                          className="inline-flex items-center gap-2 bg-white text-[#1A0509] hover:bg-neutral-100 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
+                        >
+                          <span>اقرأ المزيد</span>
+                          <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover/btn:-translate-x-1" />
+                        </button>
                       </div>
                     </div>
-
-                    {/* Spacer between slides */}
-                    {index < services.length - 1 && (
-                      <div className="h-4 sm:h-5" />
-                    )}
                   </div>
                 );
               })}
-
-              {/* Extra Spacer at the Bottom (so the final slide stacks smoothly) */}
-              <div className="h-44 sm:h-52" />
             </div>
-
-            {/* ── Floating Controls Bar (Prev/Next & Dots Navigation) ── */}
-            <div className="mt-4 flex items-center justify-between px-3">
-              {/* Step indicator dots */}
-              <div className="flex items-center gap-1.5">
-                {services.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => scrollToSlide(i)}
-                    aria-label={`انتقل للخدمة ${i + 1}`}
-                    className="h-2 rounded-full transition-all duration-300"
-                    style={{
-                      width: i === currentSlide ? 28 : 8,
-                      background: i === currentSlide ? "#FF0A2B" : "rgba(255, 255, 255, 0.25)",
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Next/Prev Mini Arrows */}
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  disabled={currentSlide === 0}
-                  className="w-8 h-8 rounded-full border border-white/20 bg-white/5 hover:bg-[#FF0A2B] hover:border-[#FF0A2B] text-white flex items-center justify-center transition-colors disabled:opacity-30 disabled:pointer-events-none"
-                  aria-label="الخدمة السابقة"
-                >
-                  <ChevronUp className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  disabled={currentSlide === services.length - 1}
-                  className="w-8 h-8 rounded-full border border-white/20 bg-white/5 hover:bg-[#FF0A2B] hover:border-[#FF0A2B] text-white flex items-center justify-center transition-colors disabled:opacity-30 disabled:pointer-events-none"
-                  aria-label="الخدمة التالية"
-                >
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>
 
-      {/* ═══════════════ Service Details Modal with AnimatePresence ═══════════════ */}
+      {/* ═══════════════ Service Details Modal ═══════════════ */}
       <AnimatePresence>
         {activeModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">

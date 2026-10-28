@@ -64,6 +64,26 @@ body {
   }
 }
 
+/* Infinite Marquee Slider for Partners */
+@keyframes marqueeSlider {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeSlider 32s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
 /* Laser Scanline Effect */
 @keyframes scanline {
   0% {

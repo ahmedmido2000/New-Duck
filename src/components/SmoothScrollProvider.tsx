@@ -31,19 +31,19 @@ export default function SmoothScrollProvider({
     // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // Check reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    // Snappy, fast, responsive smooth scroll
     const lenis = new Lenis({
-      duration: prefersReducedMotion ? 0.1 : 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -8 * t)),
+      duration: prefersReducedMotion ? 0.05 : 0.85,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: !prefersReducedMotion,
-      wheelMultiplier: 0.8,
-      touchMultiplier: 1.1,
+      wheelMultiplier: 1.35, // Faster, responsive scrolling
+      touchMultiplier: 1.4,
       infinite: false,
     });
 
@@ -62,7 +62,7 @@ export default function SmoothScrollProvider({
     gsap.ticker.add(updateTicker);
     gsap.ticker.lagSmoothing(0);
 
-    // Intercept internal hash anchor clicks for smooth Lenis scrolling
+    // Intercept internal hash anchor clicks for swift Lenis scrolling
     const handleAnchorClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement)?.closest("a");
       if (!target) return;
@@ -73,7 +73,7 @@ export default function SmoothScrollProvider({
           e.preventDefault();
           lenis.scrollTo(el as HTMLElement, {
             offset: -80,
-            duration: 1.3,
+            duration: 0.9,
             easing: (t) => 1 - Math.pow(1 - t, 3),
           });
         }
@@ -97,7 +97,7 @@ export default function SmoothScrollProvider({
     if (lenisRef.current) {
       lenisRef.current.scrollTo(target, {
         offset: -80,
-        duration: 1.2,
+        duration: 0.9,
         ...options,
       });
     } else if (typeof window !== "undefined") {

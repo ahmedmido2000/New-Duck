@@ -1,17 +1,21 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
 import MagneticButton from "./MagneticButton";
+import InteractiveHeroGrid from "./InteractiveHeroGrid";
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement | null>(null);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.12,
-        delayChildren: 0.2,
+        delayChildren: 0.15,
       },
     },
   };
@@ -22,7 +26,7 @@ export default function Hero() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.85,
+        duration: 0.8,
         ease: [0.16, 1, 0.3, 1] as const,
       },
     },
@@ -30,19 +34,23 @@ export default function Hero() {
 
   return (
     <section
+      ref={heroRef}
       id="top"
-      className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-20 sm:pt-36 sm:pb-28 px-4 sm:px-8 lg:px-16 overflow-hidden"
+      className="relative min-h-[94vh] flex items-center justify-center pt-28 pb-20 sm:pt-36 sm:pb-28 px-4 sm:px-8 lg:px-16 overflow-hidden"
       style={{
         background:
           "radial-gradient(ellipse at 20% 80%, #3A0610 0%, #0D0204 68%)",
       }}
     >
+      {/* Interactive Physics Grid Canvas */}
+      <InteractiveHeroGrid containerRef={heroRef} />
+
       {/* Background Animated SVG Laser Streams */}
       <svg
         viewBox="0 0 1360 640"
         preserveAspectRatio="xMinYMax slice"
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full opacity-90 pointer-events-none"
+        className="absolute inset-0 w-full h-full opacity-90 pointer-events-none z-[2]"
       >
         <defs>
           <linearGradient id="laserGrad" x1="0" y1="1" x2="1" y2="0">
@@ -126,7 +134,7 @@ export default function Hero() {
         {/* Kicker Tag */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FF0A2B]/10 border border-[#FF0A2B]/30 backdrop-blur-sm shadow-glow-red"
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#FF0A2B]/10 border border-[#FF0A2B]/40 backdrop-blur-sm shadow-glow-red"
         >
           <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
           <span className="text-[#FF0A2B] font-extrabold text-sm sm:text-base tracking-wide text-glow-red">

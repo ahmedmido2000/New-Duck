@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Check, Sparkles, X, MessageCircle } from "lucide-react";
+import { ArrowLeft, Check, Sparkles, X, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
 import MagneticButton from "./MagneticButton";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface ServiceItem {
   id: number;
@@ -13,6 +11,9 @@ interface ServiceItem {
   ghost: string;
   description: string;
   details: string[];
+  gradient: string;
+  borderColor: string;
+  pillColor: string;
 }
 
 const services: ServiceItem[] = [
@@ -28,6 +29,9 @@ const services: ServiceItem[] = [
       "ربط بوابات الدفع الإلكتروني وشركات الشحن",
       "تحسين سرعة التصفح وتجربة الشراء السريعة",
     ],
+    gradient: "linear-gradient(145deg, #7A0B1A 0%, #4A0610 50%, #240207 100%)",
+    borderColor: "rgba(255, 10, 43, 0.45)",
+    pillColor: "#7A0B1A",
   },
   {
     id: 2,
@@ -41,6 +45,9 @@ const services: ServiceItem[] = [
       "تصاميم نماذج أولية تفاعلية على Figma",
       "مراعاة أعلى معايير سهولة الاستخدام والوصول",
     ],
+    gradient: "linear-gradient(145deg, #FF0A2B 0%, #B80018 55%, #6B000D 100%)",
+    borderColor: "rgba(255, 255, 255, 0.3)",
+    pillColor: "#FF0A2B",
   },
   {
     id: 3,
@@ -54,6 +61,9 @@ const services: ServiceItem[] = [
       "إشعارات فورية لزيادة تفاعل وإعادة شراء العملاء",
       "دعم فني وصيانة دورية وأمان عالي",
     ],
+    gradient: "linear-gradient(145deg, #5C0813 0%, #36030A 55%, #180104 100%)",
+    borderColor: "rgba(255, 10, 43, 0.4)",
+    pillColor: "#7A0B1A",
   },
   {
     id: 4,
@@ -67,6 +77,9 @@ const services: ServiceItem[] = [
       "إعادة استهداف ذكية لزوار المتجر",
       "تقارير دورية وشفافة توضح العائد والمبيعات",
     ],
+    gradient: "linear-gradient(145deg, #B8081E 0%, #750412 55%, #3D0108 100%)",
+    borderColor: "rgba(255, 255, 255, 0.25)",
+    pillColor: "#B8081E",
   },
   {
     id: 5,
@@ -80,6 +93,9 @@ const services: ServiceItem[] = [
       "بناء روابط خلفية قوية وموثوقة (Backlinks)",
       "تحسين محركات البحث المحلية (Local SEO)",
     ],
+    gradient: "linear-gradient(145deg, #4A050E 0%, #2B0207 55%, #140003 100%)",
+    borderColor: "rgba(255, 10, 43, 0.35)",
+    pillColor: "#7A0B1A",
   },
   {
     id: 6,
@@ -93,184 +109,262 @@ const services: ServiceItem[] = [
       "تصاميم السوشيال ميديا والمطبوعات الإعلانية",
       "نبرة الصوت والرسائل التسويقية للعلامة",
     ],
+    gradient: "linear-gradient(145deg, #E60021 0%, #990014 55%, #52000A 100%)",
+    borderColor: "rgba(255, 255, 255, 0.3)",
+    pillColor: "#FF0A2B",
   },
 ];
 
 export default function Services() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeModal, setActiveModal] = useState<ServiceItem | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  // Monitor scroll inside cards container to update indicator
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
+    const el = scrollContainerRef.current;
+    if (!el) return;
 
-    const section = sectionRef.current;
-    if (!section) return;
+    const handleScroll = () => {
+      const scrollPos = el.scrollTop;
+      const cardHeight = 380;
+      const index = Math.min(
+        services.length - 1,
+        Math.max(0, Math.round(scrollPos / cardHeight))
+      );
+      setCurrentSlide(index);
+    };
 
-    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-    const scrollPerCard = window.innerHeight * 0.9;
-    const totalScroll = scrollPerCard * (services.length - 1);
-
-    // Initial state: card 0 visible, rest peeking from bottom
-    gsap.set(cards[0], { yPercent: 0 });
-    cards.slice(1).forEach((card) => gsap.set(card, { yPercent: 100 }));
-
-    const ctx = gsap.context(() => {
-      // Pin the whole section for the scroll duration
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: `+=${totalScroll}`,
-        pin: true,
-        pinSpacing: true,
-      });
-
-      // Animate card transitions one-by-one
-      cards.forEach((_, i) => {
-        if (i >= cards.length - 1) return;
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: `top+=${i * scrollPerCard} top`,
-            end: `top+=${(i + 1) * scrollPerCard} top`,
-            scrub: 0.6,
-            onEnter: () => setActiveIndex(i + 1),
-            onLeaveBack: () => setActiveIndex(i),
-          },
-        });
-
-        // Current card slides out to top
-        tl.to(cards[i], { yPercent: -100, ease: "none" }, 0);
-        // Next card slides up to fill
-        tl.to(cards[i + 1], { yPercent: 0, ease: "none" }, 0);
-      });
-    }, section);
-
-    return () => ctx.revert();
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    return () => el.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSlide = (index: number) => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const targetScroll = index * 390;
+    el.scrollTo({ top: targetScroll, behavior: "smooth" });
+  };
+
+  const handleNext = () => {
+    if (currentSlide < services.length - 1) {
+      scrollToSlide(currentSlide + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentSlide > 0) {
+      scrollToSlide(currentSlide - 1);
+    }
+  };
+
   return (
-    <section
-      ref={sectionRef}
-      id="services"
-      className="bg-[#12030A] overflow-hidden"
-    >
-      {/* 100vh inner layout */}
-      <div className="h-screen flex items-center">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-10 lg:gap-16 h-full py-12">
+    <section id="services" className="py-20 sm:py-28 bg-[#0D0204] relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#FF0A2B]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#7A0B1A]/15 rounded-full blur-[130px] pointer-events-none" />
 
-          {/* ── Left: Stacking Cards ── */}
-          <div className="relative w-full lg:w-[45%] shrink-0 h-[55vw] max-h-[520px] min-h-[340px] overflow-hidden rounded-[28px]">
-            {services.map((svc, index) => {
-              const isEven = index % 2 === 1;
-              return (
-                <div
-                  key={svc.id}
-                  ref={(el) => { cardRefs.current[index] = el; }}
-                  className="absolute inset-0 rounded-[28px] overflow-hidden will-change-transform"
-                  style={{ zIndex: services.length - index }}
-                >
-                  <div
-                    className="w-full h-full flex flex-col p-6 sm:p-8 relative overflow-hidden"
-                    style={{
-                      background: isEven ? "#7A0B1A" : "#FF0A2B",
-                      color: "#fff",
-                    }}
-                  >
-                    {/* Pill */}
-                    <div
-                      className="self-start rounded-[10px] px-6 py-1.5 font-extrabold text-sm sm:text-base tracking-[3px] mb-4"
-                      style={{ background: "#fff", color: isEven ? "#7A0B1A" : "#FF0A2B" }}
-                    >
-                      خـــدمـــة
-                    </div>
-
-                    {/* Ghost watermark */}
-                    <div
-                      className="absolute -right-2 bottom-16 text-[64px] sm:text-[80px] font-black whitespace-nowrap select-none pointer-events-none"
-                      style={{ color: "rgba(255,255,255,0.12)" }}
-                    >
-                      {svc.ghost}
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="relative z-10 text-2xl sm:text-4xl font-black leading-snug mt-auto">
-                      {svc.title}
-                    </h3>
-
-                    {/* Read More */}
-                    <button
-                      type="button"
-                      onClick={() => setActiveModal(svc)}
-                      className="relative z-10 mt-5 self-start inline-flex items-center gap-2 bg-white text-[#1A0509] px-5 py-2.5 rounded-lg font-extrabold text-sm sm:text-base hover:bg-neutral-100 transition-colors shadow-md"
-                    >
-                      <span>اقرأ المزيد</span>
-                      <ArrowLeft className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Card counter dots — inside but visible via pb space */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-              {services.map((_, i) => (
-                <div
-                  key={i}
-                  className="rounded-full transition-all duration-300"
-                  style={{
-                    width: i === activeIndex ? 20 : 8,
-                    height: 8,
-                    background: i === activeIndex ? "#FF0A2B" : "rgba(255,255,255,0.4)",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* ── Right: Sticky section info + active card description ── */}
-          <div className="flex-1 text-right flex flex-col gap-5 sm:gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+          
+          {/* ═══════════════ RIGHT COLUMN: Sticky Information & CTA (RTL: Starts on Right) ═══════════════ */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+            className="w-full lg:w-[45%] flex flex-col items-start text-right gap-6 order-1 lg:order-2"
+          >
+            {/* Kicker badge */}
             <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg">
-              <Sparkles className="w-5 h-5" />
+              <Sparkles className="w-5 h-5 text-[#FF0A2B]" />
               <span>حوّل ميزانيتك إلى نمو</span>
+              <span className="w-6 h-[2px] bg-[#FF0A2B]" />
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
-              خدمات متكاملة تصنع الفارق
+            {/* Main Section Heading */}
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-white leading-[1.3] tracking-tight">
+              في عالم التسويق الرقمي، نكون الشريك الذي يبدأ معك من الفكرة الأولى، لا من مرحلة التنفيذ فقط
             </h2>
 
-            {/* Active service description — fades on change */}
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={activeIndex}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.35 }}
-                className="text-base sm:text-xl font-semibold text-[#E6CDD0] leading-relaxed"
-              >
-                {services[activeIndex].description}
-              </motion.p>
-            </AnimatePresence>
+            {/* Description */}
+            <p className="text-base sm:text-lg text-[#C9A4A8] leading-relaxed font-normal max-w-xl">
+              حيث نبدأ بفهم عميق لطبيعة نشاطك والسوق وجمهورك المستهدف، لنرسم لك اتجاهًا واضحًا نحو النمو المستدام ومضاعفة مبيعاتك وأرباحك.
+            </p>
 
-            <div className="pt-1">
+            {/* Primary Action Button */}
+            <div className="pt-2">
               <MagneticButton
                 href="https://wa.me/201064544080"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-7 py-3.5 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 shadow-glow-red shimmer-hover"
+                className="inline-flex items-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-bold text-base sm:text-lg transition-all shadow-glow-red shimmer-hover"
               >
-                <span>خُد خطوتك الأولى معانا</span>
+                <span>خُذ خطوتك الأولى معانا</span>
+                <ArrowLeft className="w-5 h-5" />
               </MagneticButton>
             </div>
-          </div>
+
+            {/* Helpful Scroll Tip & Step Indicator */}
+            <div className="pt-4 flex items-center gap-3 text-xs sm:text-sm text-[#E6CDD0]/80">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#FF0A2B] animate-ping" />
+              <span>مرر على البطاقات لاستعراض كافة خدماتنا المبتكرة ({currentSlide + 1} من {services.length})</span>
+            </div>
+          </motion.div>
+
+          {/* ═══════════════ LEFT COLUMN: Masar-Style Stacking Sticky Cards ═══════════════ */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+            className="w-full lg:w-[55%] flex flex-col order-2 lg:order-1 relative"
+          >
+            {/* The Dedicated Scroll Parent (Masar Agency .custom-parent Architecture) */}
+            <div
+              ref={scrollContainerRef}
+              data-lenis-prevent="true"
+              className="custom-parent relative w-full h-[540px] sm:h-[580px] overflow-y-auto overflow-x-hidden rounded-[32px] p-2 sm:p-3 select-none"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <style jsx>{`
+                .custom-parent::-webkit-scrollbar {
+                  display: none;
+                }
+                .sticky-slide-1 { top: 0px !important; z-index: 10; }
+                .sticky-slide-2 { top: 18px !important; z-index: 20; }
+                .sticky-slide-3 { top: 36px !important; z-index: 30; }
+                .sticky-slide-4 { top: 54px !important; z-index: 40; }
+                .sticky-slide-5 { top: 72px !important; z-index: 50; }
+                .sticky-slide-6 { top: 90px !important; z-index: 60; }
+              `}</style>
+
+              {services.map((svc, index) => {
+                const stickyClass = `sticky-slide-${index + 1}`;
+
+                return (
+                  <div key={svc.id}>
+                    {/* Sticky Card Slide Container */}
+                    <div
+                      className={`sticky ${stickyClass} w-full transition-transform duration-300`}
+                    >
+                      {/* Card Body (.all-content) */}
+                      <div
+                        className="group relative w-full min-h-[380px] sm:min-h-[410px] rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                        style={{
+                          background: svc.gradient,
+                          border: `1.5px solid ${svc.borderColor}`,
+                          boxShadow:
+                            "0 -12px 30px rgba(0, 0, 0, 0.55), 0 16px 36px rgba(0, 0, 0, 0.4)",
+                        }}
+                      >
+                        {/* ── Background Large Ghost Watermark Text (Masar style) ── */}
+                        <div
+                          className="absolute -right-4 top-24 text-[65px] sm:text-[88px] font-black whitespace-nowrap text-white/[0.08] pointer-events-none select-none transition-transform duration-700 group-hover:-translate-x-6"
+                          style={{ direction: "rtl" }}
+                        >
+                          {svc.ghost}
+                        </div>
+
+                        {/* ── Head Content ── */}
+                        <div className="relative z-10 flex flex-col items-start gap-4">
+                          {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
+                          <div
+                            className="inline-block bg-white px-5 sm:px-6 py-1.5 sm:py-2 rounded-xl font-black text-sm sm:text-base tracking-[4px] shadow-sm"
+                            style={{ color: svc.pillColor }}
+                          >
+                            خـــــــــــدمـــــــــــــــــــة
+                          </div>
+
+                          {/* Service Title */}
+                          <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-black text-white leading-snug mt-1">
+                            {svc.title}
+                          </h3>
+                        </div>
+
+                        {/* ── Body Content ── */}
+                        <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mt-6 pt-4 border-t border-white/10">
+                          {/* Short Description */}
+                          <p className="text-xs sm:text-sm lg:text-[15px] text-white/90 leading-relaxed max-w-full sm:max-w-[70%] font-medium">
+                            {svc.description}
+                          </p>
+
+                          {/* Read More Button */}
+                          <button
+                            type="button"
+                            onClick={() => setActiveModal(svc)}
+                            className="inline-flex items-center gap-2 bg-white text-[#1A0509] hover:bg-neutral-100 px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
+                          >
+                            <span>اقرأ المزيد</span>
+                            <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Spacer between slides */}
+                    {index < services.length - 1 && (
+                      <div className="h-4 sm:h-5" />
+                    )}
+                  </div>
+                );
+              })}
+
+              {/* Extra Spacer at the Bottom (so the final slide stacks smoothly) */}
+              <div className="h-44 sm:h-52" />
+            </div>
+
+            {/* ── Floating Controls Bar (Prev/Next & Dots Navigation) ── */}
+            <div className="mt-4 flex items-center justify-between px-3">
+              {/* Step indicator dots */}
+              <div className="flex items-center gap-1.5">
+                {services.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => scrollToSlide(i)}
+                    aria-label={`انتقل للخدمة ${i + 1}`}
+                    className="h-2 rounded-full transition-all duration-300"
+                    style={{
+                      width: i === currentSlide ? 28 : 8,
+                      background: i === currentSlide ? "#FF0A2B" : "rgba(255, 255, 255, 0.25)",
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Next/Prev Mini Arrows */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  disabled={currentSlide === 0}
+                  className="w-8 h-8 rounded-full border border-white/20 bg-white/5 hover:bg-[#FF0A2B] hover:border-[#FF0A2B] text-white flex items-center justify-center transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  aria-label="الخدمة السابقة"
+                >
+                  <ChevronUp className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={currentSlide === services.length - 1}
+                  className="w-8 h-8 rounded-full border border-white/20 bg-white/5 hover:bg-[#FF0A2B] hover:border-[#FF0A2B] text-white flex items-center justify-center transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  aria-label="الخدمة التالية"
+                >
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
 
-      {/* ── Service Details Modal ── */}
+      {/* ═══════════════ Service Details Modal with AnimatePresence ═══════════════ */}
       <AnimatePresence>
         {activeModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
@@ -326,6 +420,7 @@ export default function Services() {
                   <MessageCircle className="w-5 h-5" />
                   <span>طلب الخدمة عبر واتساب</span>
                 </a>
+
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}

@@ -45,11 +45,11 @@ export default function Home() {
         {/* Metrics & Performance Stats */}
         <Metrics />
 
-        {/* Contact & Regional Branches */}
-        <Contact />
-
         {/* Free Consultation & FAQ */}
         <Consultation />
+
+        {/* Contact & Regional Branches */}
+        <Contact />
 
         {/* Footer */}
         <Footer />

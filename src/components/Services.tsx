@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Check, Sparkles, X, MessageCircle } from "lucide-react";
 import MagneticButton from "./MagneticButton";
-import TiltCard from "./TiltCard";
 
 interface ServiceItem {
   id: number;
@@ -14,6 +13,27 @@ interface ServiceItem {
   details: string[];
 }
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.13,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 44 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
+
 export default function Services() {
   const [activeModal, setActiveModal] = useState<ServiceItem | null>(null);
 
@@ -22,7 +42,8 @@ export default function Services() {
       id: 1,
       title: "إنشاء المتاجر الإلكترونية",
       ghost: "المتاجر الإلكترونية",
-      description: "نصمم متجرك باحترافية لعرض منتجاتك بطريقة جذابة وسهلة الاستخدام، مع ربط بوابات الدفع والشحن.",
+      description:
+        "نصمم متجرك باحترافية لعرض منتجاتك بطريقة جذابة وسهلة الاستخدام، مع ربط بوابات الدفع والشحن.",
       details: [
         "تصميم متوافق 100% مع الجوال والتابلت",
         "تكامل مع سلة، زد، وشوبيفاي و WooCommerce",
@@ -34,7 +55,8 @@ export default function Services() {
       id: 2,
       title: "تصميم واجهة موقع",
       ghost: "تصميم واجهة موقع",
-      description: "واجهات عصرية وتجربة مستخدم سلسة تحوّل الزائر لعميل، بتصاميم حديثة ومدروسة سيكولوجياً.",
+      description:
+        "واجهات عصرية وتجربة مستخدم سلسة تحوّل الزائر لعميل، بتصاميم حديثة ومدروسة سيكولوجياً.",
       details: [
         "دراسة سلوك المستخدم (UX Research)",
         "تصميم واجهات تفاعلية مبهجة (UI Design)",
@@ -46,7 +68,8 @@ export default function Services() {
       id: 3,
       title: "التطبيقات الإلكترونية",
       ghost: "التطبيقات الإلكترونية",
-      description: "نطوّر تطبيقات ذكية ومتجاوبة تناسب احتياجات عملك وتصل لعملائك بسهولة وسرعة فائقة.",
+      description:
+        "نطوّر تطبيقات ذكية ومتجاوبة تناسب احتياجات عملك وتصل لعملائك بسهولة وسرعة فائقة.",
       details: [
         "تطوير لتطبيقات iOS و Android",
         "لوحة تحكم ذكية لإدارة الطلبات والبيانات",
@@ -58,7 +81,8 @@ export default function Services() {
       id: 4,
       title: "إدارة الحملات الإعلانية",
       ghost: "الحملات الإعلانية",
-      description: "ندير حملاتك باحترافية للوصول لجمهورك المستهدف بأفضل نتيجة وبأعلى عائد استثماري ممكن.",
+      description:
+        "ندير حملاتك باحترافية للوصول لجمهورك المستهدف بأفضل نتيجة وبأعلى عائد استثماري ممكن.",
       details: [
         "إعلانات Meta (فيسبوك وإنستغرام)",
         "إعلانات TikTok و Snapchat و Google Ads",
@@ -70,7 +94,8 @@ export default function Services() {
       id: 5,
       title: "تحسين محركات البحث (SEO)",
       ghost: "تحسين محركات البحث",
-      description: "يظهر نشاطك أمام العملاء اللي بيدوّروا على خدماتك، ونرتقي بترتيبه للصفحات الأولى في جوجل.",
+      description:
+        "يظهر نشاطك أمام العملاء اللي بيدوّروا على خدماتك، ونرتقي بترتيبه للصفحات الأولى في جوجل.",
       details: [
         "دراسة الكلمات المفتاحية الأكثر ربحية ونية شراء",
         "تحسين البنية التقنية للموقع والسرعة (Technical SEO)",
@@ -82,7 +107,8 @@ export default function Services() {
       id: 6,
       title: "تصميم الهوية البصرية",
       ghost: "الهوية البصرية",
-      description: "نصمّم لك هوية مميزة تعكس شخصية علامتك وتجذب جمهورك وترسخ في أذهانهم لفترة طويلة.",
+      description:
+        "نصمّم لك هوية مميزة تعكس شخصية علامتك وتجذب جمهورك وترسخ في أذهانهم لفترة طويلة.",
       details: [
         "تصميم الشعار وتطبيقاته المختلفة",
         "دليل استخدام الهوية البصرية (Brand Guidelines)",
@@ -113,7 +139,9 @@ export default function Services() {
           </h2>
 
           <p className="text-lg sm:text-2xl font-semibold text-[#E6CDD0] leading-relaxed">
-            في عالم التسويق الرقمي، نكون الشريك الذي يبدأ معك من الفكرة الأولى، لا من مرحلة التنفيذ فقط. نفهم نشاطك وسوقك وجمهورك، لنرسم لك اتجاهًا واضحًا نحو النمو.
+            في عالم التسويق الرقمي، نكون الشريك الذي يبدأ معك من الفكرة الأولى،
+            لا من مرحلة التنفيذ فقط. نفهم نشاطك وسوقك وجمهورك، لنرسم لك اتجاهًا
+            واضحًا نحو النمو.
           </p>
 
           <div className="pt-2">
@@ -128,68 +156,78 @@ export default function Services() {
           </div>
         </motion.div>
 
-        {/* Services Grid with 3D Stack Effect & Stagger */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 sm:gap-y-20 gap-x-8 pt-8">
+        {/* Staggered Services Grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 sm:gap-y-20 gap-x-8 pt-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {services.map((svc, index) => {
             const isEven = index % 2 === 1;
             return (
               <motion.div
                 key={svc.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: (index % 3) * 0.1, ease: [0.16, 1, 0.3, 1] as const }}
+                variants={cardVariants}
+                whileHover={{ y: -10, transition: { duration: 0.3, ease: "easeOut" } }}
+                className="relative group overflow-hidden rounded-[28px] flex flex-col cursor-pointer"
+                style={{
+                  minHeight: 360,
+                  background: isEven ? "#7A0B1A" : "#FF0A2B",
+                  color: "#fff",
+                  padding: "30px",
+                  gap: "14px",
+                  // Stacked deck shadow: two layers above the card
+                  boxShadow: isEven
+                    ? "0 -14px 0 -7px #FF0A2B, 0 -28px 0 -14px #fff"
+                    : "0 -14px 0 -7px #fff, 0 -28px 0 -14px #7A0B1A",
+                }}
               >
-                <TiltCard maxTilt={6} glare={false} className="h-full">
-                  <div
-                    className={`group relative overflow-hidden rounded-[26px] p-7 sm:p-8 min-h-[360px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-3 cursor-pointer h-full ${
-                      isEven ? "svc-even" : "svc-odd"
-                    }`}
-                  >
-                    {/* Pill Tag */}
-                    <div
-                      className={`self-start rounded-lg px-6 py-1.5 font-extrabold text-sm sm:text-base tracking-widest shadow-sm ${
-                        isEven ? "bg-white text-[#7A0B1A]" : "bg-white text-[#FF0A2B]"
-                      }`}
-                    >
-                      خـــــدمـــــة
-                    </div>
+                {/* "خدمة" pill tag */}
+                <div
+                  className="self-start rounded-[10px] px-7 py-2 font-extrabold text-base tracking-[3px] shadow-sm"
+                  style={{ background: "#fff", color: isEven ? "#7A0B1A" : "#FF0A2B" }}
+                >
+                  خـــــدمـــــة
+                </div>
 
-                    {/* Ghost Watermark Background Text */}
-                    <div className="absolute -right-4 top-24 text-6xl sm:text-7xl font-black whitespace-nowrap text-white/10 select-none pointer-events-none transition-transform duration-700 group-hover:-translate-x-8">
-                      {svc.ghost}
-                    </div>
+                {/* Ghost watermark text */}
+                <div
+                  className="absolute -right-2.5 top-24 text-[80px] sm:text-[92px] font-black whitespace-nowrap select-none pointer-events-none transition-transform duration-[600ms] group-hover:-translate-x-10"
+                  style={{ color: "rgba(255,255,255,0.13)" }}
+                >
+                  {svc.ghost}
+                </div>
 
-                    {/* Content */}
-                    <div className="relative z-10 my-4">
-                      <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
-                        {svc.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-white/90 leading-relaxed max-w-[280px]">
-                        {svc.description}
-                      </p>
-                    </div>
+                {/* Main content */}
+                <div className="relative z-10 my-2 flex flex-col gap-3">
+                  <h3 className="text-[28px] sm:text-[34px] font-black leading-snug">
+                    {svc.title}
+                  </h3>
+                  <p className="text-sm sm:text-base leading-[1.8] max-w-[300px] text-white/90">
+                    {svc.description}
+                  </p>
+                </div>
 
-                    {/* Read More Button */}
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      type="button"
-                      onClick={() => setActiveModal(svc)}
-                      className="relative z-10 self-start inline-flex items-center gap-2 bg-white text-[#1A0509] px-5 py-2.5 rounded-lg font-extrabold text-sm sm:text-base hover:bg-neutral-100 transition-colors shadow-md"
-                    >
-                      <span>اقرأ المزيد</span>
-                      <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                    </motion.button>
-                  </div>
-                </TiltCard>
+                {/* Read more button — pushed to bottom */}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type="button"
+                  onClick={() => setActiveModal(svc)}
+                  className="relative z-10 mt-auto self-start inline-flex items-center gap-2 bg-white text-[#1A0509] px-6 py-2.5 rounded-[6px] font-extrabold text-sm sm:text-base hover:bg-neutral-100 transition-colors shadow-md"
+                >
+                  <span>اقرأ المزيد</span>
+                  <ArrowLeft className="w-4 h-4" />
+                </motion.button>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Service Details Modal with AnimatePresence */}
+      {/* Service Details Modal */}
       <AnimatePresence>
         {activeModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">

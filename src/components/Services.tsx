@@ -10,19 +10,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 interface ServiceItem {
   id: number;
   title: string;
-  ghost: string;
   description: string;
   details: string[];
   gradient: string;
   borderColor: string;
+  pillBg: string;
   pillColor: string;
+  titleColor: string;
+  descColor: string;
+  btnBg: string;
+  btnColor: string;
+  btnHoverBg: string;
 }
 
 const services: ServiceItem[] = [
   {
     id: 1,
     title: "إنشاء المتاجر الإلكترونية",
-    ghost: "المتاجر الإلكترونية",
     description:
       "نصمم متجرك باحترافية لعرض منتجاتك بطريقة جذابة وسهلة الاستخدام، مع ربط بوابات الدفع والشحن.",
     details: [
@@ -31,14 +35,19 @@ const services: ServiceItem[] = [
       "ربط بوابات الدفع الإلكتروني وشركات الشحن",
       "تحسين سرعة التصفح وتجربة الشراء السريعة",
     ],
-    gradient: "linear-gradient(145deg, #7A0B1A 0%, #4A0610 50%, #200206 100%)",
+    gradient: "linear-gradient(145deg, #661022 0%, #420814 55%, #240209 100%)",
     borderColor: "rgba(255, 10, 43, 0.45)",
-    pillColor: "#7A0B1A",
+    pillBg: "#ffffff",
+    pillColor: "#661022",
+    titleColor: "#ffffff",
+    descColor: "rgba(255, 255, 255, 0.9)",
+    btnBg: "#ffffff",
+    btnColor: "#1A0509",
+    btnHoverBg: "#f5f5f5",
   },
   {
     id: 2,
     title: "تصميم واجهة موقع",
-    ghost: "تصميم واجهة موقع",
     description:
       "واجهات عصرية وتجربة مستخدم سلسة تحوّل الزائر لعميل، بتصاميم حديثة ومدروسة سيكولوجياً.",
     details: [
@@ -47,14 +56,19 @@ const services: ServiceItem[] = [
       "تصاميم نماذج أولية تفاعلية على Figma",
       "مراعاة أعلى معايير سهولة الاستخدام والوصول",
     ],
-    gradient: "linear-gradient(145deg, #FF0A2B 0%, #B80018 55%, #6B000D 100%)",
-    borderColor: "rgba(255, 255, 255, 0.35)",
-    pillColor: "#FF0A2B",
+    gradient: "linear-gradient(145deg, #F0A203 0%, #D48B00 55%, #A86D00 100%)",
+    borderColor: "rgba(255, 220, 100, 0.5)",
+    pillBg: "#ffffff",
+    pillColor: "#A86D00",
+    titleColor: "#ffffff",
+    descColor: "rgba(255, 255, 255, 0.95)",
+    btnBg: "#ffffff",
+    btnColor: "#1A0509",
+    btnHoverBg: "#f5f5f5",
   },
   {
     id: 3,
     title: "التطبيقات الإلكترونية",
-    ghost: "التطبيقات الإلكترونية",
     description:
       "نطوّر تطبيقات ذكية ومتجاوبة تناسب احتياجات عملك وتصل لعملائك بسهولة وسرعة فائقة.",
     details: [
@@ -63,14 +77,19 @@ const services: ServiceItem[] = [
       "إشعارات فورية لزيادة تفاعل وإعادة شراء العملاء",
       "دعم فني وصيانة دورية وأمان عالي",
     ],
-    gradient: "linear-gradient(145deg, #5C0813 0%, #36030A 55%, #180104 100%)",
-    borderColor: "rgba(255, 10, 43, 0.4)",
-    pillColor: "#7A0B1A",
+    gradient: "linear-gradient(145deg, #540D1D 0%, #380712 55%, #1C0208 100%)",
+    borderColor: "rgba(255, 10, 43, 0.35)",
+    pillBg: "#ffffff",
+    pillColor: "#540D1D",
+    titleColor: "#ffffff",
+    descColor: "rgba(255, 255, 255, 0.9)",
+    btnBg: "#ffffff",
+    btnColor: "#1A0509",
+    btnHoverBg: "#f5f5f5",
   },
   {
     id: 4,
     title: "إدارة الحملات الإعلانية",
-    ghost: "الحملات الإعلانية",
     description:
       "ندير حملاتك باحترافية للوصول لجمهورك المستهدف بأفضل نتيجة وبأعلى عائد استثماري ممكن.",
     details: [
@@ -79,14 +98,19 @@ const services: ServiceItem[] = [
       "إعادة استهداف ذكية لزوار المتجر",
       "تقارير دورية وشفافة توضح العائد والمبيعات",
     ],
-    gradient: "linear-gradient(145deg, #B8081E 0%, #750412 55%, #3D0108 100%)",
-    borderColor: "rgba(255, 255, 255, 0.3)",
-    pillColor: "#B8081E",
+    gradient: "linear-gradient(145deg, #FFFFFF 0%, #F9F5F6 100%)",
+    borderColor: "rgba(99, 23, 45, 0.3)",
+    pillBg: "#520C1A",
+    pillColor: "#ffffff",
+    titleColor: "#520C1A",
+    descColor: "#520C1A",
+    btnBg: "#520C1A",
+    btnColor: "#ffffff",
+    btnHoverBg: "#3D0813",
   },
   {
     id: 5,
     title: "تحسين محركات البحث (SEO)",
-    ghost: "تحسين محركات البحث",
     description:
       "يظهر نشاطك أمام العملاء اللي بيدوّروا على خدماتك، ونرتقي بترتيبه للصفحات الأولى في جوجل.",
     details: [
@@ -95,14 +119,19 @@ const services: ServiceItem[] = [
       "بناء روابط خلفية قوية وموثوقة (Backlinks)",
       "تحسين محركات البحث المحلية (Local SEO)",
     ],
-    gradient: "linear-gradient(145deg, #4A050E 0%, #2B0207 55%, #140003 100%)",
+    gradient: "linear-gradient(145deg, #4A0817 0%, #2E030C 55%, #170105 100%)",
     borderColor: "rgba(255, 10, 43, 0.35)",
-    pillColor: "#7A0B1A",
+    pillBg: "#ffffff",
+    pillColor: "#4A0817",
+    titleColor: "#ffffff",
+    descColor: "rgba(255, 255, 255, 0.9)",
+    btnBg: "#ffffff",
+    btnColor: "#1A0509",
+    btnHoverBg: "#f5f5f5",
   },
   {
     id: 6,
     title: "تصميم الهوية البصرية",
-    ghost: "الهوية البصرية",
     description:
       "نصمّم لك هوية مميزة تعكس شخصية علامتك وتجذب جمهورك وترسخ في أذهانهم لفترة طويلة.",
     details: [
@@ -111,9 +140,15 @@ const services: ServiceItem[] = [
       "تصاميم السوشيال ميديا والمطبوعات الإعلانية",
       "نبرة الصوت والرسائل التسويقية للعلامة",
     ],
-    gradient: "linear-gradient(145deg, #E60021 0%, #990014 55%, #52000A 100%)",
-    borderColor: "rgba(255, 255, 255, 0.35)",
-    pillColor: "#FF0A2B",
+    gradient: "linear-gradient(145deg, #F0A203 0%, #D48B00 55%, #A86D00 100%)",
+    borderColor: "rgba(255, 220, 100, 0.5)",
+    pillBg: "#ffffff",
+    pillColor: "#A86D00",
+    titleColor: "#ffffff",
+    descColor: "rgba(255, 255, 255, 0.95)",
+    btnBg: "#ffffff",
+    btnColor: "#1A0509",
+    btnHoverBg: "#f5f5f5",
   },
 ];
 
@@ -140,27 +175,21 @@ export default function Services() {
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
-        // Fallback for reduced motion: show static stacked deck
         cards.forEach((card, i) => {
           gsap.set(card, { y: i * 15 });
         });
         return;
       }
 
-      // Responsive dimensions
       const isMobile = window.innerWidth < 640;
       const cardHeight = isMobile ? 360 : 400;
-      const peekOffset = isMobile ? 48 : 56; // Peeking tab height visible at bottom
-      const stackGap = isMobile ? 12 : 15; // Vertical offset per stacked card at top
+      const peekOffset = isMobile ? 48 : 56;
+      const stackGap = isMobile ? 12 : 15;
 
       // ── Step 1: Initial Positions ──
-      // Card 0 sits at resting top position
       gsap.set(cards[0], { y: 0 });
-
-      // Card 1 starts peeking from the bottom (Image 1)
       gsap.set(cards[1], { y: cardHeight - peekOffset });
 
-      // Remaining cards (2..5) wait below the visible frame
       for (let i = 2; i < cards.length; i++) {
         gsap.set(cards[i], { y: cardHeight + 80 });
       }
@@ -182,18 +211,15 @@ export default function Services() {
         },
       });
 
-      // Chain card transitions sequentially
       for (let i = 1; i < cards.length; i++) {
-        const targetY = i * stackGap; // Docked stack position at top
+        const targetY = i * stackGap;
 
-        // Animate Card i from peek position up to its stacked position over the previous card
         tl.to(cards[i], {
           y: targetY,
           ease: "none",
           duration: 1,
         });
 
-        // Simultaneously, bring Card i+1 into the peeking slot from below (if it exists)
         if (i + 1 < cards.length) {
           tl.to(
             cards[i + 1],
@@ -202,7 +228,7 @@ export default function Services() {
               ease: "none",
               duration: 1,
             },
-            "<" // Run in parallel with Card i moving up!
+            "<"
           );
         }
       }
@@ -243,16 +269,15 @@ export default function Services() {
               حيث نبدأ بفهم لطبيعة نشاطك والسوق السعودي وجمهورك المستهدف، لنرسم لك اتجاهًا واضحًا نحو النمو المستدام.
             </p>
 
-            {/* CTA Button */}
+            {/* CTA Button without Arrow */}
             <div className="pt-1">
               <MagneticButton
                 href="https://wa.me/201064544080"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
+                className="inline-flex items-center justify-center bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
               >
                 <span>خُذ خطوتك الأولى معنا</span>
-                <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </MagneticButton>
             </div>
           </div>
@@ -265,7 +290,6 @@ export default function Services() {
               className="relative w-full max-w-[540px] h-[410px] sm:h-[450px] overflow-hidden rounded-[30px] sm:rounded-[36px]"
             >
               {services.map((svc, index) => {
-                // Ascending z-index so later cards slide ON TOP of earlier cards
                 const zIndex = (index + 1) * 10;
 
                 return (
@@ -287,34 +311,35 @@ export default function Services() {
                           "0 -10px 30px rgba(0, 0, 0, 0.65), 0 16px 36px rgba(0, 0, 0, 0.45)",
                       }}
                     >
-                      {/* Ghost Watermark Text in Background */}
-                      <div
-                        className="absolute -right-4 top-20 sm:top-24 text-[60px] sm:text-[84px] font-black whitespace-nowrap text-white/[0.08] pointer-events-none select-none transition-transform duration-700 group-hover:-translate-x-6"
-                        style={{ direction: "rtl" }}
-                      >
-                        {svc.ghost}
-                      </div>
-
                       {/* Head Content */}
                       <div className="relative z-10 flex flex-col items-start gap-3 sm:gap-4">
                         {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
                         <div
-                          className="inline-block bg-white px-5 sm:px-6 py-1.5 sm:py-2 rounded-xl font-black text-xs sm:text-sm tracking-[4px] shadow-sm"
-                          style={{ color: svc.pillColor }}
+                          className="inline-block px-5 sm:px-6 py-1.5 sm:py-2 rounded-xl font-black text-xs sm:text-sm tracking-[4px] shadow-sm"
+                          style={{
+                            backgroundColor: svc.pillBg,
+                            color: svc.pillColor,
+                          }}
                         >
                           خـــــــــــدمـــــــــــــــــــة
                         </div>
 
                         {/* Service Title */}
-                        <h3 className="text-xl sm:text-2xl lg:text-[32px] font-black text-white leading-snug mt-1">
+                        <h3
+                          className="text-xl sm:text-2xl lg:text-[32px] font-black leading-snug mt-1"
+                          style={{ color: svc.titleColor }}
+                        >
                           {svc.title}
                         </h3>
                       </div>
 
                       {/* Body Content */}
-                      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 pt-4 border-t border-white/10">
+                      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 pt-4 border-t border-black/10 dark:border-white/10">
                         {/* Description */}
-                        <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-full sm:max-w-[70%] font-medium">
+                        <p
+                          className="text-xs sm:text-sm leading-relaxed max-w-full sm:max-w-[70%] font-medium"
+                          style={{ color: svc.descColor }}
+                        >
                           {svc.description}
                         </p>
 
@@ -322,7 +347,11 @@ export default function Services() {
                         <button
                           type="button"
                           onClick={() => setActiveModal(svc)}
-                          className="inline-flex items-center gap-2 bg-white text-[#1A0509] hover:bg-neutral-100 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
+                          className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
+                          style={{
+                            backgroundColor: svc.btnBg,
+                            color: svc.btnColor,
+                          }}
                         >
                           <span>اقرأ المزيد</span>
                           <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover/btn:-translate-x-1" />

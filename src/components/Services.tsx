@@ -182,7 +182,7 @@ export default function Services() {
       }
 
       const isMobile = window.innerWidth < 640;
-      const containerHeight = isMobile ? 470 : 510;
+      const containerHeight = isMobile ? 440 : 480;
       const stackGap = isMobile ? 12 : 14;
 
       // ── Step 1: Initial Positions ──
@@ -196,7 +196,8 @@ export default function Services() {
       }
 
       // ── Step 2: Main Scrub Timeline Pinned to Main Page Scroll ──
-      const scrollDistancePerCard = window.innerHeight * 0.85;
+      // Fast, snappy, responsive scroll distance per card (~340px)
+      const scrollDistancePerCard = Math.min(window.innerHeight * 0.36, 360);
       const totalScroll = scrollDistancePerCard * (cards.length - 1);
 
       const tl = gsap.timeline({
@@ -206,7 +207,7 @@ export default function Services() {
           end: `+=${totalScroll}`,
           pin: true,
           pinSpacing: true,
-          scrub: 0.6,
+          scrub: 0.35,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
@@ -215,20 +216,16 @@ export default function Services() {
       for (let i = 1; i < cards.length; i++) {
         const targetY = i * stackGap;
 
-        // 1. Dwell Phase: The current card remains 100% fully visible, readable, and clickable with its button
-        // before the next card even starts moving!
-        tl.to({}, { duration: 0.45 });
-
-        // 2. Rising Phase: Card i enters from below the container and slides smoothly over the previous card
+        // Card i slides smoothly and immediately from below into its stacked position
         tl.to(cards[i], {
           y: targetY,
-          ease: "power2.inOut",
+          ease: "none",
           duration: 1.0,
         });
       }
 
-      // Final dwell phase for the last card
-      tl.to({}, { duration: 0.6 });
+      // Small smooth buffer for the last card before natural unpinning
+      tl.to({}, { duration: 0.15 });
     }, section);
 
     return () => ctx.revert();
@@ -281,10 +278,10 @@ export default function Services() {
 
           {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame (Left in RTL) ═══════════════ */}
           <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2 lg:order-2">
-            {/* Card Frame: Extra vertical height guarantees full button visibility on all stacked cards */}
+            {/* Card Frame: clips cards outside its bounds, guaranteeing clean entry from bottom */}
             <div
               ref={cardFrameRef}
-              className="relative w-full max-w-[540px] h-[470px] sm:h-[510px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
+              className="relative w-full max-w-[540px] h-[440px] sm:h-[480px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
             >
               {services.map((svc, index) => {
                 const zIndex = (index + 1) * 10;
@@ -300,7 +297,7 @@ export default function Services() {
                   >
                     {/* The Visual Card: Compact, perfectly proportioned so button & description are always 100% visible */}
                     <div
-                      className="group relative w-full h-[295px] sm:h-[315px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
+                      className="group relative w-full h-[320px] sm:h-[345px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
                       style={{
                         background: svc.gradient,
                         border: `1.5px solid ${svc.borderColor}`,

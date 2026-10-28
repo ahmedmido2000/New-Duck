@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Headphones, Check } from "lucide-react";
+import { Phone, Mail, MapPin, Headphones } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] relative overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col gap-6 sm:gap-8">
+    <section id="contact" className="py-20 sm:py-28 bg-[#12030A] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6 sm:gap-8">
         {/* Header Block (Right-aligned, positioned directly above the cards) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,15 +27,15 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Content Row: Cards on Right, Video on Left with EXACT same start and end height */}
+        {/* Content Row: Cards on Right (decreased width), Video on Left (increased width) */}
         <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-8">
-          {/* Cards Column (Enters from Right) */}
+          {/* Cards Column (Decreased width ~38%, enters from Right) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-            className="flex-1 w-full flex flex-col justify-between gap-4 sm:gap-5 text-right"
+            className="w-full lg:w-[40%] lg:max-w-[450px] flex flex-col justify-between gap-4 sm:gap-5 text-right shrink-0"
           >
             {/* Egypt Branch */}
             <motion.div
@@ -125,7 +125,7 @@ export default function Contact() {
             </motion.div>
           </motion.div>
 
-          {/* Video Column (Starts and Ends at the EXACT same height as the cards) */}
+          {/* Video Column (Increased width ~60%, matching exact start and end height) */}
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.95 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -146,14 +146,6 @@ export default function Contact() {
 
               {/* Gradient Overlay */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#0D0204]/60 via-transparent to-transparent pointer-events-none z-20" />
-
-              {/* Bottom Left Badge: "التفاصيل في البيان" */}
-              <div className="absolute bottom-5 left-5 z-30 flex items-center gap-2 bg-[#0D0204]/85 backdrop-blur-md px-4 py-2 rounded-xl border border-[#FF0A2B]/50 shadow-glow-red">
-                <span className="text-xs sm:text-sm font-black text-white">
-                  التفاصيل في البيان
-                </span>
-                <Check className="w-4 h-4 text-[#FF0A2B]" />
-              </div>
             </div>
           </motion.div>
         </div>

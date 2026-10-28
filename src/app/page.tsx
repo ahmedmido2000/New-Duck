@@ -30,9 +30,6 @@ export default function Home() {
         {/* Hero Section with Interactive Canvas Physics Grid */}
         <Hero />
 
-        {/* Partners Marquee Wall */}
-        <PartnersWall />
-
         {/* About Section */}
         <About />
 
@@ -53,6 +50,9 @@ export default function Home() {
 
         {/* Features & Cybernetic AI Visual */}
         <Features />
+
+        {/* Partners Marquee Wall */}
+        <PartnersWall />
 
         {/* Metrics & Performance Stats */}
         <Metrics />

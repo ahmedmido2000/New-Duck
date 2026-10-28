@@ -4,8 +4,6 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
 import MagneticButton from "./MagneticButton";
-import InteractiveHeroGrid from "./InteractiveHeroGrid";
-
 export default function Hero() {
   const heroRef = useRef<HTMLElement | null>(null);
 
@@ -42,16 +40,25 @@ export default function Hero() {
           "radial-gradient(ellipse at 20% 80%, #3A0610 0%, #0D0204 68%)",
       }}
     >
-      {/* Interactive Physics Grid Canvas */}
-      <InteractiveHeroGrid containerRef={heroRef} />
+      {/* Hero Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/images/duck-hero-city.jpg"
+          alt=""
+          className="w-full h-full object-cover object-center"
+          aria-hidden="true"
+        />
+        {/* Dark Overlay to keep text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0204]/70 via-[#0D0204]/55 to-[#0D0204]/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D0204]/60 via-transparent to-[#0D0204]/30" />
+      </div>
 
       {/* Background Animated SVG Laser Streams */}
       <svg
         viewBox="0 0 1360 640"
         preserveAspectRatio="xMinYMax slice"
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full opacity-90 pointer-events-none z-[2]"
-      >
+        className="absolute inset-0 w-full h-full opacity-90 pointer-events-none z-[2]"      >
         <defs>
           <linearGradient id="laserGrad" x1="0" y1="1" x2="1" y2="0">
             <stop offset="0%" stopColor="#FF0A2B" stopOpacity="0" />
@@ -129,8 +136,7 @@ export default function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-5xl mx-auto w-full flex flex-col items-start gap-6 sm:gap-8"
-      >
+        className="relative z-10 max-w-5xl mx-auto w-full flex flex-col items-start gap-6 sm:gap-8"      >
         {/* Kicker Tag */}
         <motion.div
           variants={itemVariants}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowLeft, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 
 export default function Navbar() {
@@ -113,7 +113,6 @@ export default function Navbar() {
             className="group flex items-center gap-2 bg-[#7A0B1A] hover:bg-[#FF0A2B] text-white px-5 py-2.5 rounded-lg font-bold text-sm lg:text-base transition-all duration-300 shadow-glow-red shimmer-hover"
           >
             <span>ابدأ مسارك الآن</span>
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           </MagneticButton>
         </div>
 

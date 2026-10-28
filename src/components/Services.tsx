@@ -224,8 +224,8 @@ export default function Services() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
 
-          {/* ═══════════════ RIGHT COLUMN: Stationary Section Info & CTA ═══════════════ */}
-          <div className="w-full lg:w-[46%] flex flex-col items-start text-right gap-4 sm:gap-6 order-1 lg:order-2 shrink-0">
+          {/* ═══════════════ RIGHT COLUMN: Stationary Section Info & CTA (Right in RTL) ═══════════════ */}
+          <div className="w-full lg:w-[46%] flex flex-col items-start text-right gap-4 sm:gap-6 order-1 lg:order-1 shrink-0">
             {/* Kicker */}
             <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-sm sm:text-base">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B]" />
@@ -257,8 +257,8 @@ export default function Services() {
             </div>
           </div>
 
-          {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame ═══════════════ */}
-          <div className="w-full lg:w-[54%] flex justify-center order-2 lg:order-1">
+          {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame (Left in RTL) ═══════════════ */}
+          <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2 lg:order-2">
             {/* Card Frame: clips cards outside its bounds, exactly like Masar Agency */}
             <div
               ref={cardFrameRef}

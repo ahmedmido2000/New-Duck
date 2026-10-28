@@ -5,8 +5,8 @@ import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-[#12030A] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] relative overflow-hidden">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
         {/* Contact Info Cards (Enters from Right) */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}

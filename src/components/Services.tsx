@@ -124,7 +124,6 @@ export default function Services() {
               className="inline-flex items-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-7 py-3.5 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 shadow-glow-red shimmer-hover"
             >
               <span>خُد خطوتك الأولى معانا</span>
-              <ArrowLeft className="w-5 h-5" />
             </MagneticButton>
           </div>
         </motion.div>

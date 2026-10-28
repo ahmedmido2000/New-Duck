@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
+import { Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 export default function Hero() {
   const heroRef = useRef<HTMLElement | null>(null);
@@ -182,7 +182,6 @@ export default function Hero() {
             className="group flex items-center justify-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-black text-lg sm:text-xl transition-all duration-300 shadow-glow-red shimmer-hover hover:-translate-y-1 active:translate-y-0 text-center"
           >
             <span>خُد خطوتك الأولى معانا</span>
-            <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1.5" />
           </MagneticButton>
 
           <a

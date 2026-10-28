@@ -163,7 +163,7 @@ export default function Services() {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-10 lg:gap-16 h-full py-12">
 
           {/* ── Left: Stacking Cards ── */}
-          <div className="relative w-full lg:w-[45%] shrink-0 h-[55vw] max-h-[520px] min-h-[340px]">
+          <div className="relative w-full lg:w-[45%] shrink-0 h-[55vw] max-h-[520px] min-h-[340px] overflow-hidden rounded-[28px]">
             {services.map((svc, index) => {
               const isEven = index % 2 === 1;
               return (
@@ -215,8 +215,8 @@ export default function Services() {
               );
             })}
 
-            {/* Card counter dots */}
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+            {/* Card counter dots — inside but visible via pb space */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
               {services.map((_, i) => (
                 <div
                   key={i}
@@ -224,7 +224,7 @@ export default function Services() {
                   style={{
                     width: i === activeIndex ? 20 : 8,
                     height: 8,
-                    background: i === activeIndex ? "#FF0A2B" : "rgba(255,255,255,0.25)",
+                    background: i === activeIndex ? "#FF0A2B" : "rgba(255,255,255,0.4)",
                   }}
                 />
               ))}

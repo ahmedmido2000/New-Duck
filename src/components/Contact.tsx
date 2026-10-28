@@ -6,7 +6,7 @@ import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 export default function Contact() {
   return (
     <section id="contact" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] relative overflow-hidden">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-12 lg:gap-16">
         {/* Contact Info Cards (Enters from Right) */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
@@ -124,7 +124,42 @@ export default function Contact() {
           </motion.div>
         </motion.div>
 
-        {/* Global Hub Floating Sphere (Enters from Left) */}
+        {/* Video with matching cards height and no audio (muted) */}
+        <motion.div
+          initial={{ opacity: 0, x: -50, scale: 0.95 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
+          className="flex-1 w-full flex flex-col justify-end self-stretch"
+        >
+          <div className="relative w-full h-full min-h-[380px] sm:min-h-[440px] rounded-2xl overflow-hidden border border-[#3A0C15] bg-[#1A0509] shadow-2xl flex items-center justify-center">
+            {/* Ambient Red Glow */}
+            <div className="absolute -inset-1 bg-gradient-to-tr from-[#FF0A2B]/15 via-transparent to-[#7A0B1A]/20 blur-xl pointer-events-none" />
+
+            <video
+              src="/videos/duck-contact.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover rounded-2xl relative z-10"
+            />
+
+            {/* Subtle Gradient Overlay */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#0D0204]/70 via-transparent to-transparent pointer-events-none z-20" />
+
+            {/* Floating Location Pill */}
+            <div className="absolute bottom-5 right-5 z-30 flex items-center gap-2 bg-[#0D0204]/85 backdrop-blur-md px-4 py-2 rounded-full border border-[#FF0A2B]/40 shadow-glow-red">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
+              <span className="text-xs sm:text-sm font-black text-white">
+                القاهرة · الرياض · دبي
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Commented out original circle:
         <motion.div
           initial={{ opacity: 0, x: -50, scale: 0.9 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -132,7 +167,6 @@ export default function Contact() {
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
           className="animate-float relative flex-1 max-w-[320px] sm:max-w-[380px] w-full aspect-square rounded-full flex items-center justify-center"
         >
-          {/* Radar Ring */}
           <div className="absolute inset-0 rounded-full border border-[#FF0A2B]/40 radar-ring pointer-events-none" />
 
           <div
@@ -154,6 +188,7 @@ export default function Contact() {
             </div>
           </div>
         </motion.div>
+        */}
       </div>
     </section>
   );

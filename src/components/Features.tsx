@@ -100,87 +100,39 @@ export default function Features() {
             </motion.div>
           </div>
 
-          {/* Cybernetic AI Visual Side with Animated Scanline */}
-          <div className="lg:w-[420px] min-h-[340px] sm:min-h-[420px] bg-[#12030A] border-t lg:border-t-0 lg:border-r border-[#3A0C15] relative flex items-center justify-center p-8 overflow-hidden">
-            {/* Scanlines Background Effect */}
-            <div
-              className="absolute inset-0 pointer-events-none opacity-40"
-              style={{
-                backgroundImage:
-                  "repeating-linear-gradient(0deg, rgba(255,10,43,0.15) 0px, rgba(255,10,43,0.15) 1px, transparent 1px, transparent 6px)",
-              }}
+          {/* Cybernetic Duck AI Video Side */}
+          <div className="lg:w-[460px] xl:w-[500px] min-h-[380px] sm:min-h-[460px] bg-[#12030A] border-t lg:border-t-0 lg:border-r border-[#3A0C15] relative overflow-hidden flex items-center justify-center">
+            <video
+              src="/videos/duck-contact.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover"
             />
 
+            {/* Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0204]/85 via-transparent to-[#0D0204]/40 pointer-events-none" />
+
             {/* Moving Laser Beam Sweep */}
-            <div className="absolute inset-x-0 h-10 bg-gradient-to-b from-transparent via-[#FF0A2B]/20 to-transparent animate-scanline pointer-events-none" />
+            <div className="absolute inset-x-0 h-12 bg-gradient-to-b from-transparent via-[#FF0A2B]/25 to-transparent animate-scanline pointer-events-none" />
 
-            {/* Radial Core Glow */}
-            <div className="absolute w-64 h-64 bg-[#FF0A2B]/20 rounded-full blur-3xl pointer-events-none" />
+            {/* Top Right Floating Tech Pill */}
+            <div className="absolute top-5 right-5 z-10 flex items-center gap-2 bg-[#0D0204]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#FF0A2B]/40 shadow-glow-red">
+              <span className="w-2 h-2 rounded-full bg-[#FF0A2B] animate-ping" />
+              <span className="text-[11px] font-mono tracking-widest text-[#FF0A2B] font-bold">
+                AI ENGINE ACTIVE
+              </span>
+            </div>
 
-            {/* Cybernetic Eye / Neural Lens SVG Illustration */}
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <svg
-                viewBox="0 0 240 240"
-                className="w-48 h-48 sm:w-56 sm:h-56 text-[#FF0A2B]"
-                fill="none"
-              >
-                {/* Outer Concentric Scanning Rings */}
-                <circle
-                  cx="120"
-                  cy="120"
-                  r="105"
-                  stroke="#FF0A2B"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 8"
-                  className="animate-spin"
-                  style={{ animationDuration: "25s" }}
-                />
-                <circle
-                  cx="120"
-                  cy="120"
-                  r="88"
-                  stroke="#FFB3BE"
-                  strokeWidth="1"
-                  strokeOpacity="0.4"
-                />
-
-                {/* Cyber Eye Outline */}
-                <path
-                  d="M 25 120 Q 120 40 215 120 Q 120 200 25 120 Z"
-                  stroke="#FF0A2B"
-                  strokeWidth="2.5"
-                  fill="#2A0309"
-                  fillOpacity="0.5"
-                />
-
-                {/* Iris & Digital Core */}
-                <circle cx="120" cy="120" r="42" fill="#7A0B1A" stroke="#FF0A2B" strokeWidth="2" />
-                <circle cx="120" cy="120" r="28" fill="#FF0A2B" fillOpacity="0.8" />
-                <circle cx="120" cy="120" r="14" fill="#ffffff" />
-
-                {/* Digital Target Reticles */}
-                <line x1="120" y1="50" x2="120" y2="70" stroke="#FF0A2B" strokeWidth="2" />
-                <line x1="120" y1="170" x2="120" y2="190" stroke="#FF0A2B" strokeWidth="2" />
-                <line x1="50" y1="120" x2="70" y2="120" stroke="#FF0A2B" strokeWidth="2" />
-                <line x1="170" y1="120" x2="190" y2="120" stroke="#FF0A2B" strokeWidth="2" />
-
-                {/* Scanning Laser Line */}
-                <line
-                  x1="60"
-                  y1="120"
-                  x2="180"
-                  y2="120"
-                  stroke="#FFB3BE"
-                  strokeWidth="1.5"
-                  strokeDasharray="2 4"
-                />
-              </svg>
-
-              <div className="mt-4 font-mono text-xs tracking-widest text-[#FF0A2B] bg-[#2A0509] px-3.5 py-1 rounded-full border border-[#FF0A2B]/30 shadow-glow-red">
-                AI PERFORMANCE MONITOR
+            {/* Bottom Floating Caption */}
+            <div className="absolute bottom-5 inset-x-5 z-10 bg-[#0D0204]/85 backdrop-blur-md p-3.5 rounded-xl border border-[#3A0C15] text-right">
+              <div className="text-white font-extrabold text-sm sm:text-base">
+                نظام Duck الذكي لإدارة وتحسين الحملات
               </div>
-              <div className="text-white font-extrabold text-base mt-2">
-                دقة في الاستهداف والتحليل
+              <div className="text-xs text-[#C9A4A8] mt-0.5">
+                استهداف متقدم، تحليل لحظي، ونتائج إعلانية تتفوق على منافسيك
               </div>
             </div>
           </div>

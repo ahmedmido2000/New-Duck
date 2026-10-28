@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Headphones } from "lucide-react";
+import RegionalGlobe from "./RegionalGlobe";
 
 export default function Contact() {
   return (
@@ -125,7 +126,7 @@ export default function Contact() {
             </motion.div>
           </motion.div>
 
-          {/* Video Column (Increased width ~60%, matching exact start and end height) */}
+          {/* Regional Globe Animation (Left column) */}
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.95 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -133,20 +134,7 @@ export default function Contact() {
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
             className="flex-1 w-full flex flex-col self-stretch"
           >
-            <div className="relative w-full h-full min-h-[340px] rounded-2xl overflow-hidden border border-[#FF0A2B]/40 bg-[#1A0509] shadow-2xl flex items-center justify-center">
-              <video
-                src="/videos/duck-contact.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="w-full h-full object-cover rounded-2xl relative z-10"
-              />
-
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#0D0204]/60 via-transparent to-transparent pointer-events-none z-20" />
-            </div>
+            <RegionalGlobe />
           </motion.div>
         </div>
 

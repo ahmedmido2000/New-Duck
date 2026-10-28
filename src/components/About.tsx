@@ -5,7 +5,7 @@ import { Target, CheckCircle2, Compass } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#0D0204] relative overflow-hidden">
+    <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0D0204] relative overflow-hidden">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
         {/* Text Content (Enters from Right) */}
         <motion.div

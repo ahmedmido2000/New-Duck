@@ -35,7 +35,7 @@ export default function Consultation() {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-gradient-to-b from-[#12030A] to-[#3A0610] text-center overflow-hidden">
+    <section id="faq" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#12030A] to-[#3A0610] text-center overflow-hidden">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
         {/* Kicker */}
         <motion.div

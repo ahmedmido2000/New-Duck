@@ -14,7 +14,7 @@ export default function AIEcosystem() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#0D0204] relative overflow-hidden">
+    <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#0D0204] relative overflow-hidden">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
         {/* Header */}
         <motion.div

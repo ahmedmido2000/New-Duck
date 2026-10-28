@@ -26,7 +26,7 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] overflow-hidden">
+    <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#12030A] overflow-hidden">
       <div className="max-w-6xl mx-auto border border-[#3A0C15] rounded-3xl overflow-hidden bg-[#0D0204]/60 shadow-2xl">
         <div className="flex flex-col lg:flex-row items-stretch">
           {/* Features Side */}

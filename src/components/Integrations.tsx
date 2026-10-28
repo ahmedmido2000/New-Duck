@@ -40,7 +40,7 @@ export default function Integrations() {
   };
 
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-8 lg:px-16 bg-[#0D0204] border-t border-[#3A0C15]/50 overflow-hidden">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#0D0204] border-t border-[#3A0C15]/50 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

@@ -93,7 +93,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-20 sm:py-28 px-4 sm:px-8 lg:px-16 bg-[#12030A] relative overflow-hidden">
+    <section id="services" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#12030A] relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Header Block */}
         <motion.div

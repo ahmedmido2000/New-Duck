@@ -36,10 +36,15 @@ export default function Counter({
     return () => controls.stop();
   }, [isInView, from, to, duration, decimals]);
 
+  const formattedNumber =
+    decimals > 0
+      ? displayValue.toFixed(decimals)
+      : displayValue.toLocaleString("en-US");
+
   return (
-    <span ref={nodeRef} className="font-mono">
+    <span ref={nodeRef} className="font-mono" suppressHydrationWarning>
       {prefix}
-      {decimals > 0 ? displayValue.toFixed(decimals) : displayValue.toLocaleString()}
+      {formattedNumber}
       {suffix}
     </span>
   );

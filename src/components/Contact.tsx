@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Headphones, MessageCircle } from "lucide-react";
 import RegionalGlobe from "./RegionalGlobe";
 
 export default function Contact() {
+  const [hoveredBranch, setHoveredBranch] = useState<"egypt" | "ksa" | null>(null);
+
   return (
     <section id="contact" className="py-20 sm:py-28 bg-[#12030A] relative overflow-hidden" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8 sm:gap-10">
@@ -32,19 +35,25 @@ export default function Contact() {
         </motion.div>
 
         {/* Content Row: Cards on Right, Interactive Globe on Left */}
-        <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Branches Cards Column (Right in RTL) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-            className="w-full lg:w-[45%] flex flex-col justify-between gap-5 text-right shrink-0"
+            className="w-full lg:w-[46%] flex flex-col justify-between gap-5 text-right shrink-0"
           >
             {/* Egypt Branch */}
             <motion.div
-              whileHover={{ y: -3, borderColor: "#FF0A2B" }}
-              className="border border-[#FF0A2B]/40 rounded-2xl p-6 bg-[#1A0509]/90 flex flex-col gap-4 text-base transition-all shadow-xl"
+              whileHover={{ y: -3 }}
+              onMouseEnter={() => setHoveredBranch("egypt")}
+              onMouseLeave={() => setHoveredBranch(null)}
+              className={`border rounded-2xl p-6 bg-[#1A0509]/90 flex flex-col gap-4 text-base transition-all shadow-xl ${
+                hoveredBranch === "egypt"
+                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.35)]"
+                  : "border-[#FF0A2B]/40 hover:border-[#FF0A2B]"
+              }`}
             >
               <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
                 <div className="flex items-center gap-2">
@@ -118,8 +127,14 @@ export default function Contact() {
 
             {/* KSA Branch */}
             <motion.div
-              whileHover={{ y: -3, borderColor: "#FF0A2B" }}
-              className="border border-[#FF0A2B]/40 rounded-2xl p-6 bg-[#1A0509]/90 flex flex-col gap-4 text-base transition-all shadow-xl"
+              whileHover={{ y: -3 }}
+              onMouseEnter={() => setHoveredBranch("ksa")}
+              onMouseLeave={() => setHoveredBranch(null)}
+              className={`border rounded-2xl p-6 bg-[#1A0509]/90 flex flex-col gap-4 text-base transition-all shadow-xl ${
+                hoveredBranch === "ksa"
+                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.35)]"
+                  : "border-[#FF0A2B]/40 hover:border-[#FF0A2B]"
+              }`}
             >
               <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
                 <div className="flex items-center gap-2">
@@ -192,15 +207,18 @@ export default function Contact() {
             </motion.div>
           </motion.div>
 
-          {/* Regional Globe Animation (Left column) */}
+          {/* Regional Globe Animation (Left column in RTL) */}
           <motion.div
             initial={{ opacity: 0, x: -50, scale: 0.95 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-            className="flex-1 w-full flex flex-col self-stretch"
+            className="flex-1 w-full flex items-center justify-center"
           >
-            <RegionalGlobe />
+            <RegionalGlobe
+              highlightedBranch={hoveredBranch}
+              onHoverBranch={setHoveredBranch}
+            />
           </motion.div>
         </div>
       </div>

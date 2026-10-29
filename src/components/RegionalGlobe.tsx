@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, MessageCircle, Navigation2, Sparkles, MapPin } from "lucide-react";
+import { Phone, MessageCircle, MapPin } from "lucide-react";
 
 interface RegionalGlobeProps {
   highlightedBranch?: "egypt" | "ksa" | null;
@@ -86,11 +86,19 @@ export default function RegionalGlobe({
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="relative w-[92%] h-[92%] flex items-center justify-center"
       >
-        <img
-          src="/images/duck-masar-globe.png"
-          alt="Duck Agency 3D Regional Globe"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(255,10,43,0.45)] pointer-events-none"
-        />
+        {/* Rotating globe wrapper */}
+        <motion.div
+          animate={{ rotateY: 360 }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          style={{ transformStyle: "preserve-3d", perspective: 800 }}
+          className="w-full h-full"
+        >
+          <img
+            src="/images/duck-masar-globe.png"
+            alt="Duck Agency 3D Regional Globe"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(255,10,43,0.45)] pointer-events-none"
+          />
+        </motion.div>
 
         {/* Interactive Location Pins */}
         {pins.map((pin) => {
@@ -213,19 +221,7 @@ export default function RegionalGlobe({
         })}
       </motion.div>
 
-      {/* Floating Bottom Status Badge */}
-      <div className="absolute -bottom-2 sm:bottom-0 inset-x-0 z-20 flex items-center justify-center pointer-events-none">
-        <div className="inline-flex items-center gap-2 bg-[#1A0509]/90 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#FF0A2B]/40 shadow-[0_0_25px_rgba(255,10,43,0.3)]">
-          <Navigation2
-            className="w-3.5 h-3.5 text-[#FF0A2B] animate-spin"
-            style={{ animationDuration: "14s" }}
-          />
-          <span className="text-xs sm:text-sm font-extrabold text-white">
-            فروعنا الرسمية: مدينة 6 أكتوبر (مصر) · الرياض (السعودية)
-          </span>
-          <Sparkles className="w-3.5 h-3.5 text-[#FF0A2B]" />
-        </div>
-      </div>
+
     </div>
   );
 }

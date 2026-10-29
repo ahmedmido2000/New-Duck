@@ -56,12 +56,6 @@ interface GaugeCardProps {
   target: number;
   suffix: string;
   litPercent: number;
-  footRightNum: number;
-  footRightSuffix: string;
-  footRightLabel: string;
-  footLeftNum: number;
-  footLeftSuffix: string;
-  footLeftLabel: string;
 }
 
 function DuckGaugeCard({
@@ -72,12 +66,6 @@ function DuckGaugeCard({
   target,
   suffix,
   litPercent,
-  footRightNum,
-  footRightSuffix,
-  footRightLabel,
-  footLeftNum,
-  footLeftSuffix,
-  footLeftLabel,
 }: GaugeCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const gradId = useId().replace(/:/g, "_");
@@ -138,8 +126,6 @@ function DuckGaugeCard({
 
   // Counter values
   const currentCenterVal = Math.round(target * progress) + suffix;
-  const currentRightNum = Math.round(footRightNum * progress) + footRightSuffix;
-  const currentLeftNum = Math.round(footLeftNum * progress) + footLeftSuffix;
 
   return (
     <div
@@ -277,28 +263,7 @@ function DuckGaugeCard({
         </div>
       </div>
 
-      {/* Footer statistics row (RTL: right side first, left side second) */}
-      <div className="relative z-10 flex items-end justify-between pt-2 border-t border-[#3A0C15]/50">
-        {/* Right Metric (Start of RTL layout) */}
-        <div>
-          <div className="text-[19px] sm:text-[20px] font-bold text-white leading-none">
-            {currentRightNum}
-          </div>
-          <div className="text-[10.5px] text-[#C9A4A8] mt-1.5 leading-snug">
-            {footRightLabel}
-          </div>
-        </div>
 
-        {/* Left Metric (End of RTL layout) */}
-        <div className="text-left">
-          <div className="text-[19px] sm:text-[20px] font-bold text-white leading-none">
-            {currentLeftNum}
-          </div>
-          <div className="text-[10.5px] text-[#C9A4A8] mt-1.5 leading-snug">
-            {footLeftLabel}
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
@@ -527,12 +492,6 @@ export default function Metrics() {
                 target={40}
                 suffix="M"
                 litPercent={82}
-                footRightNum={40}
-                footRightSuffix="M"
-                footRightLabel="ريال مستثمر بأعلى كفاءة"
-                footLeftNum={200}
-                footLeftSuffix="K"
-                footLeftLabel="خفض في هدر الأموال"
                 icon={
                   <svg
                     viewBox="0 0 24 24"
@@ -566,12 +525,6 @@ export default function Metrics() {
                 target={15}
                 suffix="X"
                 litPercent={92}
-                footRightNum={12}
-                footRightSuffix="M"
-                footRightLabel="إجمالي ريتش الحملات"
-                footLeftNum={92}
-                footLeftSuffix="%"
-                footLeftLabel="نسبة نجاح استراتيجياتنا"
                 icon={
                   <svg
                     viewBox="0 0 24 24"

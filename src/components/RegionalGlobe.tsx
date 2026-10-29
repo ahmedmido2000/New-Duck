@@ -11,10 +11,10 @@ export default function RegionalGlobe() {
     {
       id: "egypt",
       name: "جمهورية مصر العربية",
-      city: "القاهرة (6 أكتوبر)",
+      city: "مدينة 6 أكتوبر - الحصري",
       country: "مصر",
       flag: "🇪🇬",
-      phone: "+20 10 4567 8900",
+      phone: "+20 10 6454 4080",
       top: "42%",
       left: "40%",
       color: "#FF0A2B",
@@ -22,24 +22,13 @@ export default function RegionalGlobe() {
     {
       id: "ksa",
       name: "المملكة العربية السعودية",
-      city: "الرياض (العليا)",
+      city: "الرياض",
       country: "السعودية",
       flag: "🇸🇦",
-      phone: "+966 57 539 8099",
+      phone: "+966 57 939 8098",
       top: "46%",
       left: "62%",
       color: "#00A651",
-    },
-    {
-      id: "dubai",
-      name: "الإمارات العربية المتحدة",
-      city: "دبي (D3)",
-      country: "الإمارات",
-      flag: "🇦🇪",
-      phone: "تغطية إقليمية",
-      top: "52%",
-      left: "75%",
-      color: "#FF9500",
     },
   ];
 
@@ -262,7 +251,7 @@ export default function RegionalGlobe() {
         <div className="inline-flex items-center gap-2 bg-[#0D0204]/85 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#FFB800]/40 shadow-[0_0_25px_rgba(255,184,0,0.25)]">
           <Navigation2 className="w-3.5 h-3.5 text-[#FFB800] animate-spin" style={{ animationDuration: "12s" }} />
           <span className="text-xs sm:text-sm font-extrabold text-white">
-            تغطية إقليمية نشطة: القاهرة · الرياض · دبي
+            فروعنا الرسمية: مدينة 6 أكتوبر (مصر) · الرياض (السعودية)
           </span>
           <Sparkles className="w-3.5 h-3.5 text-[#FF0A2B]" />
         </div>

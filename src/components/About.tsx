@@ -25,14 +25,14 @@ export default function About() {
           </h2>
 
           <p className="text-lg sm:text-2xl text-[#E6CDD0] leading-relaxed font-normal">
-            شريكك في بناء حضور رقمي يليق بطموحك. نؤمن أن لكل علامة طريقها الخاص، لذلك نعتمد أسلوبًا مخصصًا لكل علامة حسب هويتها واحتياجاتها، وليس بنهج واحد للجميع.
+            Duck شركة دعاية وتسويق تقدم حلولاً متكاملة للشركات والمشاهير والأفراد، تبدأ من بناء الهوية البصرية وإدارة الصفحات على السوشيال ميديا، وحتى المونتاج والتصميم وباقات الخدمات الجاهزة. كما تقدم الشركة أكاديمية تعليمية متخصصة.
           </p>
 
           <motion.div
             whileHover={{ scale: 1.02 }}
             className="w-full bg-[#FF0A2B] text-white py-3.5 px-6 rounded-xl font-extrabold text-base sm:text-xl text-center shadow-glow-red shimmer-hover cursor-default"
           >
-            هدفنا أن نكون الشريك الذي يسير معك في المسار الصحيح
+            للرؤية أثر — شريكك الإبداعي لصناعة أثر حقيقي لعلامتك التجارية
           </motion.div>
 
           {/* Core Values */}

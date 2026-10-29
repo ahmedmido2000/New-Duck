@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUp, MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { useSmoothScroll } from "./SmoothScrollProvider";
 
 export default function Footer() {
@@ -124,56 +124,29 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Branches & Official Addresses */}
+          {/* Our Services (خدماتنا) */}
           <div>
             <h4 className="text-xl sm:text-2xl font-black text-[#FF0A2B] mb-4 text-glow-red">
-              فروعنا وعناويننا
+              خدماتنا
             </h4>
-            <div className="space-y-4 text-sm">
-              {/* Egypt Branch */}
-              <div className="p-3 rounded-xl bg-[#1A0509] border border-[#3A0C15] space-y-1.5">
-                <div className="flex items-center gap-1.5 font-bold text-white text-sm">
-                  <span>🇪🇬</span>
-                  <span>فرع مصر (الرئيسي):</span>
-                </div>
-                <div className="flex items-start gap-2 text-xs text-[#C9A4A8]">
-                  <MapPin className="w-3.5 h-3.5 text-[#FF0A2B] shrink-0 mt-0.5" />
-                  <span>مدينة 6 أكتوبر - الحصري، مصر</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-[#C9A4A8]">
-                  <Phone className="w-3.5 h-3.5 text-[#FF0A2B] shrink-0" />
+            <ul className="space-y-2.5 text-base font-semibold">
+              {[
+                "إنشاء المتاجر الإلكترونية",
+                "إدارة الحملات الإعلانية",
+                "تحسين محركات البحث (SEO)",
+                "تصميم وتطوير المواقع والتطبيقات",
+                "الهوية البصرية والموشن جرافيك",
+              ].map((svc, idx) => (
+                <li key={idx}>
                   <a
-                    href="tel:+201064544080"
-                    className="hover:text-white font-mono font-bold"
-                    style={{ direction: "ltr" }}
+                    href="#services"
+                    className="hover:text-[#FF0A2B] transition-colors hover:translate-x-1 inline-block"
                   >
-                    +20 10 6454 4080
+                    {svc}
                   </a>
-                </div>
-              </div>
-
-              {/* KSA Branch */}
-              <div className="p-3 rounded-xl bg-[#1A0509] border border-[#3A0C15] space-y-1.5">
-                <div className="flex items-center gap-1.5 font-bold text-white text-sm">
-                  <span>🇸🇦</span>
-                  <span>فرع السعودية:</span>
-                </div>
-                <div className="flex items-start gap-2 text-xs text-[#C9A4A8]">
-                  <MapPin className="w-3.5 h-3.5 text-[#FF0A2B] shrink-0 mt-0.5" />
-                  <span>الرياض، المملكة العربية السعودية</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-[#C9A4A8]">
-                  <Phone className="w-3.5 h-3.5 text-[#FF0A2B] shrink-0" />
-                  <a
-                    href="tel:+966579398098"
-                    className="hover:text-white font-mono font-bold"
-                    style={{ direction: "ltr" }}
-                  >
-                    +966 57 939 8098
-                  </a>
-                </div>
-              </div>
-            </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Social Links & Back to top */}

@@ -26,7 +26,7 @@ export default function FloatingWhatsApp() {
             <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse" />
-                <span className="font-black text-sm text-white">تواصل سريع ومباشر</span>
+                <span className="font-black text-sm text-white">تواصل مباشر</span>
               </div>
               <button
                 type="button"
@@ -38,11 +38,7 @@ export default function FloatingWhatsApp() {
               </button>
             </div>
 
-            <p className="text-xs text-[#C9A4A8] my-3 leading-relaxed">
-              اختر الفرع الأنسب لك للمحادثة الفورية عبر واتساب أو الاتصال الهاتفي المباشر:
-            </p>
-
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 mt-3">
               {/* Egypt Branch */}
               <div className="p-2.5 rounded-xl bg-[#2A0509] border border-[#3A0C15] flex items-center justify-between gap-2">
                 <div>
@@ -109,28 +105,20 @@ export default function FloatingWhatsApp() {
         )}
       </AnimatePresence>
 
-      {/* Main Floating Trigger Button */}
-      <div className="flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="تواصل معنا عبر واتساب والاتصال السريع"
-          className="relative w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
-        >
-          <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-40 pointer-events-none" />
-          {isOpen ? (
-            <X className="w-7 h-7" />
-          ) : (
-            <MessageCircle className="w-8 h-8 fill-current" />
-          )}
-        </button>
-
-        {!isOpen && (
-          <div className="hidden sm:block bg-[#1A0509]/95 text-white px-3.5 py-2 rounded-xl text-xs font-bold border border-[#FF0A2B]/40 shadow-xl pointer-events-none">
-            تواصل معنا عبر واتساب 🇪🇬 🇸🇦
-          </div>
+      {/* Main Floating Trigger Button (Clean, without any side description text) */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="تواصل معنا عبر واتساب والاتصال السريع"
+        className="relative w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
+      >
+        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-40 pointer-events-none" />
+        {isOpen ? (
+          <X className="w-7 h-7" />
+        ) : (
+          <MessageCircle className="w-8 h-8 fill-current" />
         )}
-      </div>
+      </button>
     </aside>
   );
 }

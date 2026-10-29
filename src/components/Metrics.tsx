@@ -64,7 +64,7 @@ interface GaugeCardProps {
   footLeftLabel: string;
 }
 
-function MasarGaugeCard({
+function DuckGaugeCard({
   title,
   subtitle,
   stat,
@@ -144,27 +144,27 @@ function MasarGaugeCard({
   return (
     <div
       ref={cardRef}
-      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-white/[0.09] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_18px_40px_-28px_#000] bg-gradient-to-b from-[#3a0810] via-[#2f0408] to-[#1f0205] transition-all hover:border-[#f0a203]/40"
+      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-[#3A0C15] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_18px_40px_-28px_#000] bg-gradient-to-b from-[#24050A] via-[#160307] to-[#0D0204] transition-all hover:border-[#FF0A2B]/50"
     >
-      {/* Background soft radial glow */}
-      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(240,162,3,0.08),transparent_60%)]" />
+      {/* Background soft radial brand glow */}
+      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.12),transparent_60%)]" />
 
       {/* Header */}
       <div className="relative z-10 flex items-start justify-between gap-3 mb-2">
         <div className="flex items-start gap-3">
-          <div className="w-[34px] h-[34px] rounded-[10px] bg-[#440b14] border border-white/[0.09] flex items-center justify-center text-[#f0a203] shrink-0 mt-0.5 shadow-sm">
+          <div className="w-[34px] h-[34px] rounded-[10px] bg-[#FF0A2B]/10 border border-[#FF0A2B]/25 flex items-center justify-center text-[#FF0A2B] shrink-0 mt-0.5 shadow-[0_0_12px_rgba(255,10,43,0.15)]">
             {icon}
           </div>
           <div>
-            <div className="font-bold text-[16px] text-[#f3f3f3] leading-snug">
+            <div className="font-bold text-[16px] text-white leading-snug">
               {title}
             </div>
-            <div className="text-[12.5px] text-[#f3f3f3]/50 mt-1 leading-relaxed">
+            <div className="text-[12.5px] text-[#C9A4A8] mt-1 leading-relaxed">
               {subtitle}
             </div>
           </div>
         </div>
-        <div className="font-mono text-[12px] text-[#f3f3f3]/50 tracking-wider shrink-0 pt-0.5">
+        <div className="font-mono text-[12px] text-[#C9A4A8]/80 tracking-wider shrink-0 pt-0.5">
           {stat}
         </div>
       </div>
@@ -185,20 +185,20 @@ function MasarGaugeCard({
               x2="0"
               y2="20"
             >
-              <stop offset="0" stopColor="#e09600" />
-              <stop offset="1" stopColor="#ffc24d" />
+              <stop offset="0" stopColor="#FF0A2B" />
+              <stop offset="1" stopColor="#FF4D6D" />
             </linearGradient>
           </defs>
 
-          {/* Background unlit track arc */}
+          {/* Background unlit track arc (deep wine track) */}
           <path
             d={arcPath(A_R, A_L, RC)}
             fill="none"
-            stroke="#561425"
+            stroke="#350811"
             strokeWidth={BW}
           />
 
-          {/* Active lit gold arc with glow */}
+          {/* Active lit neon-red arc with glow */}
           <path
             d={litArc}
             fill="none"
@@ -206,7 +206,7 @@ function MasarGaugeCard({
             strokeWidth={BW}
             strokeLinecap="butt"
             style={{
-              filter: "drop-shadow(0 0 6px rgba(240,162,3,0.5))",
+              filter: "drop-shadow(0 0 8px rgba(255,10,43,0.65))",
             }}
           />
 
@@ -214,24 +214,24 @@ function MasarGaugeCard({
           <path
             d={arcPath(A_R, A_L, R)}
             fill="none"
-            stroke="rgba(255,210,120,0.45)"
+            stroke="rgba(255,100,120,0.35)"
             strokeWidth={1}
           />
           <path
             d={arcPath(A_R, A_L, RI)}
             fill="none"
-            stroke="rgba(0,0,0,0.4)"
+            stroke="rgba(0,0,0,0.5)"
             strokeWidth={1.5}
           />
 
-          {/* 85 Perimeter circle dots */}
+          {/* 85 Perimeter circle dots in brand red */}
           {PERIMETER_DOTS.map(([x, y], idx) => (
             <circle
               key={idx}
               cx={x}
               cy={y}
               r={1.05}
-              fill="rgba(240,162,3,0.85)"
+              fill="rgba(255,10,43,0.85)"
             />
           ))}
 
@@ -245,7 +245,7 @@ function MasarGaugeCard({
                 y1={pA[1]}
                 x2={pB[0]}
                 y2={pB[1]}
-                stroke={isLit ? "rgba(48,3,2,0.65)" : "rgba(240,162,3,0.5)"}
+                stroke={isLit ? "rgba(25,2,5,0.75)" : "rgba(255,10,43,0.55)"}
                 strokeWidth={1.6}
                 strokeLinecap="round"
               />
@@ -253,47 +253,48 @@ function MasarGaugeCard({
           })}
 
           {/* Center Hub */}
-          <circle cx={CX} cy={CY} r={6} fill="#f0a203" />
-          <circle cx={CX} cy={CY} r={2.6} fill="#2c0205" />
+          <circle cx={CX} cy={CY} r={6} fill="#FF0A2B" />
+          <circle cx={CX} cy={CY} r={2.6} fill="#140205" />
 
-          {/* Needle */}
+          {/* Needle with neon glow */}
           <line
             x1={CX}
             y1={CY}
             x2={needleTip[0]}
             y2={needleTip[1]}
-            stroke="#f0a203"
+            stroke="#FF0A2B"
             strokeWidth={3.2}
             strokeLinecap="round"
+            style={{ filter: "drop-shadow(0 0 4px rgba(255,10,43,0.8))" }}
           />
         </svg>
 
         {/* Center Target Display Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center translate-y-[6%] pointer-events-none">
-          <div className="text-[24px] sm:text-[26px] font-extrabold text-[#f0a203] drop-shadow-[0_0_16px_rgba(240,162,3,0.35)] leading-none tracking-tight">
+          <div className="text-[25px] sm:text-[27px] font-black text-white drop-shadow-[0_0_16px_rgba(255,10,43,0.6)] leading-none tracking-tight">
             {currentCenterVal}
           </div>
         </div>
       </div>
 
       {/* Footer statistics row (RTL: right side first, left side second) */}
-      <div className="relative z-10 flex items-end justify-between pt-2 border-t border-white/[0.05]">
+      <div className="relative z-10 flex items-end justify-between pt-2 border-t border-[#3A0C15]/50">
         {/* Right Metric (Start of RTL layout) */}
         <div>
-          <div className="text-[19px] sm:text-[20px] font-bold text-[#f3f3f3] leading-none">
+          <div className="text-[19px] sm:text-[20px] font-bold text-white leading-none">
             {currentRightNum}
           </div>
-          <div className="text-[10.5px] text-[#f3f3f3]/50 mt-1.5 leading-snug">
+          <div className="text-[10.5px] text-[#C9A4A8] mt-1.5 leading-snug">
             {footRightLabel}
           </div>
         </div>
 
         {/* Left Metric (End of RTL layout) */}
         <div className="text-left">
-          <div className="text-[19px] sm:text-[20px] font-bold text-[#f3f3f3] leading-none">
+          <div className="text-[19px] sm:text-[20px] font-bold text-white leading-none">
             {currentLeftNum}
           </div>
-          <div className="text-[10.5px] text-[#f3f3f3]/50 mt-1.5 leading-snug">
+          <div className="text-[10.5px] text-[#C9A4A8] mt-1.5 leading-snug">
             {footLeftLabel}
           </div>
         </div>
@@ -312,7 +313,7 @@ const SPIKES = SPIKE_HEIGHTS.map((y, i) => ({
   isHot: i === HOT_INDEX,
 }));
 
-function MasarSpikesCard() {
+function DuckSpikesCard() {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [slaData, setSlaData] = useState({ pct: 40, left: 10, top: 22 });
@@ -364,15 +365,15 @@ function MasarSpikesCard() {
   return (
     <div
       ref={cardRef}
-      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-white/[0.09] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_18px_40px_-28px_#000] bg-gradient-to-b from-[#3a0810] via-[#2f0408] to-[#1f0205] transition-all hover:border-[#f0a203]/40"
+      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-[#3A0C15] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_18px_40px_-28px_#000] bg-gradient-to-b from-[#24050A] via-[#160307] to-[#0D0204] transition-all hover:border-[#FF0A2B]/50"
     >
-      {/* Background soft radial glow */}
-      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(240,162,3,0.08),transparent_60%)]" />
+      {/* Background soft radial brand glow */}
+      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.12),transparent_60%)]" />
 
       {/* Header */}
       <div className="relative z-10 flex items-start justify-between gap-3 mb-2">
         <div className="flex items-start gap-3">
-          <div className="w-[34px] h-[34px] rounded-[10px] bg-[#440b14] border border-white/[0.09] flex items-center justify-center text-[#f0a203] shrink-0 mt-0.5 shadow-sm">
+          <div className="w-[34px] h-[34px] rounded-[10px] bg-[#FF0A2B]/10 border border-[#FF0A2B]/25 flex items-center justify-center text-[#FF0A2B] shrink-0 mt-0.5 shadow-[0_0_12px_rgba(255,10,43,0.15)]">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -384,15 +385,15 @@ function MasarSpikesCard() {
             </svg>
           </div>
           <div>
-            <div className="font-bold text-[16px] text-[#f3f3f3] leading-snug">
+            <div className="font-bold text-[16px] text-white leading-snug">
               حجم المبيعات المباشرة
             </div>
-            <div className="text-[12.5px] text-[#f3f3f3]/50 mt-1 leading-relaxed">
+            <div className="text-[12.5px] text-[#C9A4A8] mt-1 leading-relaxed">
               التصاعد الربحي السنوي لعملائنا
             </div>
           </div>
         </div>
-        <div className="font-mono text-[12px] text-[#f3f3f3]/50 tracking-wider shrink-0 pt-0.5">
+        <div className="font-mono text-[12px] text-[#C9A4A8]/80 tracking-wider shrink-0 pt-0.5">
           99.99%
         </div>
       </div>
@@ -435,8 +436,8 @@ function MasarSpikesCard() {
                   y1={178}
                   x2={spike.x}
                   y2={spike.y}
-                  stroke="rgba(243,243,243,0.30)"
-                  strokeWidth="1.4"
+                  stroke={spike.isHot ? "#FF0A2B" : "rgba(255,255,255,0.30)"}
+                  strokeWidth={spike.isHot ? "1.8" : "1.4"}
                   style={{
                     transformOrigin: `${spike.x}px 178px`,
                     transform: isInView ? "scaleY(1)" : "scaleY(0)",
@@ -449,10 +450,10 @@ function MasarSpikesCard() {
                   cx={spike.x}
                   cy={spike.y}
                   r={spike.isHot ? 5.5 : 4}
-                  fill={spike.isHot ? "#f0a203" : "#f3f3f3"}
+                  fill={spike.isHot ? "#FF0A2B" : "#FFFFFF"}
                   style={{
                     filter: spike.isHot
-                      ? "drop-shadow(0 0 7px rgba(240,162,3,0.85))"
+                      ? "drop-shadow(0 0 8px rgba(255,10,43,0.95))"
                       : undefined,
                     opacity: isInView ? 1 : 0,
                     transition: "opacity 0.4s ease",
@@ -464,16 +465,16 @@ function MasarSpikesCard() {
           </g>
         </svg>
 
-        {/* Floating SLA Pill */}
+        {/* Floating SLA Pill in brand styling */}
         <div
-          className="absolute z-10 pointer-events-none -translate-x-1/2 -translate-y-1/2 bg-[#440b14] border border-[#f0a203]/25 text-[#f3f3f3] font-mono text-[11px] py-1 px-2.5 rounded-full whitespace-nowrap shadow-[0_6px_16px_-8px_#000]"
+          className="absolute z-10 pointer-events-none -translate-x-1/2 -translate-y-1/2 bg-[#1C0307] border border-[#FF0A2B]/40 text-[#f3f3f3] font-mono text-[11px] py-1 px-2.5 rounded-full whitespace-nowrap shadow-[0_6px_20px_-6px_rgba(255,10,43,0.5)]"
           style={{
             left: `${slaData.left}%`,
             top: `${slaData.top}%`,
             transition: "left 0.1s linear, top 0.1s linear",
           }}
         >
-          SLA <b className="text-[#f0a203] font-bold">{slaData.pct}%</b>
+          SLA <b className="text-[#FF0A2B] font-bold">{slaData.pct}%</b>
         </div>
       </div>
 
@@ -519,7 +520,7 @@ export default function Metrics() {
           {/* Card 1 (Right in RTL): الميزانيات المدارة */}
           <motion.div variants={itemVariants} className="h-full">
             <TiltCard maxTilt={6} glare={true} className="rounded-[20px] h-full">
-              <MasarGaugeCard
+              <DuckGaugeCard
                 title="الميزانيات المدارة"
                 subtitle="ذروة المواسم البيعية لتحقيق أقصى ربح"
                 stat="8.4M"
@@ -551,14 +552,14 @@ export default function Metrics() {
           {/* Card 2 (Middle in RTL): حجم المبيعات المباشرة */}
           <motion.div variants={itemVariants} className="h-full">
             <TiltCard maxTilt={6} glare={true} className="rounded-[20px] h-full">
-              <MasarSpikesCard />
+              <DuckSpikesCard />
             </TiltCard>
           </motion.div>
 
           {/* Card 3 (Left in RTL): العائد على الإنفاق (ROAS) */}
           <motion.div variants={itemVariants} className="h-full">
             <TiltCard maxTilt={6} glare={true} className="rounded-[20px] h-full">
-              <MasarGaugeCard
+              <DuckGaugeCard
                 title="العائد على الإنفاق (ROAS)"
                 subtitle="معدلات كفاءة الإعلانات"
                 stat="98.7%"

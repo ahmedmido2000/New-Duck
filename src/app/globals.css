@@ -71,23 +71,39 @@ html[dir="ltr"], body[dir="ltr"] {
   }
 }
 
-/* Infinite Marquee Slider for Partners */
-@keyframes marqueeSlider {
+/* Dual Direction Infinite Marquee for Partners */
+@keyframes marqueeLeft {
   0% {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(50%);
+    transform: translateX(-50%);
   }
 }
 
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marqueeSlider 32s linear infinite;
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
-.marquee-track:hover {
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 38s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 38s linear infinite;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
   animation-play-state: paused;
 }
 

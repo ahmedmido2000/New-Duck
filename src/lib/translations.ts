@@ -82,6 +82,28 @@ export interface Translations {
       stat: string;
     };
   };
+  partners: {
+    kicker: string;
+    heading: string;
+    headingHighlight: string;
+    subtitle: string;
+    filterAll: string;
+    filterGov: string;
+    filterCorp: string;
+    filterConsumer: string;
+    ctaButton: string;
+    stats: {
+      partnersCount: string;
+      partnersCountLabel: string;
+      satisfaction: string;
+      satisfactionLabel: string;
+      projects: string;
+      projectsLabel: string;
+      countries: string;
+      countriesLabel: string;
+    };
+    marqueeLabel: string;
+  };
   faq: {
     kicker: string;
     heading: string;
@@ -159,6 +181,7 @@ export const translations: Record<Language, Translations> = {
         { name: "الرئيسية", href: "#top", id: "top" },
         { name: "من نحن", href: "#about", id: "about" },
         { name: "الخدمات", href: "#services", id: "services" },
+        { name: "الشركاء", href: "#partners", id: "partners" },
         { name: "الأسئلة الشائعة", href: "#faq", id: "faq" },
         { name: "تواصل معنا", href: "#contact", id: "contact" },
       ],
@@ -335,6 +358,28 @@ export const translations: Record<Language, Translations> = {
         stat: "98.7%",
       },
     },
+    partners: {
+      kicker: "شركاء المسيرة والنجاح",
+      heading: "عملاؤنا وشركاؤنا،",
+      headingHighlight: "نجاحنا المشترك",
+      subtitle: "نفتخر بشراكتنا الراسخة مع كبرى المنظمات والهيئات والشركات في مصر والسعودية والإمارات، مقدمين حلولاً هندسية وإنتاجاً رقمياً يصنع الفارق.",
+      filterAll: "جميع الشركاء",
+      filterGov: "جهات حكومية ومؤسسية",
+      filterCorp: "شركات كبرى وصناعية",
+      filterConsumer: "علامات تجارية واستثمارية",
+      ctaButton: "انضم إلى شركاء النجاح",
+      stats: {
+        partnersCount: "+13",
+        partnersCountLabel: "شريك استراتيجي",
+        satisfaction: "98%",
+        satisfactionLabel: "نسبة رضا واستمرارية",
+        projects: "+150",
+        projectsLabel: "مشروع نوعي منجز",
+        countries: "3",
+        countriesLabel: "دول إقليمية (مصر • السعودية • الإمارات)",
+      },
+      marqueeLabel: "شريط الشركاء التفاعلي (مرر الماوس للتوقف أو الفحص)",
+    },
     faq: {
       kicker: "الأسئلة الشائعة",
       heading: "الأسئلة الأكثر شيوعاً",
@@ -434,6 +479,7 @@ export const translations: Record<Language, Translations> = {
         { name: "Home", href: "#top", id: "top" },
         { name: "About Us", href: "#about", id: "about" },
         { name: "Services", href: "#services", id: "services" },
+        { name: "Partners", href: "#partners", id: "partners" },
         { name: "FAQ", href: "#faq", id: "faq" },
         { name: "Contact Us", href: "#contact", id: "contact" },
       ],
@@ -609,6 +655,28 @@ export const translations: Record<Language, Translations> = {
         subtitle: "Top-tier campaign efficiency rates",
         stat: "15X",
       },
+    },
+    partners: {
+      kicker: "Partners in Success & Journey",
+      heading: "Our Clients & Partners,",
+      headingHighlight: "Our Shared Success",
+      subtitle: "We take immense pride in our established partnerships with leading institutions, authorities, and corporations across Egypt, Saudi Arabia, and the UAE, delivering digital solutions that redefine impact.",
+      filterAll: "All Partners",
+      filterGov: "Gov & Enterprise",
+      filterCorp: "Corporate & Industry",
+      filterConsumer: "Consumer & Investment Brands",
+      ctaButton: "Join Our Success Network",
+      stats: {
+        partnersCount: "13+",
+        partnersCountLabel: "Strategic Partners",
+        satisfaction: "98%",
+        satisfactionLabel: "Client Satisfaction Rate",
+        projects: "150+",
+        projectsLabel: "Milestones Delivered",
+        countries: "3",
+        countriesLabel: "Regional Hubs (Egypt • KSA • UAE)",
+      },
+      marqueeLabel: "Interactive Partners Stream (Hover to pause or inspect)",
     },
     faq: {
       kicker: "Frequently Asked Questions",

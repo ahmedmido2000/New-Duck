@@ -9,6 +9,7 @@ import Services from "@/components/Services";
 import AIEcosystem from "@/components/AIEcosystem";
 import Features from "@/components/Features";
 import Metrics from "@/components/Metrics";
+import Partners from "@/components/Partners";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Consultation from "@/components/Consultation";
@@ -49,6 +50,9 @@ export default function Home() {
 
             {/* Metrics & Performance Stats */}
             <Metrics />
+
+            {/* Success Partners - Strategic Regional Clients */}
+            <Partners />
 
             {/* FAQ Section */}
             <FAQ />

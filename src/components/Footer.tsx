@@ -66,7 +66,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#0A0103] border-t border-[#3A0C15] py-16 text-neutral-300 overflow-hidden" dir="rtl">
+    <footer className="bg-white border-t border-gray-200 py-16 text-neutral-800 overflow-hidden" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-14 text-right">
@@ -74,10 +74,10 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <Link
               href="#top"
-              className="group text-5xl sm:text-6xl font-black text-white tracking-tight"
+              className="group text-5xl sm:text-6xl font-black text-[#0D0204] tracking-tight"
               style={{ direction: "ltr", textAlign: "right" }}
             >
-              <span className="text-[#FF0A2B] text-glow-red inline-block group-hover:scale-105 transition-transform">
+              <span className="text-[#FF0A2B] inline-block group-hover:scale-105 transition-transform">
                 d
               </span>
               uck
@@ -86,25 +86,25 @@ export default function Footer() {
             {/* Slogan from PDF: للرؤية أثر */}
             <div className="flex items-center gap-2">
               <span className="w-4 h-[2px] bg-[#FF0A2B]" />
-              <span className="text-base font-black text-white tracking-wide">
+              <span className="text-base font-black text-[#0D0204] tracking-wide">
                 للرؤية <span className="text-[#FF0A2B]">أثر</span>
               </span>
             </div>
 
             <div
-              className="text-xs tracking-[3px] text-[#C9A4A8] font-bold"
+              className="text-xs tracking-[3px] text-[#FF0A2B] font-extrabold"
               style={{ direction: "ltr", textAlign: "right" }}
             >
               DIGITAL MEDIA AGENCY
             </div>
-            <p className="text-sm text-[#C9A4A8] leading-relaxed mt-1">
+            <p className="text-sm text-[#555555] leading-relaxed mt-1">
               شركة دعاية وتسويق تقدم حلولاً متكاملة للشركات والمشاهير والأفراد، تبدأ من بناء الهوية وإدارة السوشيال ميديا وحتى المونتاج والتصميم والكورسات.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xl sm:text-2xl font-black text-[#FF0A2B] mb-4 text-glow-red">
+            <h4 className="text-xl sm:text-2xl font-black text-[#0D0204] mb-4">
               روابط سريعة
             </h4>
             <ul className="space-y-2.5 text-base font-semibold">
@@ -114,7 +114,7 @@ export default function Footer() {
                   <li key={idx}>
                     <a
                       href={hrefs[idx]}
-                      className="hover:text-[#FF0A2B] transition-colors hover:translate-x-1 inline-block"
+                      className="text-[#444444] hover:text-[#FF0A2B] transition-colors hover:translate-x-1 inline-block"
                     >
                       {item}
                     </a>
@@ -126,7 +126,7 @@ export default function Footer() {
 
           {/* Our Services (خدماتنا) */}
           <div>
-            <h4 className="text-xl sm:text-2xl font-black text-[#FF0A2B] mb-4 text-glow-red">
+            <h4 className="text-xl sm:text-2xl font-black text-[#0D0204] mb-4">
               خدماتنا
             </h4>
             <ul className="space-y-2.5 text-base font-semibold">
@@ -140,7 +140,7 @@ export default function Footer() {
                 <li key={idx}>
                   <a
                     href="#services"
-                    className="hover:text-[#FF0A2B] transition-colors hover:translate-x-1 inline-block"
+                    className="text-[#444444] hover:text-[#FF0A2B] transition-colors hover:translate-x-1 inline-block"
                   >
                     {svc}
                   </a>
@@ -151,10 +151,10 @@ export default function Footer() {
 
           {/* Social Links & Back to top */}
           <div>
-            <h4 className="text-xl sm:text-2xl font-black text-[#FF0A2B] mb-4 text-glow-red">
+            <h4 className="text-xl sm:text-2xl font-black text-[#0D0204] mb-4">
               وسائل التواصل
             </h4>
-            <p className="text-sm text-[#C9A4A8] mb-4">
+            <p className="text-sm text-[#555555] mb-4">
               تابعنا على منصات التواصل الاجتماعي لمشاهدة آخر أعمالنا الإبداعية.
             </p>
             <div className="flex flex-wrap gap-2 mb-6">
@@ -167,7 +167,7 @@ export default function Footer() {
                   aria-label={social.label}
                   whileHover={{ y: -4, scale: 1.1, backgroundColor: "#FF0A2B", color: "#ffffff" }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-xl bg-[#1A0509] border border-[#3A0C15] text-neutral-300 flex items-center justify-center transition-colors shadow-md hover:border-[#FF0A2B]"
+                  className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-200 text-[#0D0204] flex items-center justify-center transition-colors shadow-sm hover:border-[#FF0A2B]"
                 >
                   {social.icon}
                 </motion.a>
@@ -179,7 +179,7 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleScrollToTop}
-              className="inline-flex items-center gap-2 text-sm text-[#FFB3BE] hover:text-white bg-[#1A0509] border border-[#3A0C15] hover:border-[#FF0A2B] px-4 py-2.5 rounded-lg font-bold transition-all shadow-glow-red"
+              className="inline-flex items-center gap-2 text-sm text-[#0D0204] hover:text-white bg-gray-100 hover:bg-[#FF0A2B] border border-gray-200 hover:border-[#FF0A2B] px-4 py-2.5 rounded-lg font-bold transition-all shadow-sm"
             >
               <span>العودة للأعلى</span>
               <ArrowUp className="w-4 h-4" />
@@ -188,17 +188,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-[#3A0C15] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-[#C9A4A8]">
+        <div className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-500">
           <div>
             جميع الحقوق محفوظة © {new Date().getFullYear()}{" "}
             <span className="text-[#FF0A2B] font-bold">Duck Agency</span> · للرؤية أثر.
           </div>
           <div className="flex gap-4">
-            <span className="hover:text-white cursor-pointer transition-colors">
+            <span className="hover:text-black cursor-pointer transition-colors">
               سياسة الخصوصية
             </span>
             <span>·</span>
-            <span className="hover:text-white cursor-pointer transition-colors">
+            <span className="hover:text-black cursor-pointer transition-colors">
               الشروط والأحكام
             </span>
           </div>

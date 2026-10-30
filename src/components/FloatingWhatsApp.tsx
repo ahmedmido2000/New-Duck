@@ -21,17 +21,17 @@ export default function FloatingWhatsApp() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="w-72 bg-[#1A0509]/95 backdrop-blur-xl border border-[#FF0A2B]/40 rounded-2xl p-4 shadow-2xl text-right text-white"
+            className="w-72 bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl p-4 shadow-2xl text-right text-[#0D0204]"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-100">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse" />
-                <span className="font-black text-sm text-white">تواصل مباشر</span>
+                <span className="font-black text-sm text-[#0D0204]">تواصل مباشر</span>
               </div>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="text-[#C9A4A8] hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+                className="text-gray-400 hover:text-black p-1 rounded-lg hover:bg-gray-100 transition-colors"
                 aria-label="إغلاق النافذة"
               >
                 <X className="w-4 h-4" />
@@ -40,13 +40,13 @@ export default function FloatingWhatsApp() {
 
             <div className="space-y-2.5 mt-3">
               {/* Egypt Branch */}
-              <div className="p-2.5 rounded-xl bg-[#2A0509] border border-[#3A0C15] flex items-center justify-between gap-2">
+              <div className="p-2.5 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2">
                 <div>
-                  <div className="font-bold text-xs text-white flex items-center gap-1.5">
+                  <div className="font-bold text-xs text-[#0D0204] flex items-center gap-1.5">
                     <span>🇪🇬</span>
                     <span>فرع مصر</span>
                   </div>
-                  <div className="text-[11px] font-mono text-[#C9A4A8] mt-0.5" style={{ direction: "ltr" }}>
+                  <div className="text-[11px] font-mono text-gray-500 mt-0.5" style={{ direction: "ltr" }}>
                     +20 10 6454 4080
                   </div>
                 </div>
@@ -54,7 +54,7 @@ export default function FloatingWhatsApp() {
                   <a
                     href="tel:+201064544080"
                     aria-label="اتصال بفرع مصر"
-                    className="w-8 h-8 rounded-lg bg-[#FF0A2B]/20 hover:bg-[#FF0A2B] text-[#FF0A2B] hover:text-white flex items-center justify-center transition-colors"
+                    className="w-8 h-8 rounded-lg bg-[#FF0A2B]/10 hover:bg-[#FF0A2B] text-[#FF0A2B] hover:text-white flex items-center justify-center transition-colors"
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </a>
@@ -71,13 +71,13 @@ export default function FloatingWhatsApp() {
               </div>
 
               {/* Saudi Arabia Branch */}
-              <div className="p-2.5 rounded-xl bg-[#2A0509] border border-[#3A0C15] flex items-center justify-between gap-2">
+              <div className="p-2.5 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2">
                 <div>
-                  <div className="font-bold text-xs text-white flex items-center gap-1.5">
+                  <div className="font-bold text-xs text-[#0D0204] flex items-center gap-1.5">
                     <span>🇸🇦</span>
                     <span>فرع السعودية</span>
                   </div>
-                  <div className="text-[11px] font-mono text-[#C9A4A8] mt-0.5" style={{ direction: "ltr" }}>
+                  <div className="text-[11px] font-mono text-gray-500 mt-0.5" style={{ direction: "ltr" }}>
                     +966 57 939 8098
                   </div>
                 </div>
@@ -85,7 +85,7 @@ export default function FloatingWhatsApp() {
                   <a
                     href="tel:+966579398098"
                     aria-label="اتصال بفرع السعودية"
-                    className="w-8 h-8 rounded-lg bg-[#FF0A2B]/20 hover:bg-[#FF0A2B] text-[#FF0A2B] hover:text-white flex items-center justify-center transition-colors"
+                    className="w-8 h-8 rounded-lg bg-[#FF0A2B]/10 hover:bg-[#FF0A2B] text-[#FF0A2B] hover:text-white flex items-center justify-center transition-colors"
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </a>

@@ -130,10 +130,10 @@ function DuckGaugeCard({
   return (
     <div
       ref={cardRef}
-      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-[#3A0C15] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_18px_40px_-28px_#000] bg-gradient-to-b from-[#24050A] via-[#160307] to-[#0D0204] transition-all hover:border-[#FF0A2B]/50"
+      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-gray-200 shadow-xl bg-white transition-all hover:border-[#FF0A2B]/40"
     >
       {/* Background soft radial brand glow */}
-      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.12),transparent_60%)]" />
+      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.06),transparent_60%)]" />
 
       {/* Header */}
       <div className="relative z-10 flex items-start justify-between gap-3 mb-2">
@@ -142,15 +142,15 @@ function DuckGaugeCard({
             {icon}
           </div>
           <div>
-            <div className="font-bold text-[16px] text-white leading-snug">
+            <div className="font-bold text-[16px] text-[#0D0204] leading-snug">
               {title}
             </div>
-            <div className="text-[12.5px] text-[#C9A4A8] mt-1 leading-relaxed">
+            <div className="text-[12.5px] text-[#555555] mt-1 leading-relaxed">
               {subtitle}
             </div>
           </div>
         </div>
-        <div className="font-mono text-[12px] text-[#C9A4A8]/80 tracking-wider shrink-0 pt-0.5">
+        <div className="font-mono text-[12px] text-[#FF0A2B] font-bold tracking-wider shrink-0 pt-0.5">
           {stat}
         </div>
       </div>
@@ -176,11 +176,11 @@ function DuckGaugeCard({
             </linearGradient>
           </defs>
 
-          {/* Background unlit track arc (deep wine track) */}
+          {/* Background unlit track arc (clean subtle track) */}
           <path
             d={arcPath(A_R, A_L, RC)}
             fill="none"
-            stroke="#350811"
+            stroke="#EEEEEE"
             strokeWidth={BW}
           />
 
@@ -192,7 +192,7 @@ function DuckGaugeCard({
             strokeWidth={BW}
             strokeLinecap="butt"
             style={{
-              filter: "drop-shadow(0 0 8px rgba(255,10,43,0.65))",
+              filter: "drop-shadow(0 0 8px rgba(255,10,43,0.45))",
             }}
           />
 
@@ -200,13 +200,13 @@ function DuckGaugeCard({
           <path
             d={arcPath(A_R, A_L, R)}
             fill="none"
-            stroke="rgba(255,100,120,0.35)"
+            stroke="rgba(0,0,0,0.06)"
             strokeWidth={1}
           />
           <path
             d={arcPath(A_R, A_L, RI)}
             fill="none"
-            stroke="rgba(0,0,0,0.5)"
+            stroke="rgba(0,0,0,0.06)"
             strokeWidth={1.5}
           />
 
@@ -217,7 +217,7 @@ function DuckGaugeCard({
               cx={x}
               cy={y}
               r={1.05}
-              fill="rgba(255,10,43,0.85)"
+              fill="rgba(255,10,43,0.45)"
             />
           ))}
 
@@ -231,7 +231,7 @@ function DuckGaugeCard({
                 y1={pA[1]}
                 x2={pB[0]}
                 y2={pB[1]}
-                stroke={isLit ? "rgba(25,2,5,0.75)" : "rgba(255,10,43,0.55)"}
+                stroke={isLit ? "#FF0A2B" : "#E5E5E5"}
                 strokeWidth={1.6}
                 strokeLinecap="round"
               />
@@ -240,7 +240,7 @@ function DuckGaugeCard({
 
           {/* Center Hub */}
           <circle cx={CX} cy={CY} r={6} fill="#FF0A2B" />
-          <circle cx={CX} cy={CY} r={2.6} fill="#140205" />
+          <circle cx={CX} cy={CY} r={2.6} fill="#FFFFFF" />
 
           {/* Needle with neon glow */}
           <line
@@ -257,7 +257,7 @@ function DuckGaugeCard({
 
         {/* Center Target Display Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center translate-y-[6%] pointer-events-none">
-          <div className="text-[25px] sm:text-[27px] font-black text-white drop-shadow-[0_0_16px_rgba(255,10,43,0.6)] leading-none tracking-tight">
+          <div className="text-[25px] sm:text-[27px] font-black text-[#0D0204] drop-shadow-[0_0_12px_rgba(255,10,43,0.25)] leading-none tracking-tight">
             {currentCenterVal}
           </div>
         </div>
@@ -330,10 +330,10 @@ function DuckSpikesCard() {
   return (
     <div
       ref={cardRef}
-      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-[#3A0C15] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_18px_40px_-28px_#000] bg-gradient-to-b from-[#24050A] via-[#160307] to-[#0D0204] transition-all hover:border-[#FF0A2B]/50"
+      className="relative flex flex-col justify-between h-full rounded-[20px] p-5 sm:p-6 overflow-hidden border border-gray-200 shadow-xl bg-white transition-all hover:border-[#FF0A2B]/40"
     >
       {/* Background soft radial brand glow */}
-      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.12),transparent_60%)]" />
+      <div className="absolute inset-0 pointer-events-none rounded-[20px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.06),transparent_60%)]" />
 
       {/* Header */}
       <div className="relative z-10 flex items-start justify-between gap-3 mb-2">
@@ -350,15 +350,15 @@ function DuckSpikesCard() {
             </svg>
           </div>
           <div>
-            <div className="font-bold text-[16px] text-white leading-snug">
+            <div className="font-bold text-[16px] text-[#0D0204] leading-snug">
               حجم المبيعات المباشرة
             </div>
-            <div className="text-[12.5px] text-[#C9A4A8] mt-1 leading-relaxed">
+            <div className="text-[12.5px] text-[#555555] mt-1 leading-relaxed">
               التصاعد الربحي السنوي لعملائنا
             </div>
           </div>
         </div>
-        <div className="font-mono text-[12px] text-[#C9A4A8]/80 tracking-wider shrink-0 pt-0.5">
+        <div className="font-mono text-[12px] text-[#FF0A2B] font-bold tracking-wider shrink-0 pt-0.5">
           99.99%
         </div>
       </div>
@@ -377,7 +377,7 @@ function DuckSpikesCard() {
             y1="40"
             x2="590"
             y2="40"
-            stroke="rgba(243,243,243,0.16)"
+            stroke="rgba(0,0,0,0.08)"
             strokeDasharray="2 5"
             strokeWidth="1"
           />
@@ -388,7 +388,7 @@ function DuckSpikesCard() {
             y1="178"
             x2="590"
             y2="178"
-            stroke="rgba(243,243,243,0.09)"
+            stroke="#EAEAEA"
             strokeWidth="1"
           />
 
@@ -401,7 +401,7 @@ function DuckSpikesCard() {
                   y1={178}
                   x2={spike.x}
                   y2={spike.y}
-                  stroke={spike.isHot ? "#FF0A2B" : "rgba(255,255,255,0.30)"}
+                  stroke={spike.isHot ? "#FF0A2B" : "#D1D5DB"}
                   strokeWidth={spike.isHot ? "1.8" : "1.4"}
                   style={{
                     transformOrigin: `${spike.x}px 178px`,
@@ -415,7 +415,7 @@ function DuckSpikesCard() {
                   cx={spike.x}
                   cy={spike.y}
                   r={spike.isHot ? 5.5 : 4}
-                  fill={spike.isHot ? "#FF0A2B" : "#FFFFFF"}
+                  fill={spike.isHot ? "#FF0A2B" : "#9CA3AF"}
                   style={{
                     filter: spike.isHot
                       ? "drop-shadow(0 0 8px rgba(255,10,43,0.95))"
@@ -432,7 +432,7 @@ function DuckSpikesCard() {
 
         {/* Floating SLA Pill in brand styling */}
         <div
-          className="absolute z-10 pointer-events-none -translate-x-1/2 -translate-y-1/2 bg-[#1C0307] border border-[#FF0A2B]/40 text-[#f3f3f3] font-mono text-[11px] py-1 px-2.5 rounded-full whitespace-nowrap shadow-[0_6px_20px_-6px_rgba(255,10,43,0.5)]"
+          className="absolute z-10 pointer-events-none -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 text-[#0D0204] font-mono text-[11px] py-1 px-2.5 rounded-full whitespace-nowrap shadow-md"
           style={{
             left: `${slaData.left}%`,
             top: `${slaData.top}%`,
@@ -473,7 +473,7 @@ export default function Metrics() {
   };
 
   return (
-    <section className="py-20 sm:py-24 bg-[#0D0204] overflow-hidden" dir="rtl">
+    <section className="py-20 sm:py-24 bg-white overflow-hidden border-t border-gray-100" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}

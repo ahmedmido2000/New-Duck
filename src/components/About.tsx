@@ -5,7 +5,7 @@ import { Target, CheckCircle2, Compass } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 sm:py-28 bg-[#0D0204] relative overflow-hidden">
+    <section id="about" className="py-20 sm:py-28 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
         {/* Text Content (Enters from Right) */}
         <motion.div
@@ -20,11 +20,11 @@ export default function About() {
             <span>رؤيتنا ومنهجنا</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight">
             من نحن؟
           </h2>
 
-          <p className="text-lg sm:text-2xl text-[#E6CDD0] leading-relaxed font-normal">
+          <p className="text-lg sm:text-2xl text-[#333333] leading-relaxed font-normal">
             Duck شركة دعاية وتسويق تقدم حلولاً متكاملة للشركات والمشاهير والأفراد، تبدأ من بناء الهوية البصرية وإدارة الصفحات على السوشيال ميديا، وحتى المونتاج والتصميم وباقات الخدمات الجاهزة. كما تقدم الشركة أكاديمية تعليمية متخصصة.
           </p>
 
@@ -39,23 +39,23 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 w-full">
             <motion.div
               whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
-              className="flex items-start gap-3 bg-[#1A0509] p-4 rounded-xl border border-[#3A0C15] transition-all"
+              className="flex items-start gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm transition-all"
             >
               <CheckCircle2 className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-bold text-white text-base">استراتيجيات مبنية على بيانات</h4>
-                <p className="text-sm text-[#C9A4A8]">قرارات تسويقية تستند لأرقام حقيقية وسلوك الجمهور المستهدف.</p>
+                <h4 className="font-bold text-[#0D0204] text-base">استراتيجيات مبنية على بيانات</h4>
+                <p className="text-sm text-[#555555]">قرارات تسويقية تستند لأرقام حقيقية وسلوك الجمهور المستهدف.</p>
               </div>
             </motion.div>
 
             <motion.div
               whileHover={{ y: -4, borderColor: "#FF0A2B66" }}
-              className="flex items-start gap-3 bg-[#1A0509] p-4 rounded-xl border border-[#3A0C15] transition-all"
+              className="flex items-start gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm transition-all"
             >
               <Target className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-bold text-white text-base">تركيز كامل على العائد (ROI)</h4>
-                <p className="text-sm text-[#C9A4A8]">كل قرش يُنفق في الإعلانات محسوب بهدف مضاعفة الأرباح.</p>
+                <h4 className="font-bold text-[#0D0204] text-base">تركيز كامل على العائد (ROI)</h4>
+                <p className="text-sm text-[#555555]">كل قرش يُنفق في الإعلانات محسوب بهدف مضاعفة الأرباح.</p>
               </div>
             </motion.div>
           </div>
@@ -80,7 +80,6 @@ export default function About() {
               alt="Duck Agency – المسار الصحيح لنمو علامتك التجارية"
               className="w-full h-full object-cover object-center"
             />
-            {/* Subtle red overlay vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0D0204]/60 via-transparent to-transparent" />
             {/* Caption badge */}
             <div className="absolute bottom-6 inset-x-0 flex justify-center">

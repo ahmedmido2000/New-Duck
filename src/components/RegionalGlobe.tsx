@@ -175,18 +175,18 @@ export default function RegionalGlobe({
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.9 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute -top-28 z-40 min-w-[210px] sm:min-w-[230px] p-3.5 rounded-2xl bg-[#1A0509]/95 border border-[#FF0A2B]/60 shadow-[0_10px_35px_-5px_rgba(255,10,43,0.5)] backdrop-blur-xl text-right"
+                      className="absolute -top-28 z-40 min-w-[210px] sm:min-w-[230px] p-3.5 rounded-2xl bg-white/95 border border-[#FF0A2B]/40 shadow-xl backdrop-blur-xl text-right"
                     >
-                      <div className="font-black text-xs sm:text-sm text-white leading-snug">
+                      <div className="font-black text-xs sm:text-sm text-[#0D0204] leading-snug">
                         {pin.name}
                       </div>
-                      <div className="flex items-center gap-1.5 text-[11px] text-[#C9A4A8] mt-1">
+                      <div className="flex items-center gap-1.5 text-[11px] text-[#666666] mt-1">
                         <MapPin className="w-3 h-3 text-[#FF0A2B] shrink-0" />
                         <span>{pin.city}</span>
                       </div>
 
                       {/* Quick action buttons inside tooltip */}
-                      <div className="pt-2.5 mt-2 border-t border-[#3A0C15] flex items-center justify-between gap-2">
+                      <div className="pt-2.5 mt-2 border-t border-gray-100 flex items-center justify-between gap-2">
                         <a
                           href={`tel:${pin.tel}`}
                           className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-1.5 px-2 rounded-lg font-bold text-[11px] transition-colors shadow-glow-red"

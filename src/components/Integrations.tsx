@@ -40,14 +40,14 @@ export default function Integrations() {
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-[#0D0204] border-t border-[#3A0C15]/50 overflow-hidden">
+    <section className="py-16 sm:py-24 bg-white border-t border-gray-200 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white text-center leading-relaxed max-w-4xl mx-auto mb-10 sm:mb-14"
+          className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D0204] text-center leading-relaxed max-w-4xl mx-auto mb-10 sm:mb-14"
         >
           ندعم تكاملك مع منصات التجارة الإلكترونية وأدوات الإدارة الذكية، كل ما تحتاجه في مسار واحد
         </motion.h2>
@@ -70,15 +70,15 @@ export default function Integrations() {
                   glare={true}
                   className="rounded-xl overflow-hidden h-full"
                 >
-                  <div className="platform-cell group relative flex flex-col items-center justify-center min-h-[125px] sm:min-h-[150px] p-4 rounded-xl border border-[#2E0A11] bg-[#12030A]/70 hover:bg-gradient-to-br hover:from-[#FF0A2B]/15 hover:to-transparent hover:border-[#FF0A2B]/50 transition-all duration-300 cursor-pointer overflow-hidden h-full">
+                  <div className="platform-cell group relative flex flex-col items-center justify-center min-h-[125px] sm:min-h-[150px] p-4 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gradient-to-br hover:from-[#FF0A2B]/10 hover:to-white hover:border-[#FF0A2B]/50 transition-all duration-300 cursor-pointer overflow-hidden h-full">
                     {/* Background Subtle Icon Glow */}
                     <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-[#FF0A2B]/5 rounded-full blur-xl group-hover:bg-[#FF0A2B]/20 transition-all" />
 
-                    <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-[#6C4B50] group-hover:text-[#FF0A2B] transition-colors mb-2" />
-                    <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#8A6368] group-hover:text-white transition-colors tracking-tight">
+                    <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-[#FF0A2B]/50 group-hover:text-[#FF0A2B] transition-colors mb-2" />
+                    <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0D0204] group-hover:text-[#0D0204] transition-colors tracking-tight">
                       {platform.name}
                     </span>
-                    <span className="text-[11px] sm:text-xs text-[#C9A4A8]/60 group-hover:text-[#FFB3BE] transition-colors mt-1 font-semibold text-center font-cairo">
+                    <span className="text-[11px] sm:text-xs text-gray-500 group-hover:text-[#FF0A2B] transition-colors mt-1 font-semibold text-center font-cairo">
                       {platform.category}
                     </span>
                   </div>

@@ -14,7 +14,7 @@ export default function AIEcosystem() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-[#0D0204] relative overflow-hidden">
+    <section className="py-20 sm:py-28 bg-white relative overflow-hidden border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Header */}
         <motion.div
@@ -29,11 +29,11 @@ export default function AIEcosystem() {
             <span>من يتبنّاه اليوم، يقود السوق غدًا</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight">
             مستقبل التسويق يبدأ بالذكاء الاصطناعي
           </h2>
 
-          <p className="text-base sm:text-xl text-[#C9A4A8] leading-relaxed max-w-2xl font-normal">
+          <p className="text-base sm:text-xl text-[#444444] leading-relaxed max-w-2xl font-normal">
             الذكاء الاصطناعي لم يعد اختيارًا بل ضرورة: تحليل سلوك العملاء، تخصيص المحتوى، وتحسين الحملات لزيادة المبيعات بأقل تكلفة ممكنة.
           </p>
         </motion.div>
@@ -44,11 +44,11 @@ export default function AIEcosystem() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
-          className="w-full overflow-hidden rounded-2xl bg-[#12030A]/40 border border-[#3A0C15]/70 p-2 sm:p-6 shadow-2xl relative"
+          className="w-full overflow-hidden rounded-2xl bg-gray-50 border border-gray-200 p-2 sm:p-6 shadow-lg relative"
         >
           {/* Ambient Corner Glows */}
-          <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF0A2B]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FF0A2B]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF0A2B]/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FF0A2B]/5 rounded-full blur-3xl pointer-events-none" />
 
           <svg
             viewBox="0 0 1100 520"
@@ -127,10 +127,10 @@ export default function AIEcosystem() {
               cx="550"
               cy="260"
               r="64"
-              fill="#2A0309"
+              fill="#0D0204"
               stroke="#FF0A2B"
               strokeWidth="2.5"
-              className="drop-shadow-[0_0_25px_rgba(255,10,43,0.5)]"
+              className="drop-shadow-[0_0_20px_rgba(255,10,43,0.35)]"
             />
             <text
               x="550"
@@ -146,7 +146,7 @@ export default function AIEcosystem() {
             </text>
 
             {/* Outer Service Hub Rectangles */}
-            <g fill="#2A0309" stroke="#FF0A2B" strokeOpacity="0.75" strokeWidth="1.5">
+            <g fill="#FFFFFF" stroke="#FF0A2B" strokeOpacity="0.85" strokeWidth="1.5">
               <rect x="220" y="66" width="80" height="68" rx="16" />
               <rect x="800" y="66" width="80" height="68" rx="16" />
               <rect x="110" y="226" width="80" height="68" rx="16" />
@@ -157,7 +157,7 @@ export default function AIEcosystem() {
 
             {/* Service Labels */}
             <g
-              fill="#ffffff"
+              fill="#0D0204"
               fontSize="16"
               fontWeight="700"
               textAnchor="middle"
@@ -195,10 +195,10 @@ export default function AIEcosystem() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.5 }}
               whileHover={{ y: -3, borderColor: "#FF0A2B88" }}
-              className="bg-[#1A0509] p-3 rounded-xl border border-[#3A0C15] text-center transition-all cursor-default"
+              className="bg-white p-3 rounded-xl border border-gray-200 shadow-sm text-center transition-all cursor-default"
             >
-              <div className="text-sm font-bold text-white mb-0.5">{item.title}</div>
-              <div className="text-[11px] text-[#C9A4A8]">{item.desc}</div>
+              <div className="text-sm font-bold text-[#0D0204] mb-0.5">{item.title}</div>
+              <div className="text-[11px] text-[#666666]">{item.desc}</div>
             </motion.div>
           ))}
         </div>

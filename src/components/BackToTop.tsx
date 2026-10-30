@@ -39,7 +39,7 @@ export default function BackToTop() {
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
           aria-label="الرجوع للأعلى"
-          className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#1A0509] border border-[#3A0C15] text-white flex items-center justify-center shadow-lg hover:border-[#FF0A2B] transition-colors group cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-white border border-gray-200 text-[#0D0204] flex items-center justify-center shadow-lg hover:border-[#FF0A2B] hover:text-[#FF0A2B] transition-colors group cursor-pointer"
         >
           {/* Circular progress SVG */}
           <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none p-0.5">
@@ -47,7 +47,7 @@ export default function BackToTop() {
               cx="22"
               cy="22"
               r="20"
-              stroke="#2A0509"
+              stroke="#E5E7EB"
               strokeWidth="2.5"
               fill="transparent"
             />

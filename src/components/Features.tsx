@@ -26,9 +26,9 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-[#12030A] overflow-hidden">
+    <section className="py-20 sm:py-28 bg-white overflow-hidden border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="border border-[#3A0C15] rounded-3xl overflow-hidden bg-[#0D0204]/60 shadow-2xl">
+        <div className="border border-gray-200 rounded-3xl overflow-hidden bg-white shadow-xl">
           <div className="flex flex-col lg:flex-row items-stretch">
           {/* Features Side */}
           <div className="flex-1 flex flex-col justify-between">
@@ -38,18 +38,18 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="p-6 sm:p-10 border-b border-[#3A0C15]"
+              className="p-6 sm:p-10 border-b border-gray-200"
             >
-              <h2 className="text-3xl sm:text-5xl font-black text-[#FF0A2B] mb-3 text-glow-red">
+              <h2 className="text-3xl sm:text-5xl font-black text-[#FF0A2B] mb-3">
                 مميزات تصنع الفرق
               </h2>
-              <p className="text-base sm:text-lg text-[#C9A4A8] leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg text-[#444444] leading-relaxed max-w-xl">
                 نحوّل أفكارك إلى مشاريع ناجحة بخدمات احترافية تجمع بين الإبداع الفني والتقنية المتطورة والاستراتيجية المدروسة.
               </p>
             </motion.div>
 
             {/* Features 01 & 02 */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x sm:divide-x-reverse divide-[#3A0C15] border-b border-[#3A0C15]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x sm:divide-x-reverse divide-gray-200 border-b border-gray-200">
               {features.slice(0, 2).map((item, idx) => {
                 const Icon = item.icon;
                 return (
@@ -59,18 +59,18 @@ export default function Features() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: idx * 0.15 }}
-                    className="p-6 sm:p-8 flex flex-col gap-3.5 hover:bg-[#FF0A2B]/5 transition-colors group cursor-default"
+                    className="p-6 sm:p-8 flex flex-col gap-3.5 hover:bg-red-50/40 transition-colors group cursor-default"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8A0F20] to-[#2A0309] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-md group-hover:scale-110 transition-transform">
+                      <div className="w-12 h-12 rounded-xl bg-[#FF0A2B]/10 border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-sm group-hover:scale-110 transition-transform">
                         {item.num}
                       </div>
-                      <Icon className="w-6 h-6 text-[#6C4B50] group-hover:text-[#FF0A2B] transition-colors" />
+                      <Icon className="w-6 h-6 text-[#FF0A2B] transition-colors" />
                     </div>
-                    <h3 className="text-2xl font-black text-[#FF0A2B] group-hover:text-white transition-colors">
+                    <h3 className="text-2xl font-black text-[#0D0204] group-hover:text-[#FF0A2B] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-[#555555] leading-relaxed">
                       {item.desc}
                     </p>
                   </motion.div>
@@ -84,16 +84,16 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:bg-[#FF0A2B]/5 transition-colors group cursor-default"
+              className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:bg-red-50/40 transition-colors group cursor-default"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8A0F20] to-[#2A0309] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-md shrink-0 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-[#FF0A2B]/10 border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-sm shrink-0 group-hover:scale-110 transition-transform">
                 03
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-black text-[#FF0A2B] group-hover:text-white transition-colors mb-1">
+                <h3 className="text-2xl font-black text-[#0D0204] group-hover:text-[#FF0A2B] transition-colors mb-1">
                   دعم مستمر وشراكة حقيقية
                 </h3>
-                <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+                <p className="text-sm sm:text-base text-[#555555] leading-relaxed">
                   متابعة ودعم دائم لضمان نجاح مشروعك، مع تقارير أداء دورية واجتماعات استراتيجية منتظمة.
                 </p>
               </div>
@@ -101,7 +101,7 @@ export default function Features() {
           </div>
 
           {/* Cybernetic Duck AI Video Side */}
-          <div className="lg:w-[460px] xl:w-[500px] min-h-[380px] sm:min-h-[460px] bg-[#12030A] border-t lg:border-t-0 lg:border-r border-[#3A0C15] relative overflow-hidden flex items-center justify-center">
+          <div className="lg:w-[460px] xl:w-[500px] min-h-[380px] sm:min-h-[460px] bg-black border-t lg:border-t-0 lg:border-r border-gray-200 relative overflow-hidden flex items-center justify-center">
             <video
               src="/videos/duck-contact.mp4"
               autoPlay

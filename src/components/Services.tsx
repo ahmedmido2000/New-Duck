@@ -260,11 +260,11 @@ export default function Services() {
     <section
       ref={sectionRef}
       id="services"
-      className="bg-[#0D0204] relative overflow-hidden h-screen flex items-center justify-center"
+      className="bg-white relative overflow-hidden h-screen flex items-center justify-center border-t border-gray-100"
     >
       {/* Background Ambience */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#FF0A2B]/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#7A0B1A]/15 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#FF0A2B]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#FF0A2B]/5 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
@@ -279,12 +279,12 @@ export default function Services() {
             </div>
 
             {/* Main Section Heading */}
-            <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-black text-white leading-[1.3] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-black text-[#0D0204] leading-[1.3] tracking-tight">
               في عالم التسويق الرقمي، نكون الشريك الذي يبدأ معك من الفكرة الأولى، لا من مرحلة التنفيذ فقط
             </h2>
 
             {/* Subtitle / Description */}
-            <p className="text-sm sm:text-base lg:text-lg text-[#C9A4A8] leading-relaxed font-normal max-w-xl">
+            <p className="text-sm sm:text-base lg:text-lg text-[#444444] leading-relaxed font-normal max-w-xl">
               حيث نبدأ بفهم لطبيعة نشاطك والسوق السعودي وجمهورك المستهدف، لنرسم لك اتجاهًا واضحًا نحو النمو المستدام.
             </p>
 
@@ -395,14 +395,14 @@ export default function Services() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-              className="relative bg-[#1A0509] border border-[#FF0A2B]/40 rounded-2xl max-w-lg w-full p-6 sm:p-8 text-right shadow-2xl shadow-[#FF0A2B]/30"
+              className="relative bg-white border border-gray-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 text-right shadow-2xl"
               role="dialog"
               aria-modal="true"
             >
               <button
                 type="button"
                 onClick={() => setActiveModal(null)}
-                className="absolute top-4 left-4 p-2 text-neutral-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                className="absolute top-4 left-4 p-2 text-neutral-400 hover:text-black rounded-lg hover:bg-gray-100 transition-colors"
                 aria-label="إغلاق النافذة"
               >
                 <X className="w-6 h-6" />
@@ -412,18 +412,18 @@ export default function Services() {
                 تفاصيل الخدمة
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
+              <h3 className="text-2xl sm:text-3xl font-black text-[#0D0204] mb-3">
                 {activeModal.title}
               </h3>
 
-              <p className="text-base text-[#E6CDD0] leading-relaxed mb-6">
+              <p className="text-base text-[#444444] leading-relaxed mb-6">
                 {activeModal.description}
               </p>
 
               <div className="space-y-3 mb-8">
-                <h4 className="font-bold text-white text-base">ماذا يشمل تنفيذ الخدمة؟</h4>
+                <h4 className="font-bold text-[#0D0204] text-base">ماذا يشمل تنفيذ الخدمة؟</h4>
                 {activeModal.details.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2.5 text-sm sm:text-base text-neutral-200">
+                  <div key={idx} className="flex items-center gap-2.5 text-sm sm:text-base text-[#333333]">
                     <Check className="w-5 h-5 text-[#FF0A2B] shrink-0" />
                     <span>{item}</span>
                   </div>
@@ -446,7 +446,7 @@ export default function Services() {
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="px-5 py-3 rounded-xl border border-neutral-700 hover:bg-white/5 font-bold text-neutral-300"
+                  className="px-5 py-3 rounded-xl border border-gray-300 hover:bg-gray-50 font-bold text-[#0D0204]"
                 >
                   إغلاق
                 </button>

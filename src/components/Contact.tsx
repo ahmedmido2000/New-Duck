@@ -9,7 +9,7 @@ export default function Contact() {
   const [hoveredBranch, setHoveredBranch] = useState<"egypt" | "ksa" | null>(null);
 
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-[#12030A] relative overflow-hidden" dir="rtl">
+    <section id="contact" className="py-20 sm:py-28 bg-white relative overflow-hidden border-t border-gray-100" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8 sm:gap-10">
         {/* Header Block */}
         <motion.div
@@ -25,10 +25,10 @@ export default function Contact() {
               <span>تواصل مباشر</span>
               <span className="w-5 h-[2px] bg-[#FF0A2B]" />
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight">
               أينما كان نشاطك، نحن قريبون منك
             </h2>
-            <p className="text-[#C9A4A8] text-sm sm:text-base mt-2">
+            <p className="text-[#444444] text-sm sm:text-base mt-2">
               فروعنا الرسمية في مصر والمملكة العربية السعودية لتقديم حلول الدعاية والتسويق المتكاملة.
             </p>
           </div>
@@ -49,16 +49,16 @@ export default function Contact() {
               whileHover={{ y: -3 }}
               onMouseEnter={() => setHoveredBranch("egypt")}
               onMouseLeave={() => setHoveredBranch(null)}
-              className={`border rounded-2xl p-6 bg-[#1A0509]/90 flex flex-col gap-4 text-base transition-all shadow-xl ${
+              className={`border rounded-2xl p-6 bg-white flex flex-col gap-4 text-base transition-all shadow-lg ${
                 hoveredBranch === "egypt"
-                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.35)]"
-                  : "border-[#FF0A2B]/40 hover:border-[#FF0A2B]"
+                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.2)]"
+                  : "border-gray-200 hover:border-[#FF0A2B]/60"
               }`}
             >
-              <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
+              <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🇪🇬</span>
-                  <span className="font-black text-lg sm:text-xl text-white">
+                  <span className="font-black text-lg sm:text-xl text-[#0D0204]">
                     فرع جمهورية مصر العربية
                   </span>
                 </div>
@@ -73,7 +73,7 @@ export default function Contact() {
                 <MapPin className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
                 <div>
                   <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">العنوان:</span>{" "}
-                  <span className="text-white font-medium text-sm sm:text-base">
+                  <span className="text-[#0D0204] font-medium text-sm sm:text-base">
                     مدينة 6 أكتوبر - الحصري، مصر
                   </span>
                 </div>
@@ -85,7 +85,7 @@ export default function Contact() {
                 <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">رقم الهاتف:</span>
                 <a
                   href="tel:+201064544080"
-                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-white text-sm sm:text-base"
+                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
                   style={{ direction: "ltr" }}
                 >
                   +20 10 6454 4080
@@ -98,7 +98,7 @@ export default function Contact() {
                 <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">البريد الإلكتروني:</span>
                 <a
                   href="mailto:info@duckagency.com"
-                  className="hover:text-[#FF0A2B] transition-colors font-sans text-neutral-300 text-sm sm:text-base"
+                  className="hover:text-[#FF0A2B] transition-colors font-sans text-[#444444] text-sm sm:text-base"
                 >
                   info@duckagency.com
                 </a>
@@ -130,16 +130,16 @@ export default function Contact() {
               whileHover={{ y: -3 }}
               onMouseEnter={() => setHoveredBranch("ksa")}
               onMouseLeave={() => setHoveredBranch(null)}
-              className={`border rounded-2xl p-6 bg-[#1A0509]/90 flex flex-col gap-4 text-base transition-all shadow-xl ${
+              className={`border rounded-2xl p-6 bg-white flex flex-col gap-4 text-base transition-all shadow-lg ${
                 hoveredBranch === "ksa"
-                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.35)]"
-                  : "border-[#FF0A2B]/40 hover:border-[#FF0A2B]"
+                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.2)]"
+                  : "border-gray-200 hover:border-[#FF0A2B]/60"
               }`}
             >
-              <div className="flex items-center justify-between pb-3 border-b border-[#3A0C15]">
+              <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🇸🇦</span>
-                  <span className="font-black text-lg sm:text-xl text-white">
+                  <span className="font-black text-lg sm:text-xl text-[#0D0204]">
                     فرع المملكة العربية السعودية
                   </span>
                 </div>
@@ -154,7 +154,7 @@ export default function Contact() {
                 <MapPin className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
                 <div>
                   <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">العنوان:</span>{" "}
-                  <span className="text-white font-medium text-sm sm:text-base">
+                  <span className="text-[#0D0204] font-medium text-sm sm:text-base">
                     الرياض، المملكة العربية السعودية
                   </span>
                 </div>
@@ -166,7 +166,7 @@ export default function Contact() {
                 <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">رقم الهاتف:</span>
                 <a
                   href="tel:+966579398098"
-                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-white text-sm sm:text-base"
+                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
                   style={{ direction: "ltr" }}
                 >
                   +966 57 939 8098
@@ -179,7 +179,7 @@ export default function Contact() {
                 <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">البريد الإلكتروني:</span>
                 <a
                   href="mailto:info@duckagency.com"
-                  className="hover:text-[#FF0A2B] transition-colors font-sans text-neutral-300 text-sm sm:text-base"
+                  className="hover:text-[#FF0A2B] transition-colors font-sans text-[#444444] text-sm sm:text-base"
                 >
                   info@duckagency.com
                 </a>

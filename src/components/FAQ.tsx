@@ -27,7 +27,7 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-20 sm:py-28 bg-[#12030A] overflow-hidden">
+    <section id="faq" className="py-20 sm:py-28 bg-white overflow-hidden border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Kicker */}
         <motion.div
@@ -47,7 +47,7 @@ export default function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-3xl sm:text-5xl font-black text-white leading-tight mb-10 text-center"
+          className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight mb-10 text-center"
         >
           الأسئلة الأكثر شيوعاً
         </motion.h2>
@@ -63,12 +63,12 @@ export default function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="border border-[#3A0C15] rounded-xl bg-[#1A0509]/80 overflow-hidden transition-colors hover:border-[#FF0A2B]/40"
+                className="border border-gray-200 rounded-xl bg-white shadow-sm overflow-hidden transition-colors hover:border-[#FF0A2B]/40"
               >
                 <button
                   type="button"
                   onClick={() => setOpenFaq(isOpen ? null : index)}
-                  className="w-full flex items-center justify-between p-5 text-right font-extrabold text-base sm:text-lg text-white hover:text-[#FF0A2B] transition-colors focus:outline-none"
+                  className="w-full flex items-center justify-between p-5 text-right font-extrabold text-base sm:text-lg text-[#0D0204] hover:text-[#FF0A2B] transition-colors focus:outline-none"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
@@ -87,7 +87,7 @@ export default function FAQ() {
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
                       className="overflow-hidden"
                     >
-                      <div className="px-5 pb-5 text-sm sm:text-base text-[#C9A4A8] leading-relaxed border-t border-[#3A0C15]/50 pt-3">
+                      <div className="px-5 pb-5 text-sm sm:text-base text-[#444444] leading-relaxed border-t border-gray-100 pt-3">
                         {faq.a}
                       </div>
                     </motion.div>

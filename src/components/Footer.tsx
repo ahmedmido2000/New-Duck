@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { useSmoothScroll } from "./SmoothScrollProvider";
@@ -81,20 +82,20 @@ export default function Footer() {
         >
           {/* Brand Info & Slogan */}
           <div className="flex flex-col gap-3">
-            <Link
-              href="/"
-              className={`group text-5xl sm:text-6xl font-black text-[#0D0204] tracking-tight inline-block ${
-                isRTL ? "text-right" : "text-left"
-              }`}
-            >
-              <motion.span
-                whileHover={{ scale: 1.15, rotate: -6 }}
+            <Link href="/" className="inline-block" aria-label="Duck Agency">
+              <motion.div
+                whileHover={{ scale: 1.06, rotate: -1 }}
                 transition={{ type: "spring", stiffness: 350, damping: 12 }}
-                className="text-[#FF0A2B] inline-block"
+                className="relative"
               >
-                d
-              </motion.span>
-              uck
+                <Image
+                  src="/images/duck-logo.png"
+                  alt="Duck Agency"
+                  width={160}
+                  height={60}
+                  className="h-12 w-auto object-contain"
+                />
+              </motion.div>
             </Link>
 
             {/* Slogan */}

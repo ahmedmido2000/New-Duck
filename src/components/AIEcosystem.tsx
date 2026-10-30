@@ -70,6 +70,10 @@ export default function AIEcosystem() {
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
+              {/* Circular clip path for logo */}
+              <clipPath id="centerCircleClip">
+                <circle cx="550" cy="260" r="58" />
+              </clipPath>
             </defs>
 
             {/* Connecting dashed paths with interactive highlight */}
@@ -148,19 +152,17 @@ export default function AIEcosystem() {
               strokeWidth="3"
               className="drop-shadow-[0_0_25px_rgba(255,10,43,0.45)] cursor-pointer"
             />
-            <text
-              x="550"
-              y="274"
-              textAnchor="middle"
-              fill="#ffffff"
-              fontSize="40"
-              fontWeight="900"
-              fontFamily="Cairo, sans-serif"
-              direction="ltr"
+            {/* Duck Logo inside the center circle */}
+            <image
+              href="/images/duck-logo.png"
+              x="484"
+              y="228"
+              width="132"
+              height="64"
+              preserveAspectRatio="xMidYMid meet"
+              clipPath="url(#centerCircleClip)"
               className="pointer-events-none"
-            >
-              <tspan fill="#FF0A2B">d</tspan>uck
-            </text>
+            />
 
             {/* Outer Service Hub Rectangles (Interactive on hover) */}
             {[

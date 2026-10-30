@@ -53,7 +53,7 @@ export default function ContactPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
               {/* Form Column */}
-              <div className="lg:col-span-7 bg-[#FAFAFA] border border-gray-200/90 rounded-3xl p-6 sm:p-10 shadow-sm">
+              <div className="lg:col-span-7 bg-white border border-gray-200/90 rounded-3xl p-6 sm:p-10 shadow-sm">
                 <div className="mb-6">
                   <span className="text-xs font-bold text-[#FF0A2B] uppercase tracking-wider block mb-1">
                     {lang === "ar" ? "إرسال استفسار مباشر" : "Direct Inquiry"}
@@ -168,53 +168,53 @@ export default function ContactPage() {
 
               {/* Direct Channels Column */}
               <div className="lg:col-span-5 space-y-6">
-                <div className="p-6 sm:p-8 rounded-3xl bg-[#0D0204] text-white border border-[#3A0C15] shadow-xl">
+                <div className="p-6 sm:p-8 rounded-3xl bg-white text-[#0D0204] border border-gray-200/90 shadow-sm">
                   <span className="text-xs font-bold text-[#FF0A2B] uppercase tracking-wider block mb-2">
                     {lang === "ar" ? "قنوات اتصال سريعة" : "Rapid Response"}
                   </span>
-                  <h3 className="text-2xl font-black mb-6">
+                  <h3 className="text-2xl font-black mb-6 text-[#0D0204]">
                     {lang === "ar" ? "تواصل مباشر مع مستشارينا" : "Connect Directly"}
                   </h3>
 
-                  <div className="space-y-5">
+                  <div className="space-y-4">
                     <a
                       href="https://wa.me/201064544080"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-[#FF0A2B]/15 border border-white/10 hover:border-[#FF0A2B]/40 transition-all group"
+                      className="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 hover:bg-red-50/40 border border-gray-200/80 hover:border-[#FF0A2B]/40 transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-[#FF0A2B] text-white flex items-center justify-center shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-[#FF0A2B] text-white flex items-center justify-center shrink-0 shadow-sm">
                         <MessageSquare className="w-6 h-6" />
                       </div>
                       <div>
-                        <span className="text-xs text-neutral-400 block">{lang === "ar" ? "واتساب الإدارة" : "WhatsApp Direct"}</span>
-                        <span className="text-base font-bold text-white group-hover:text-[#FF0A2B] font-mono">+20 106 454 4080</span>
+                        <span className="text-xs text-gray-500 block">{lang === "ar" ? "واتساب الإدارة" : "WhatsApp Direct"}</span>
+                        <span className="text-base font-bold text-[#0D0204] group-hover:text-[#FF0A2B] font-mono">+20 106 454 4080</span>
                       </div>
                     </a>
 
                     <a
                       href="tel:+201064544080"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all group"
+                      className="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 hover:bg-red-50/40 border border-gray-200/80 hover:border-[#FF0A2B]/40 transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-red-50 text-[#FF0A2B] border border-red-100 flex items-center justify-center shrink-0">
                         <Phone className="w-6 h-6 text-[#FF0A2B]" />
                       </div>
                       <div>
-                        <span className="text-xs text-neutral-400 block">{lang === "ar" ? "اتصال هاتفي" : "Direct Phone"}</span>
-                        <span className="text-base font-bold text-white font-mono">+20 106 454 4080</span>
+                        <span className="text-xs text-gray-500 block">{lang === "ar" ? "اتصال هاتفي" : "Direct Phone"}</span>
+                        <span className="text-base font-bold text-[#0D0204] group-hover:text-[#FF0A2B] font-mono">+20 106 454 4080</span>
                       </div>
                     </a>
 
                     <a
                       href="mailto:contact@duckagency.com"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all group"
+                      className="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 hover:bg-red-50/40 border border-gray-200/80 hover:border-[#FF0A2B]/40 transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-red-50 text-[#FF0A2B] border border-red-100 flex items-center justify-center shrink-0">
                         <Mail className="w-6 h-6 text-[#FF0A2B]" />
                       </div>
                       <div>
-                        <span className="text-xs text-neutral-400 block">{lang === "ar" ? "البريد الإلكتروني" : "Official Email"}</span>
-                        <span className="text-base font-bold text-white font-mono">contact@duckagency.com</span>
+                        <span className="text-xs text-gray-500 block">{lang === "ar" ? "البريد الإلكتروني" : "Official Email"}</span>
+                        <span className="text-base font-bold text-[#0D0204] group-hover:text-[#FF0A2B] font-mono">contact@duckagency.com</span>
                       </div>
                     </a>
                   </div>

@@ -166,7 +166,6 @@ export default function PackagesPage() {
                           }`}
                         >
                           <span>{t.packages.requestBtn}</span>
-                          <ArrowUpRight className="w-4 h-4 rtl:rotate-[-90deg]" />
                         </MagneticButton>
                       </div>
                     </div>
@@ -178,7 +177,7 @@ export default function PackagesPage() {
         </section>
 
         {/* ═══════════════ Feature Comparison Table (أساسية - متوسطة - متقدمة) ═══════════════ */}
-        <section className="w-full py-12 sm:py-16 bg-[#FAFAFA] border-t border-gray-100">
+        <section className="w-full py-12 sm:py-16 border-t border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
               <span className="text-xs font-bold text-[#FF0A2B] uppercase tracking-wider block mb-2">
@@ -350,33 +349,33 @@ export default function PackagesPage() {
         </section>
 
         {/* ═══════════════ Interactive Live Cost Calculator ═══════════════ */}
-        <section className="w-full py-16 sm:py-24 bg-[#0D0204] text-white relative overflow-hidden">
+        <section className="w-full py-16 sm:py-24 border-t border-gray-100 relative overflow-hidden">
           {/* Subtle Ambient Red Flares */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#FF0A2B]/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#FF0A2B]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#FF0A2B]/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#FF0A2B]/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2A0509] border border-[#FF0A2B]/30 text-[#FF0A2B] text-xs font-bold mb-3 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FF0A2B]/10 border border-[#FF0A2B]/20 text-[#FF0A2B] text-xs font-bold mb-3 shadow-xs">
                 <Calculator className="w-4 h-4" />
                 <span>{lang === "ar" ? "حساب فوري وتفاعلي" : "Instant Interactive Estimate"}</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0D0204] tracking-tight">
                 {t.packages.calculator.title}
               </h2>
-              <p className="text-neutral-400 text-sm sm:text-base mt-3">
+              <p className="text-gray-500 text-sm sm:text-base mt-3">
                 {t.packages.calculator.subtitle}
               </p>
             </div>
 
             {/* Calculator Card Container */}
-            <div className="bg-[#141414] border border-[#3A0C15] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl relative">
+            <div className="bg-white border border-gray-200/90 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-sm relative">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 {/* Controls (Left on LTR / Right on RTL) */}
                 <div className="lg:col-span-7 space-y-6">
                   {/* Step 1: Service Type */}
                   <div>
-                    <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-2.5">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2.5">
                       {t.packages.calculator.serviceTypeLabel}
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -387,8 +386,8 @@ export default function PackagesPage() {
                           onClick={() => setSelectedBaseIndex(idx)}
                           className={`p-3.5 rounded-xl text-xs sm:text-sm font-bold border transition-all text-right rtl:text-right ltr:text-left ${
                             selectedBaseIndex === idx
-                              ? "bg-[#FF0A2B]/15 border-[#FF0A2B] text-white shadow-sm"
-                              : "bg-[#1E1E1E] border-neutral-800 text-neutral-300 hover:border-neutral-700"
+                              ? "bg-[#FF0A2B]/10 border-[#FF0A2B] text-[#FF0A2B] shadow-sm"
+                              : "bg-gray-50 border-gray-200 text-gray-700 hover:border-gray-300"
                           }`}
                         >
                           {lang === "ar" ? st.labelAr : st.labelEn}
@@ -400,10 +399,10 @@ export default function PackagesPage() {
                   {/* Step 2: Scope Slider */}
                   <div className="pt-2">
                     <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                      <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">
                         {t.packages.calculator.scopeLabel}
                       </label>
-                      <span className="text-sm font-mono font-bold text-[#FF0A2B] bg-[#2A0509] px-2.5 py-0.5 rounded-md border border-[#FF0A2B]/30">
+                      <span className="text-sm font-mono font-bold text-[#FF0A2B] bg-[#FF0A2B]/10 px-2.5 py-0.5 rounded-md border border-[#FF0A2B]/20">
                         {scopeUnits} {lang === "ar" ? "وحدات / مهام" : "Scope Units"}
                       </span>
                     </div>
@@ -413,9 +412,9 @@ export default function PackagesPage() {
                       max={10}
                       value={scopeUnits}
                       onChange={(e) => setScopeUnits(Number(e.target.value))}
-                      className="w-full h-2 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-[#FF0A2B]"
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#FF0A2B]"
                     />
-                    <div className="flex justify-between text-[11px] text-neutral-500 font-mono mt-1">
+                    <div className="flex justify-between text-[11px] text-gray-400 font-mono mt-1">
                       <span>{lang === "ar" ? "مشروع مبسط (1)" : "Compact (1)"}</span>
                       <span>{lang === "ar" ? "نطاق قياسي (5)" : "Standard (5)"}</span>
                       <span>{lang === "ar" ? "منظومة شاملة (10)" : "Enterprise (10)"}</span>
@@ -424,7 +423,7 @@ export default function PackagesPage() {
 
                   {/* Step 3: Priority Delivery Velocity */}
                   <div className="pt-2">
-                    <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-2.5">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2.5">
                       {t.packages.calculator.timelineLabel}
                     </label>
                     <div className="grid grid-cols-2 gap-3">
@@ -433,8 +432,8 @@ export default function PackagesPage() {
                         onClick={() => setIsFastTrack(false)}
                         className={`p-3 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
                           !isFastTrack
-                            ? "bg-[#FF0A2B]/15 border-[#FF0A2B] text-white"
-                            : "bg-[#1E1E1E] border-neutral-800 text-neutral-400"
+                            ? "bg-[#FF0A2B]/10 border-[#FF0A2B] text-[#FF0A2B]"
+                            : "bg-gray-50 border-gray-200 text-gray-500"
                         }`}
                       >
                         {t.packages.calculator.standard}
@@ -444,8 +443,8 @@ export default function PackagesPage() {
                         onClick={() => setIsFastTrack(true)}
                         className={`p-3 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center justify-center gap-1.5 ${
                           isFastTrack
-                            ? "bg-[#FF0A2B]/15 border-[#FF0A2B] text-white"
-                            : "bg-[#1E1E1E] border-neutral-800 text-neutral-400"
+                            ? "bg-[#FF0A2B]/10 border-[#FF0A2B] text-[#FF0A2B]"
+                            : "bg-gray-50 border-gray-200 text-gray-500"
                         }`}
                       >
                         <Zap className="w-3.5 h-3.5 text-[#FF0A2B]" />
@@ -456,9 +455,9 @@ export default function PackagesPage() {
                 </div>
 
                 {/* Live Results Panel */}
-                <div className="lg:col-span-5 bg-[#0D0204] border border-[#3A0C15] rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                <div className="lg:col-span-5 bg-gray-50 border border-gray-200 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm">
                   <div>
-                    <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-2">
+                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">
                       {t.packages.calculator.estimateTotal}
                     </span>
 
@@ -468,18 +467,18 @@ export default function PackagesPage() {
                     </div>
 
                     {/* Multi-currency breakdown */}
-                    <div className="space-y-1.5 text-xs text-neutral-300 font-mono pt-3 border-t border-neutral-800">
+                    <div className="space-y-1.5 text-xs text-gray-600 font-mono pt-3 border-t border-gray-200">
                       <div className="flex justify-between">
                         <span>≈ {totalSar.toLocaleString()} SAR</span>
-                        <span className="text-neutral-500">{t.packages.calculator.sarApprox}</span>
+                        <span className="text-gray-400">{t.packages.calculator.sarApprox}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>≈ {totalEgp.toLocaleString()} EGP</span>
-                        <span className="text-neutral-500">{t.packages.calculator.egpApprox}</span>
+                        <span className="text-gray-400">{t.packages.calculator.egpApprox}</span>
                       </div>
                     </div>
 
-                    <p className="text-[11px] text-neutral-500 mt-4 leading-relaxed">
+                    <p className="text-[11px] text-gray-400 mt-4 leading-relaxed">
                       {lang === "ar"
                         ? "* التسعير تقديري استرشادي يخضع لمراجعة متطلبات المشروع الدقيقة وموافقة العميل."
                         : "* Estimate is indicative and subject to exact project requirement verification."}
@@ -487,7 +486,7 @@ export default function PackagesPage() {
                   </div>
 
                   {/* Book On WhatsApp CTA */}
-                  <div className="pt-6 mt-6 border-t border-neutral-800">
+                  <div className="pt-6 mt-6 border-t border-gray-200">
                     <MagneticButton
                       href={waLink}
                       target="_blank"
@@ -500,178 +499,6 @@ export default function PackagesPage() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════ Feature Comparison Table (أساسية - متوسطة - متقدمة) ═══════════════ */}
-        <section className="w-full py-12 sm:py-16 bg-[#FAFAFA] border-t border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-              <span className="text-xs font-bold text-[#FF0A2B] uppercase tracking-wider block mb-2">
-                {lang === "ar" ? "مقارنة شاملة بين الباقات" : "Full Tier Comparison"}
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#0D0204] tracking-tight">
-                {lang === "ar"
-                  ? "جدول مقارنة باقات Duck (أساسية • متوسطة • متقدمة)"
-                  : "Compare Duck Packages (Basic • Pro • Enterprise)"}
-              </h2>
-              <p className="text-xs sm:text-sm text-gray-500 mt-2">
-                {lang === "ar"
-                  ? "اختر الباقة الأنسب لأهداف شركتك مع إمكانية الترقية أو التخصيص في أي وقت."
-                  : "Choose the package tailored to your business goals with easy scaling anytime."}
-              </p>
-            </div>
-
-            <div className="overflow-x-auto rounded-3xl border border-gray-200/90 bg-white shadow-sm">
-              <table className="w-full text-right rtl:text-right ltr:text-left text-xs sm:text-sm border-collapse min-w-[650px]">
-                <thead>
-                  <tr className="border-b border-gray-200 bg-gray-50/70">
-                    <th className="p-4 sm:p-5 font-black text-[#0D0204] w-2/5">
-                      {lang === "ar" ? "المميزات والخدمات المشمولة" : "Included Features"}
-                    </th>
-                    <th className="p-4 sm:p-5 font-bold text-center text-gray-700 w-1/5">
-                      <div className="font-black text-sm sm:text-base text-[#0D0204]">
-                        {lang === "ar" ? "الأساسية" : "Basic"}
-                      </div>
-                      <div className="text-xs text-[#FF0A2B] font-mono font-bold">$490</div>
-                    </th>
-                    <th className="p-4 sm:p-5 font-bold text-center bg-red-50/50 text-[#FF0A2B] border-x border-red-100 w-1/5 relative">
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-[#FF0A2B] text-white text-[10px] font-black uppercase mb-1">
-                        {lang === "ar" ? "الأكثر طلباً" : "Popular"}
-                      </span>
-                      <div className="font-black text-sm sm:text-base text-[#0D0204]">
-                        {lang === "ar" ? "المتوسطة Pro" : "Growth Pro"}
-                      </div>
-                      <div className="text-xs text-[#FF0A2B] font-mono font-bold">$890</div>
-                    </th>
-                    <th className="p-4 sm:p-5 font-bold text-center text-gray-700 w-1/5">
-                      <div className="font-black text-sm sm:text-base text-[#0D0204]">
-                        {lang === "ar" ? "المتقدمة Enterprise" : "Enterprise"}
-                      </div>
-                      <div className="text-xs text-[#FF0A2B] font-mono font-bold">$1,690</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {[
-                    {
-                      featAr: "منصات التواصل المدارة",
-                      featEn: "Managed Social Platforms",
-                      basic: "2 منصات",
-                      pro: "4 منصات",
-                      ent: "جميع المنصات",
-                    },
-                    {
-                      featAr: "التصاميم الإعلانية الشهرية",
-                      featEn: "Monthly Graphic Creatives",
-                      basic: "12 تصميماً مخصصاً",
-                      pro: "24 تصميماً + موشن",
-                      ent: "تصاميم غير محدودة",
-                    },
-                    {
-                      featAr: "إنتاج ومونتاج الفيديوهات والريلز",
-                      featEn: "Video Editing & Reels",
-                      basic: "غير مشمول",
-                      pro: "4 فيديوهات Reels/TikTok",
-                      ent: "فيديو سينمائي 4K + ريلز",
-                    },
-                    {
-                      featAr: "إدارة الحملات الإعلانية الممولة",
-                      featEn: "Paid Ad Campaigns",
-                      basic: "حملتان ممولتان",
-                      pro: "Meta, Google & TikTok",
-                      ent: "قمع تسويقي شامل Funnel",
-                    },
-                    {
-                      featAr: "كتابة المحتوى والسيناريوهات",
-                      featEn: "Content & Copywriting",
-                      basic: "كتابة محتوى إبداعي",
-                      pro: "محتوى وسيناريوهات تصوير",
-                      ent: "استراتيجية نمو ربع سنوية",
-                    },
-                    {
-                      featAr: "تحسين معدل التحويل (CRO) وتتبع البكسل",
-                      featEn: "Conversion Optimization & Pixels",
-                      basic: "تتبع أساسي",
-                      pro: "متقدم مع اختبارات A/B",
-                      ent: "مخصص شامل ومستمر",
-                    },
-                    {
-                      featAr: "مدير حسابات واستشارات مخصصة",
-                      featEn: "Account Manager & Support",
-                      basic: "دعم فني بريدي",
-                      pro: "دعم مخصص 24/7",
-                      ent: "مدير حساب تنفيذي مباشر",
-                    },
-                    {
-                      featAr: "تقارير الأداء ولوحة التحكم",
-                      featEn: "Reporting & Dashboards",
-                      basic: "تقرير شهري",
-                      pro: "أسبوعي تفاعلي",
-                      ent: "لوحة تحكم حية 24/7",
-                    },
-                  ].map((row, rIdx) => (
-                    <tr
-                      key={rIdx}
-                      className={rIdx % 2 === 0 ? "bg-white" : "bg-gray-50/40"}
-                    >
-                      <td className="p-4 sm:p-5 font-bold text-[#0D0204]">
-                        {lang === "ar" ? row.featAr : row.featEn}
-                      </td>
-                      <td className="p-4 sm:p-5 text-center text-gray-600 font-medium">
-                        {row.basic === "غير مشمول" ? (
-                          <span className="text-gray-300 font-bold">—</span>
-                        ) : (
-                          row.basic
-                        )}
-                      </td>
-                      <td className="p-4 sm:p-5 text-center bg-red-50/30 border-x border-red-100 text-[#0D0204] font-bold">
-                        {row.pro}
-                      </td>
-                      <td className="p-4 sm:p-5 text-center text-gray-700 font-semibold">
-                        {row.ent}
-                      </td>
-                    </tr>
-                  ))}
-                  {/* Action Row */}
-                  <tr className="bg-gray-50/70 border-t border-gray-200">
-                    <td className="p-4 sm:p-5 font-black text-[#0D0204]">
-                      {lang === "ar" ? "طلب الاشتراك المباشر" : "Direct Subscription"}
-                    </td>
-                    <td className="p-4 sm:p-5 text-center">
-                      <a
-                        href="https://wa.me/201064544080?text=مرحباً%20Duck%20أرغب%20بالاشتراك%20في%20الباقة%20الأساسية%20($490)"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block py-2 px-4 rounded-xl bg-[#0D0204] hover:bg-[#FF0A2B] text-white font-bold text-xs transition-colors"
-                      >
-                        {lang === "ar" ? "اشترك الآن" : "Subscribe"}
-                      </a>
-                    </td>
-                    <td className="p-4 sm:p-5 text-center bg-red-50/50 border-x border-red-100">
-                      <a
-                        href="https://wa.me/201064544080?text=مرحباً%20Duck%20أرغب%20بالاشتراك%20في%20باقة%20النمو%20Pro%20($890)"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block py-2.5 px-5 rounded-xl bg-[#FF0A2B] hover:bg-[#E00020] text-white font-black text-xs transition-all shadow-glow-red"
-                      >
-                        {lang === "ar" ? "اشترك الآن" : "Subscribe"}
-                      </a>
-                    </td>
-                    <td className="p-4 sm:p-5 text-center">
-                      <a
-                        href="https://wa.me/201064544080?text=مرحباً%20Duck%20أرغب%20بالاشتراك%20في%20الباقة%20المؤسسية%20Enterprise%20($1690)"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block py-2 px-4 rounded-xl bg-[#0D0204] hover:bg-[#FF0A2B] text-white font-bold text-xs transition-colors"
-                      >
-                        {lang === "ar" ? "اشترك الآن" : "Subscribe"}
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </section>

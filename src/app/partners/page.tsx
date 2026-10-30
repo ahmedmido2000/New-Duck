@@ -28,7 +28,7 @@ export default function PartnersPage() {
         <Partners />
 
         {/* In-Depth Institutional Partner Portfolio Grid */}
-        <section className="w-full py-16 sm:py-24 bg-[#FAFAFA] border-t border-gray-100">
+        <section className="w-full py-16 sm:py-24 bg-white border-t border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
               <span className="text-xs font-bold text-[#FF0A2B] uppercase tracking-wider block mb-2">
@@ -106,7 +106,6 @@ export default function PartnersPage() {
                 className="inline-flex items-center gap-2.5 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
               >
                 <span>{t.partners.ctaButton}</span>
-                <ArrowUpRight className="w-5 h-5 rtl:rotate-[-90deg]" />
               </MagneticButton>
             </div>
           </div>

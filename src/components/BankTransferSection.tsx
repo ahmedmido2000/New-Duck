@@ -105,25 +105,25 @@ export default function BankTransferSection({
   return (
     <section
       id="booking"
-      className="w-full py-16 sm:py-24 bg-[#0D0204] text-white relative overflow-hidden"
+      className="w-full py-16 sm:py-24 bg-white text-[#0D0204] relative overflow-hidden border-t border-gray-100"
     >
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 -right-20 w-96 h-96 bg-[#FF0A2B]/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 -left-20 w-96 h-96 bg-[#FF0A2B]/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* Subtle ambient glows */}
+      <div className="absolute top-1/4 -right-20 w-96 h-96 bg-[#FF0A2B]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 -left-20 w-96 h-96 bg-[#FF0A2B]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FF0A2B] text-xs sm:text-sm font-extrabold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF0A2B]/10 border border-[#FF0A2B]/20 text-[#FF0A2B] text-xs sm:text-sm font-extrabold uppercase tracking-wider mb-4">
             <Sparkles className="w-4 h-4" />
             <span>{b.kicker}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] tracking-tight leading-tight">
             {b.heading}
           </h2>
 
-          <p className="text-base sm:text-lg text-neutral-300 mt-4 leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-[#555555] mt-4 leading-relaxed font-normal">
             {b.subtitle}
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function BankTransferSection({
             <span className="text-xs font-bold text-[#FF0A2B] uppercase tracking-wider block">
               {b.studySystem.badge}
             </span>
-            <h3 className="text-2xl sm:text-3xl font-black text-white mt-1">
+            <h3 className="text-2xl sm:text-3xl font-black text-[#0D0204] mt-1">
               {b.studySystem.title}
             </h3>
           </div>
@@ -149,12 +149,12 @@ export default function BankTransferSection({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="p-6 rounded-2xl bg-[#160408]/90 border border-[#3A0C15] hover:border-[#FF0A2B]/60 shadow-lg flex flex-col justify-between group transition-all"
+                  className="p-6 rounded-2xl bg-white border border-gray-200/90 hover:border-[#FF0A2B] shadow-sm hover:shadow-[0_15px_30px_-5px_rgba(255,10,43,0.15)] flex flex-col justify-between group transition-all"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#2A050A] border border-[#FF0A2B]/40 text-[#FF0A2B] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-[#FF0A2B] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <p className="text-sm sm:text-base font-semibold text-neutral-200 leading-relaxed">
+                  <p className="text-sm sm:text-base font-semibold text-[#0D0204] leading-relaxed">
                     {point}
                   </p>
                 </motion.div>
@@ -167,35 +167,35 @@ export default function BankTransferSection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left Column: Official Bank Wire Card */}
           <div className="lg:col-span-5 space-y-6">
-            <TiltCard maxTilt={8} glare={true} className="rounded-3xl">
-              <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#1C050B] via-[#120206] to-[#0A0103] border border-[#FF0A2B]/40 shadow-[0_20px_50px_-10px_rgba(255,10,43,0.3)] relative overflow-hidden">
+            <TiltCard maxTilt={8} glare={false} className="rounded-3xl">
+              <div className="p-7 sm:p-9 rounded-3xl bg-white border border-gray-200/90 shadow-md relative overflow-hidden">
                 <div className="absolute top-0 inset-x-8 h-[2px] bg-gradient-to-r from-transparent via-[#FF0A2B] to-transparent" />
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#FF0A2B]/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#FF0A2B]/10 rounded-full blur-3xl pointer-events-none" />
 
                 {/* Card Top */}
                 <div className="flex items-center justify-between mb-8">
-                  <div className="flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white">
+                  <div className="flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-red-50 border border-red-100 text-[#FF0A2B]">
                     <CreditCard className="w-4 h-4 text-[#FF0A2B]" />
                     <span>{b.bankTransfer.badge}</span>
                   </div>
-                  <span className="text-xs font-mono font-bold text-neutral-400">
+                  <span className="text-xs font-mono font-bold text-gray-400">
                     BANK WIRE
                   </span>
                 </div>
 
                 {/* Account Holder */}
                 <div className="mb-6">
-                  <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-1">
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-1">
                     {b.bankTransfer.holderLabel}
                   </span>
-                  <p className="text-lg sm:text-xl font-black text-white tracking-wide">
+                  <p className="text-lg sm:text-xl font-black text-[#0D0204] tracking-wide">
                     {accountHolder}
                   </p>
                 </div>
 
                 {/* Account Number with 1-Click Copy */}
-                <div className="mb-6 p-4 rounded-2xl bg-black/50 border border-white/10 flex flex-col gap-2">
-                  <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+                <div className="mb-6 p-4 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col gap-2">
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
                     {b.bankTransfer.accountLabel}
                   </span>
                   <div className="flex items-center justify-between gap-2">
@@ -211,7 +211,7 @@ export default function BankTransferSection({
                       className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                         copied
                           ? "bg-green-600 text-white"
-                          : "bg-white/10 hover:bg-[#FF0A2B] text-white"
+                          : "bg-gray-200 hover:bg-[#FF0A2B] hover:text-white text-[#0D0204]"
                       }`}
                       aria-label="Copy bank account number"
                     >
@@ -231,23 +231,23 @@ export default function BankTransferSection({
                 </div>
 
                 {/* Bank Instructions */}
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed border-t border-white/10 pt-4">
+                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed border-t border-gray-100 pt-4">
                   {b.bankTransfer.instruction}
                 </p>
               </div>
             </TiltCard>
 
             {/* Quick WhatsApp Support Box */}
-            <div className="p-5 rounded-2xl bg-[#160408] border border-[#3A0C15] flex items-center justify-between gap-4">
+            <div className="p-5 rounded-2xl bg-white border border-gray-200/90 shadow-sm flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-green-50 text-green-600 flex items-center justify-center shrink-0">
                   <MessageCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-sm font-bold text-[#0D0204]">
                     {lang === "ar" ? "تحتاج مساعدة بالحجز؟" : "Need help with booking?"}
                   </h4>
-                  <p className="text-xs text-neutral-400">
+                  <p className="text-xs text-gray-500">
                     {lang === "ar" ? "فريقنا متاح 24/7 عبر واتساب" : "Support available 24/7 on WhatsApp"}
                   </p>
                 </div>
@@ -256,7 +256,7 @@ export default function BankTransferSection({
                 href="https://wa.me/201064544080?text=مرحباً%20Duck%20أحتاج%20مساعدة%20في%20الحجز%20والدفع"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-[#FF0A2B] text-white text-xs font-bold transition-colors shrink-0"
+                className="px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-[#FF0A2B] hover:text-white text-[#0D0204] text-xs font-bold transition-colors shrink-0"
               >
                 {lang === "ar" ? "تواصل معنا" : "Contact"}
               </a>
@@ -265,13 +265,13 @@ export default function BankTransferSection({
 
           {/* Right Column: Receipt Upload Form */}
           <div className="lg:col-span-7">
-            <div className="p-7 sm:p-9 rounded-3xl bg-[#140307]/95 border border-[#3A0C15] shadow-2xl relative">
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+            <div className="p-7 sm:p-9 rounded-3xl bg-white border border-gray-200/90 shadow-md relative">
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
                 <div>
                   <span className="text-xs font-bold text-[#FF0A2B] uppercase tracking-wider block mb-1">
                     {b.receiptUpload.badge}
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-black text-white">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#0D0204]">
                     {b.receiptUpload.title}
                   </h3>
                 </div>
@@ -281,16 +281,16 @@ export default function BankTransferSection({
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Course Selection */}
                 <div>
-                  <label className="text-xs font-bold text-neutral-300 block mb-2">
+                  <label className="text-xs font-bold text-gray-700 block mb-2">
                     {b.receiptUpload.courseLabel}
                   </label>
                   <select
                     value={selectedCourse}
                     onChange={(e) => setSelectedCourse(e.target.value)}
-                    className="w-full bg-[#0D0204] border border-white/15 focus:border-[#FF0A2B] rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-colors"
+                    className="w-full bg-white border border-gray-200 focus:border-[#FF0A2B] rounded-xl px-4 py-3 text-sm text-[#0D0204] focus:outline-none transition-colors"
                   >
                     {courseOptions.map((opt) => (
-                      <option key={opt.id} value={opt.id} className="bg-[#120206] text-white">
+                      <option key={opt.id} value={opt.id} className="bg-white text-[#0D0204]">
                         {opt.label}
                       </option>
                     ))}
@@ -300,7 +300,7 @@ export default function BankTransferSection({
                 {/* Name & Phone in 2 Columns */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-bold text-neutral-300 block mb-2">
+                    <label className="text-xs font-bold text-gray-700 block mb-2">
                       {b.receiptUpload.nameLabel}
                     </label>
                     <input
@@ -309,12 +309,12 @@ export default function BankTransferSection({
                       value={studentName}
                       onChange={(e) => setStudentName(e.target.value)}
                       placeholder={b.receiptUpload.namePlaceholder}
-                      className="w-full bg-[#0D0204] border border-white/15 focus:border-[#FF0A2B] rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-500 focus:outline-none transition-colors"
+                      className="w-full bg-white border border-gray-200 focus:border-[#FF0A2B] rounded-xl px-4 py-3 text-sm text-[#0D0204] placeholder-gray-400 focus:outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-neutral-300 block mb-2">
+                    <label className="text-xs font-bold text-gray-700 block mb-2">
                       {b.receiptUpload.phoneLabel}
                     </label>
                     <input
@@ -323,14 +323,14 @@ export default function BankTransferSection({
                       value={studentPhone}
                       onChange={(e) => setStudentPhone(e.target.value)}
                       placeholder={b.receiptUpload.phonePlaceholder}
-                      className="w-full bg-[#0D0204] border border-white/15 focus:border-[#FF0A2B] rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-500 focus:outline-none transition-colors"
+                      className="w-full bg-white border border-gray-200 focus:border-[#FF0A2B] rounded-xl px-4 py-3 text-sm text-[#0D0204] placeholder-gray-400 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 {/* Drag and Drop File Upload Area */}
                 <div>
-                  <label className="text-xs font-bold text-neutral-300 block mb-2">
+                  <label className="text-xs font-bold text-gray-700 block mb-2">
                     {b.receiptUpload.subtitle}
                   </label>
                   <div
@@ -339,8 +339,8 @@ export default function BankTransferSection({
                     onClick={() => fileInputRef.current?.click()}
                     className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-2 ${
                       receiptFile
-                        ? "border-green-500 bg-green-500/5"
-                        : "border-white/20 hover:border-[#FF0A2B] bg-[#0D0204]/70 hover:bg-[#0D0204]"
+                        ? "border-green-500 bg-green-50"
+                        : "border-gray-300 hover:border-[#FF0A2B] bg-gray-50/70 hover:bg-gray-50"
                     }`}
                   >
                     <input
@@ -353,12 +353,12 @@ export default function BankTransferSection({
 
                     {receiptFile ? (
                       <div className="flex flex-col items-center gap-2">
-                        <CheckCircle2 className="w-10 h-10 text-green-400" />
-                        <span className="text-sm font-bold text-green-300">
+                        <CheckCircle2 className="w-10 h-10 text-green-600" />
+                        <span className="text-sm font-bold text-green-800">
                           {receiptFile.name} ({(receiptFile.size / 1024).toFixed(1)} KB)
                         </span>
                         {receiptPreview && (
-                          <div className="mt-2 w-32 h-20 rounded-lg overflow-hidden border border-white/20 relative">
+                          <div className="mt-2 w-32 h-20 rounded-lg overflow-hidden border border-gray-200 relative">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={receiptPreview}
@@ -367,17 +367,17 @@ export default function BankTransferSection({
                             />
                           </div>
                         )}
-                        <span className="text-xs text-neutral-400 mt-1">
+                        <span className="text-xs text-gray-500 mt-1">
                           {lang === "ar" ? "انقر لتغيير الصورة" : "Click to change file"}
                         </span>
                       </div>
                     ) : (
                       <>
                         <UploadCloud className="w-10 h-10 text-[#FF0A2B] animate-bounce" />
-                        <span className="text-sm font-bold text-neutral-200">
+                        <span className="text-sm font-bold text-[#0D0204]">
                           {b.receiptUpload.dropzoneText}
                         </span>
-                        <span className="text-xs text-neutral-500 font-mono">
+                        <span className="text-xs text-gray-500 font-mono">
                           {b.receiptUpload.dropzoneHint}
                         </span>
                       </>
@@ -386,7 +386,7 @@ export default function BankTransferSection({
                 </div>
 
                 {/* Notice text */}
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-gray-500 leading-relaxed">
                   {b.receiptUpload.note}
                 </p>
 
@@ -418,44 +418,44 @@ export default function BankTransferSection({
       {/* ══════════════ Success Confirmation Modal ══════════════ */}
       <AnimatePresence>
         {isSuccessModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-[#180409] border border-[#FF0A2B]/60 rounded-3xl p-8 max-w-lg w-full text-center relative shadow-2xl"
+              className="bg-white border border-[#FF0A2B]/40 rounded-3xl p-8 max-w-lg w-full text-center relative shadow-2xl text-[#0D0204]"
             >
               <button
                 type="button"
                 onClick={() => setIsSuccessModalOpen(false)}
-                className="absolute top-5 right-5 p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10"
+                className="absolute top-5 right-5 p-2 rounded-lg text-gray-400 hover:text-[#0D0204] hover:bg-gray-100 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="w-16 h-16 rounded-2xl bg-green-500/10 text-green-400 flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+              <div className="w-16 h-16 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center mx-auto mb-4 border border-green-200">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
-              <h3 className="text-2xl font-black text-white mb-2">
+              <h3 className="text-2xl font-black text-[#0D0204] mb-2">
                 {b.receiptUpload.successTitle}
               </h3>
 
-              <p className="text-sm text-neutral-300 leading-relaxed mb-6">
+              <p className="text-sm text-gray-600 leading-relaxed mb-6">
                 {b.receiptUpload.successDesc}
               </p>
 
-              <div className="p-4 rounded-2xl bg-black/40 border border-white/10 text-start text-xs space-y-1.5 mb-6">
+              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 text-start text-xs space-y-1.5 mb-6">
                 <div>
-                  <span className="text-neutral-400">{lang === "ar" ? "الطالب:" : "Student:"}</span>{" "}
-                  <strong className="text-white">{studentName}</strong>
+                  <span className="text-gray-500">{lang === "ar" ? "الطالب:" : "Student:"}</span>{" "}
+                  <strong className="text-[#0D0204]">{studentName}</strong>
                 </div>
                 <div>
-                  <span className="text-neutral-400">{lang === "ar" ? "الهاتف:" : "Phone:"}</span>{" "}
-                  <strong className="text-white font-mono">{studentPhone}</strong>
+                  <span className="text-gray-500">{lang === "ar" ? "الهاتف:" : "Phone:"}</span>{" "}
+                  <strong className="text-[#0D0204] font-mono">{studentPhone}</strong>
                 </div>
                 <div>
-                  <span className="text-neutral-400">{lang === "ar" ? "الكورس:" : "Track:"}</span>{" "}
+                  <span className="text-gray-500">{lang === "ar" ? "الكورس:" : "Track:"}</span>{" "}
                   <strong className="text-[#FF0A2B]">
                     {selectedCourseObj ? selectedCourseObj.title : selectedCourse}
                   </strong>

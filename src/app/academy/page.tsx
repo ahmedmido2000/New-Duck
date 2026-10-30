@@ -207,7 +207,7 @@ export default function AcademyPage() {
         <BankTransferSection defaultCourseId={selectedCourseForBooking} />
 
         {/* ═══════════════ Academy Value Pillars ═══════════════ */}
-        <section className="w-full py-16 sm:py-20 bg-[#FAFAFA] border-t border-gray-100">
+        <section className="w-full py-16 sm:py-20 border-t border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {t.academy.features.map((feat, idx) => {

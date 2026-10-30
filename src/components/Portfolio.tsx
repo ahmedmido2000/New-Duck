@@ -187,7 +187,6 @@ export default function Portfolio() {
             className="inline-flex items-center gap-2.5 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
           >
             <span>{p.ctaButton}</span>
-            <ArrowUpRight className="w-5 h-5 rtl:rotate-[-90deg]" />
           </MagneticButton>
         </div>
       </div>

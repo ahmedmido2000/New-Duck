@@ -74,32 +74,34 @@ html[dir="ltr"], body[dir="ltr"] {
 /* Dual Direction Infinite Marquee for Partners */
 @keyframes marqueeLeft {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes marqueeRight {
   0% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
   100% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: marqueeLeft 38s linear infinite;
+  will-change: transform;
+  animation: marqueeLeft 34s linear infinite;
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: marqueeRight 38s linear infinite;
+  will-change: transform;
+  animation: marqueeRight 34s linear infinite;
 }
 
 .animate-marquee-left:hover,

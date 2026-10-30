@@ -124,18 +124,20 @@ export default function Contact() {
 
               {/* Phone with Click-to-Copy */}
               <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-                  <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
-                    {t.contact.phoneLabel}
-                  </span>
-                  <a
-                    href="tel:+201064544080"
-                    className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
-                    style={{ direction: "ltr" }}
-                  >
-                    +20 10 6454 4080
-                  </a>
+                <div className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
+                  <div className="flex flex-col">
+                    <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
+                      {t.contact.phoneLabel}
+                    </span>
+                    <a
+                      href="tel:+201064544080"
+                      className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base whitespace-nowrap"
+                      style={{ direction: "ltr" }}
+                    >
+                      +20 10 6454 4080
+                    </a>
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -232,18 +234,20 @@ export default function Contact() {
 
               {/* Phone with Click-to-Copy */}
               <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-                  <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
-                    {t.contact.phoneLabel}
-                  </span>
-                  <a
-                    href="tel:+966579398098"
-                    className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
-                    style={{ direction: "ltr" }}
-                  >
-                    +966 57 939 8098
-                  </a>
+                <div className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
+                  <div className="flex flex-col">
+                    <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
+                      {t.contact.phoneLabel}
+                    </span>
+                    <a
+                      href="tel:+966579398098"
+                      className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base whitespace-nowrap"
+                      style={{ direction: "ltr" }}
+                    >
+                      +966 57 939 8098
+                    </a>
+                  </div>
                 </div>
                 <button
                   type="button"

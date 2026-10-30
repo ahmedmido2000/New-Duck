@@ -14,6 +14,7 @@ export interface Translations {
     subtitle: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    ctaAcademy: string;
     badge1Num: string;
     badge1Label: string;
     badge2Num: string;
@@ -315,6 +316,7 @@ export const translations: Record<Language, Translations> = {
       subtitle: "نحلل سلوك جمهورك، نصمم هويتك، وندير حملاتك الذكية لتحقيق أعلى عائد استثماري ونمو متواصل لمبيعاتك.",
       ctaPrimary: "خُد خطوتك الأولى معانا",
       ctaSecondary: "شاهد ما صنعناه",
+      ctaAcademy: "اشترك في الكورسات",
       badge1Num: "+380%",
       badge1Label: "متوسط نمو مبيعات عملائنا",
       badge2Num: "100% مخصص",
@@ -936,6 +938,7 @@ export const translations: Record<Language, Translations> = {
       subtitle: "We analyze audience intent, sculpt your identity, and engineer high-performance campaigns to maximize your ROI and fuel sustainable business growth.",
       ctaPrimary: "Take Your First Step",
       ctaSecondary: "Explore Our Work",
+      ctaAcademy: "Join Our Courses",
       badge1Num: "+380%",
       badge1Label: "Average Client Revenue Growth",
       badge2Num: "100% Bespoke",

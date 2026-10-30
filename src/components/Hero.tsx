@@ -319,6 +319,19 @@ export default function Hero() {
           >
             {t.hero.ctaSecondary}
           </motion.a>
+
+          <motion.a
+            href="/academy"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-lg sm:text-xl text-white bg-white/10 border-2 border-white/30 hover:bg-white/20 hover:border-white/60 transition-all duration-300 text-center"
+          >
+            <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+            {t.hero.ctaAcademy}
+          </motion.a>
         </motion.div>
 
         {/* Trust Badges */}

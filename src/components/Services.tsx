@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Sparkles, X, MessageCircle } from "lucide-react";
 import MagneticButton from "./MagneticButton";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceItem {
@@ -36,8 +34,8 @@ const services: ServiceItem[] = [
       "ربط بوابات الدفع الإلكتروني وشركات الشحن",
       "تحسين سرعة التصفح وتجربة الشراء السريعة",
     ],
-    gradient: "linear-gradient(145deg, #FF0A2B 0%, #C70820 55%, #7D0010 100%)",
-    borderColor: "rgba(255, 255, 255, 0.4)",
+    gradient: "linear-gradient(145deg, #FF0A2B 0%, #D60520 60%, #940010 100%)",
+    borderColor: "rgba(255, 255, 255, 0.35)",
     pillBg: "#ffffff",
     pillColor: "#FF0A2B",
     titleColor: "#ffffff",
@@ -57,15 +55,15 @@ const services: ServiceItem[] = [
       "تصاميم نماذج أولية تفاعلية على Figma",
       "مراعاة أعلى معايير سهولة الاستخدام والوصول",
     ],
-    gradient: "linear-gradient(145deg, #1C0307 0%, #100204 55%, #080102 100%)",
+    gradient: "linear-gradient(145deg, #180306 0%, #0D0204 60%, #050001 100%)",
     borderColor: "rgba(255, 10, 43, 0.55)",
     pillBg: "#FF0A2B",
     pillColor: "#ffffff",
     titleColor: "#ffffff",
-    descColor: "rgba(255, 255, 255, 0.88)",
-    btnBg: "#ffffff",
-    btnColor: "#0D0204",
-    btnHoverBg: "#f0f0f0",
+    descColor: "rgba(255, 255, 255, 0.9)",
+    btnBg: "#FF0A2B",
+    btnColor: "#ffffff",
+    btnHoverBg: "#E00020",
   },
   {
     id: 3,
@@ -78,12 +76,12 @@ const services: ServiceItem[] = [
       "إشعارات فورية لزيادة تفاعل وإعادة شراء العملاء",
       "دعم فني وصيانة دورية وأمان عالي",
     ],
-    gradient: "linear-gradient(145deg, #FFFFFF 0%, #F8F3F5 100%)",
+    gradient: "linear-gradient(145deg, #FFFFFF 0%, #FAF5F6 100%)",
     borderColor: "rgba(255, 10, 43, 0.35)",
-    pillBg: "#FF0A2B",
+    pillBg: "#0D0204",
     pillColor: "#ffffff",
     titleColor: "#0D0204",
-    descColor: "#2A040A",
+    descColor: "#333333",
     btnBg: "#0D0204",
     btnColor: "#ffffff",
     btnHoverBg: "#FF0A2B",
@@ -99,10 +97,10 @@ const services: ServiceItem[] = [
       "إعادة استهداف ذكية لزوار المتجر",
       "تقارير دورية وشفافة توضح العائد والمبيعات",
     ],
-    gradient: "linear-gradient(145deg, #E60021 0%, #B80018 55%, #70000D 100%)",
+    gradient: "linear-gradient(145deg, #FF0A2B 0%, #D60520 60%, #940010 100%)",
     borderColor: "rgba(255, 255, 255, 0.35)",
     pillBg: "#ffffff",
-    pillColor: "#E60021",
+    pillColor: "#FF0A2B",
     titleColor: "#ffffff",
     descColor: "rgba(255, 255, 255, 0.95)",
     btnBg: "#ffffff",
@@ -120,15 +118,15 @@ const services: ServiceItem[] = [
       "بناء روابط خلفية قوية وموثوقة (Backlinks)",
       "تحسين محركات البحث المحلية (Local SEO)",
     ],
-    gradient: "linear-gradient(145deg, #1C0307 0%, #100205 55%, #080102 100%)",
-    borderColor: "rgba(255, 10, 43, 0.5)",
+    gradient: "linear-gradient(145deg, #180306 0%, #0D0204 60%, #050001 100%)",
+    borderColor: "rgba(255, 10, 43, 0.55)",
     pillBg: "#FF0A2B",
     pillColor: "#ffffff",
     titleColor: "#ffffff",
-    descColor: "rgba(255, 255, 255, 0.88)",
-    btnBg: "#ffffff",
-    btnColor: "#0D0204",
-    btnHoverBg: "#f0f0f0",
+    descColor: "rgba(255, 255, 255, 0.9)",
+    btnBg: "#FF0A2B",
+    btnColor: "#ffffff",
+    btnHoverBg: "#E00020",
   },
   {
     id: 6,
@@ -141,259 +139,184 @@ const services: ServiceItem[] = [
       "تصاميم السوشيال ميديا والمطبوعات الإعلانية",
       "نبرة الصوت والرسائل التسويقية للعلامة",
     ],
-    gradient: "linear-gradient(145deg, #FFFFFF 0%, #F8F3F5 100%)",
+    gradient: "linear-gradient(145deg, #FFFFFF 0%, #FAF5F6 100%)",
     borderColor: "rgba(255, 10, 43, 0.35)",
     pillBg: "#0D0204",
     pillColor: "#ffffff",
     titleColor: "#0D0204",
-    descColor: "#2A040A",
-    btnBg: "#FF0A2B",
+    descColor: "#333333",
+    btnBg: "#0D0204",
     btnColor: "#ffffff",
-    btnHoverBg: "#E00020",
+    btnHoverBg: "#FF0A2B",
   },
 ];
 
 export default function Services() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardFrameRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeModalId, setActiveModalId] = useState<number | null>(null);
-  const { t, isRTL } = useLanguage();
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = sectionRef.current;
-    const cardFrame = cardFrameRef.current;
-    if (!section || !cardFrame) return;
-
-    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (cards.length < 2) return;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion) {
-        cards.forEach((card, i) => {
-          gsap.set(card, { y: i * 14 });
-        });
-        return;
-      }
-
-      const isMobile = window.innerWidth < 640;
-      const cardHeight = isMobile ? 310 : 335;
-      const containerHeight = isMobile ? 435 : 475;
-      const stackGap = isMobile ? 12 : 14;
-
-      // Calculate tight peek position for the incoming card so cards are close to each other
-      // while ensuring the docked card's button is 100% visible
-      const getPeekY = (cardIndex: number) => {
-        const prevCardBottom = (cardIndex - 1) * stackGap + cardHeight;
-        return Math.min(containerHeight - 55, prevCardBottom + 12);
-      };
-
-      // ── Step 1: Initial Positions ──
-      // Card 0 rests at y: 0. Its button and description are 100% visible!
-      gsap.set(cards[0], { y: 0 });
-
-      // Card 1 peeks immediately below Card 0 (close to each other, exactly like Image 1!)
-      gsap.set(cards[1], { y: getPeekY(1) });
-
-      // Cards 2..5 wait below the container
-      for (let i = 2; i < cards.length; i++) {
-        gsap.set(cards[i], { y: containerHeight + 80 });
-      }
-
-      // ── Step 2: Responsive, Fast, Snappy Scrub Timeline ──
-      const scrollDistancePerCard = Math.min(window.innerHeight * 0.42, 380);
-      const totalScroll = scrollDistancePerCard * (cards.length - 1);
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: `+=${totalScroll}`,
-          pin: true,
-          pinSpacing: true,
-          scrub: 0.35,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      for (let i = 1; i < cards.length; i++) {
-        const targetY = i * stackGap;
-
-        // Dwell phase: Card (i - 1) stays visible with button clearly visible
-        tl.to({}, { duration: 0.2 });
-
-        // Card i slides up from its peek position into its docked stack slot
-        tl.to(cards[i], {
-          y: targetY,
-          ease: "power1.inOut",
-          duration: 1.0,
-        });
-
-        // Simultaneously, if there is a next card (i + 1), bring it smoothly into its peek position!
-        if (i + 1 < cards.length) {
-          tl.to(
-            cards[i + 1],
-            {
-              y: getPeekY(i + 1),
-              ease: "power1.inOut",
-              duration: 1.0,
-            },
-            "<" // Run in parallel so cards are always close to each other
-          );
-        }
-      }
-
-      // Small unpin cushion
-      tl.to({}, { duration: 0.25 });
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+  const { t, isRTL, dir } = useLanguage();
 
   return (
     <section
-      ref={sectionRef}
       id="services"
-      className="bg-white relative overflow-hidden h-screen flex items-center justify-center border-t border-gray-100"
+      dir={dir}
+      className="bg-white relative overflow-hidden py-20 sm:py-28 border-t border-gray-100"
     >
       {/* Background Ambience */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#FF0A2B]/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#FF0A2B]/5 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-10 right-0 w-[500px] h-[500px] bg-[#FF0A2B]/4 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 left-0 w-[450px] h-[450px] bg-[#FF0A2B]/4 rounded-full blur-[130px] pointer-events-none" />
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-12 sm:gap-16">
+        {/* ═══════════════ Section Header ═══════════════ */}
+        <div
+          className={`flex flex-col gap-4 sm:gap-5 ${
+            isRTL ? "text-right items-start" : "text-left items-start"
+          }`}
+        >
+          {/* Kicker */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-sm sm:text-base"
+          >
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B]" />
+            <span>{t.services.kicker}</span>
+            <span className="w-6 h-[2px] bg-[#FF0A2B]" />
+          </motion.div>
 
-          {/* ═══════════════ RIGHT COLUMN: Stationary Section Info & CTA ═══════════════ */}
-          <div className={`w-full lg:w-[46%] flex flex-col items-start gap-4 sm:gap-6 order-1 shrink-0 ${
-            isRTL ? "text-right" : "text-left"
-          }`}>
-            {/* Kicker */}
-            <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-sm sm:text-base">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B]" />
-              <span>{t.services.kicker}</span>
-              <span className="w-6 h-[2px] bg-[#FF0A2B]" />
-            </div>
+          {/* Main Section Heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-2xl sm:text-4xl lg:text-[42px] font-black text-[#0D0204] leading-[1.3] tracking-tight max-w-4xl"
+          >
+            {t.services.heading}
+          </motion.h2>
 
-            {/* Main Section Heading */}
-            <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-black text-[#0D0204] leading-[1.3] tracking-tight">
-              {t.services.heading}
-            </h2>
-
-            {/* Subtitle / Description */}
-            <p className="text-sm sm:text-base lg:text-lg text-[#444444] leading-relaxed font-normal max-w-xl">
+          {/* Subtitle & CTA Row */}
+          <div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-6 pt-1">
+            <motion.p
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-sm sm:text-base lg:text-lg text-[#444444] leading-relaxed font-normal max-w-2xl"
+            >
               {t.services.subtitle}
-            </p>
+            </motion.p>
 
-            {/* CTA Button without Arrow */}
-            <div className="pt-1">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="shrink-0"
+            >
               <MagneticButton
                 href="https://wa.me/201064544080"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
+                className="inline-flex items-center justify-center bg-[#FF0A2B] hover:bg-[#E00020] text-white px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
               >
                 <span>{t.services.cta}</span>
               </MagneticButton>
-            </div>
+            </motion.div>
           </div>
+        </div>
 
-          {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame ═══════════════ */}
-          <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2">
-            {/* Card Frame: Clips cards outside its bounds, keeping cards close and cohesive */}
-            <div
-              ref={cardFrameRef}
-              className="relative w-full max-w-[540px] h-[435px] sm:h-[475px] overflow-hidden rounded-[28px] sm:rounded-[34px]"
-            >
-              {services.map((svc, index) => {
-                const zIndex = (index + 1) * 10;
-                const localized = t.services.items.find((item) => item.id === svc.id) || svc;
+        {/* ═══════════════ Responsive Cards Grid: 2 Rows of 3 Cards on Desktop ═══════════════ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
+          {services.map((svc, index) => {
+            const localized =
+              t.services.items.find((item) => item.id === svc.id) || svc;
 
-                return (
-                  <div
-                    key={svc.id}
-                    ref={(el) => {
-                      cardRefs.current[index] = el;
-                    }}
-                    className="absolute inset-x-0 top-0 will-change-transform"
-                    style={{ zIndex }}
-                  >
-                    {/* The Visual Card */}
+            return (
+              <motion.div
+                key={svc.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.55, delay: index * 0.08 }}
+                whileHover={{ y: -6 }}
+                className={`group relative rounded-[26px] p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-all duration-300 min-h-[340px] sm:min-h-[360px] ${
+                  isRTL ? "text-right" : "text-left"
+                }`}
+                style={{
+                  background: svc.gradient,
+                  border: `1.5px solid ${svc.borderColor}`,
+                  boxShadow:
+                    "0 10px 30px -10px rgba(0, 0, 0, 0.1), 0 20px 40px -15px rgba(0, 0, 0, 0.08)",
+                }}
+              >
+                {/* Card Top: Clean Pill Badge + Number Indicator */}
+                <div className="relative z-10 flex flex-col items-start gap-3">
+                  <div className="w-full flex items-center justify-between">
+                    {/* Clean Pill Badge without any dashes or kashidas */}
                     <div
-                      className={`group relative w-full h-[310px] sm:h-[335px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full font-black text-xs tracking-wider shadow-sm uppercase"
                       style={{
-                        background: svc.gradient,
-                        border: `1.5px solid ${svc.borderColor}`,
-                        boxShadow:
-                          "0 10px 25px rgba(0, 0, 0, 0.1), 0 20px 48px -10px rgba(0, 0, 0, 0.15)",
+                        backgroundColor: svc.pillBg,
+                        color: svc.pillColor,
                       }}
                     >
-                      {/* Head Content */}
-                      <div className="relative z-10 flex flex-col items-start gap-2 sm:gap-2.5">
-                        {/* Pill Badge */}
-                        <div
-                          className="inline-block px-4 sm:px-5 py-1 sm:py-1.5 rounded-lg font-black text-xs tracking-[3px] shadow-sm uppercase"
-                          style={{
-                            backgroundColor: svc.pillBg,
-                            color: svc.pillColor,
-                          }}
-                        >
-                          {t.services.pill}
-                        </div>
-
-                        {/* Service Title */}
-                        <h3
-                          className="text-lg sm:text-2xl font-black leading-snug mt-0.5"
-                          style={{ color: svc.titleColor }}
-                        >
-                          {localized.title}
-                        </h3>
-                      </div>
-
-                      {/* Body Content */}
-                      <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-black/10 dark:border-white/10">
-                        {/* Description */}
-                        <p
-                          className="text-xs sm:text-[13px] leading-relaxed max-w-full sm:max-w-[70%] font-medium"
-                          style={{ color: svc.descColor }}
-                        >
-                          {localized.description}
-                        </p>
-
-                        {/* Read More Button */}
-                        <button
-                          type="button"
-                          onClick={() => setActiveModalId(svc.id)}
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-xs transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
-                          style={{
-                            backgroundColor: svc.btnBg,
-                            color: svc.btnColor,
-                          }}
-                        >
-                          <span>{t.services.readMore}</span>
-                          {isRTL ? (
-                            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover/btn:-translate-x-1" />
-                          ) : (
-                            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
-                          )}
-                        </button>
-                      </div>
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: svc.pillColor }}
+                      />
+                      <span>{t.services.pill}</span>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
 
+                    {/* Service Number */}
+                    <span
+                      className="font-mono font-black text-sm opacity-60 tracking-wider"
+                      style={{ color: svc.titleColor }}
+                    >
+                      0{svc.id}
+                    </span>
+                  </div>
+
+                  {/* Service Title */}
+                  <h3
+                    className="text-xl sm:text-2xl font-black leading-snug mt-1"
+                    style={{ color: svc.titleColor }}
+                  >
+                    {localized.title}
+                  </h3>
+                </div>
+
+                {/* Card Body: Description */}
+                <p
+                  className="relative z-10 text-sm sm:text-[15px] leading-relaxed my-4 font-medium flex-1"
+                  style={{ color: svc.descColor }}
+                >
+                  {localized.description}
+                </p>
+
+                {/* Card Bottom: Read More Button */}
+                <div className="relative z-10 pt-4 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setActiveModalId(svc.id)}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 shadow-md active:scale-95 group/btn"
+                    style={{
+                      backgroundColor: svc.btnBg,
+                      color: svc.btnColor,
+                    }}
+                  >
+                    <span>{t.services.readMore}</span>
+                    {isRTL ? (
+                      <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
+                    ) : (
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                    )}
+                  </button>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
@@ -401,7 +324,8 @@ export default function Services() {
       <AnimatePresence>
         {activeModalId !== null && (() => {
           const activeSvc = services.find((s) => s.id === activeModalId);
-          const activeLocalized = t.services.items.find((item) => item.id === activeModalId);
+          const activeLocalized =
+            t.services.items.find((item) => item.id === activeModalId);
           if (!activeSvc || !activeLocalized) return null;
 
           return (
@@ -441,9 +365,14 @@ export default function Services() {
                 </p>
 
                 <div className="space-y-3 mb-8">
-                  <h4 className="font-bold text-[#0D0204] text-base">{t.services.modalIncludes}</h4>
+                  <h4 className="font-bold text-[#0D0204] text-base">
+                    {t.services.modalIncludes}
+                  </h4>
                   {activeLocalized.details.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5 text-sm sm:text-base text-[#333333]">
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2.5 text-sm sm:text-base text-[#333333]"
+                    >
                       <Check className="w-5 h-5 text-[#FF0A2B] shrink-0" />
                       <span>{item}</span>
                     </div>

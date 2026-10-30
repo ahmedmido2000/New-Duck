@@ -152,13 +152,13 @@ export default function AIEcosystem() {
               strokeWidth="3"
               className="drop-shadow-[0_0_25px_rgba(255,10,43,0.45)] cursor-pointer"
             />
-            {/* Duck Logo inside the center circle */}
+            {/* Duck Logo inside the center circle — smaller for inner padding */}
             <image
               href="/images/duck-logo.png"
-              x="484"
-              y="228"
-              width="132"
-              height="64"
+              x="496"
+              y="234"
+              width="108"
+              height="52"
               preserveAspectRatio="xMidYMid meet"
               clipPath="url(#centerCircleClip)"
               className="pointer-events-none"

@@ -86,14 +86,14 @@ export default function Footer() {
               <motion.div
                 whileHover={{ scale: 1.06, rotate: -1 }}
                 transition={{ type: "spring", stiffness: 350, damping: 12 }}
-                className="relative"
+                className="relative inline-flex items-center justify-center bg-[#0D0204] rounded-xl px-4 py-2.5 border border-[#FF0A2B]/30 shadow-[0_4px_20px_rgba(255,10,43,0.12)] hover:shadow-[0_4px_24px_rgba(255,10,43,0.28)] transition-shadow duration-300"
               >
                 <Image
                   src="/images/duck-logo.png"
                   alt="Duck Agency"
-                  width={160}
-                  height={60}
-                  className="h-12 w-auto object-contain"
+                  width={140}
+                  height={52}
+                  className="h-10 w-auto object-contain"
                 />
               </motion.div>
             </Link>

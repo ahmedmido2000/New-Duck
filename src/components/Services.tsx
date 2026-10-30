@@ -213,12 +213,12 @@ export default function Services() {
                 <TiltCard maxTilt={8} glare={false} className="rounded-[26px] h-full">
                   <div
                     onMouseMove={handleCardMouseMove}
-                    className={`spotlight-card group relative rounded-[26px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-white via-white to-red-50/20 border border-gray-200/90 hover:border-[#FF0A2B] transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_45px_-12px_rgba(255,10,43,0.15)] min-h-[350px] sm:min-h-[370px] h-full ${
+                    className={`spotlight-card group relative rounded-[26px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden bg-white border border-gray-200/90 hover:border-[#FF0A2B] transition-all duration-500 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_22px_50px_-10px_rgba(255,10,43,0.35)] min-h-[350px] sm:min-h-[370px] h-full ${
                       isRTL ? "text-right" : "text-left"
                     }`}
                   >
-                    {/* Top Subtle Radial Highlight on Hover */}
-                    <div className="absolute inset-0 pointer-events-none rounded-[26px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.08),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Brand Red Background Gradient on Hover */}
+                    <div className="absolute inset-0 pointer-events-none rounded-[26px] bg-gradient-to-br from-[#FF0A2B] via-[#E80022] to-[#B30018] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out" />
 
                     {/* Card Top: Icon & Clean Pill Badge */}
                     <div className="relative z-10 flex flex-col items-start gap-4">
@@ -227,41 +227,41 @@ export default function Services() {
                         <motion.div
                           whileHover={{ scale: 1.15, rotate: -4 }}
                           transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                          className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 group-hover:border-[#FF0A2B]/40 group-hover:bg-[#FF0A2B]/10 text-[#FF0A2B] flex items-center justify-center transition-all duration-300 shadow-sm"
+                          className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 group-hover:bg-white group-hover:border-white group-hover:shadow-md text-[#FF0A2B] flex items-center justify-center transition-all duration-500 shadow-sm"
                         >
-                          <Icon className="w-6 h-6 text-[#FF0A2B]" />
+                          <Icon className="w-6 h-6 text-[#FF0A2B] transition-transform duration-300" />
                         </motion.div>
 
                         {/* Clean Pill Badge + Number */}
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-xs font-bold text-[#0D0204] group-hover:border-[#FF0A2B]/30 group-hover:text-[#FF0A2B] transition-colors shadow-xs">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-xs font-bold text-[#0D0204] group-hover:bg-[#0D0204] group-hover:border-black/40 group-hover:text-white transition-all duration-500 shadow-xs">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#FF0A2B] animate-pulse" />
                           <span>{t.services.pill}</span>
-                          <span className="text-gray-300">·</span>
-                          <span className="font-mono text-gray-400 group-hover:text-[#FF0A2B] font-bold">
+                          <span className="text-gray-300 group-hover:text-white/40 transition-colors">·</span>
+                          <span className="font-mono text-gray-400 group-hover:text-white font-bold transition-colors">
                             0{svc.id}
                           </span>
                         </div>
                       </div>
 
                       {/* Service Title */}
-                      <h3 className="text-xl sm:text-2xl font-black text-[#0D0204] group-hover:text-[#FF0A2B] leading-snug transition-colors mt-2">
+                      <h3 className="text-xl sm:text-2xl font-black text-[#0D0204] group-hover:text-white leading-snug transition-colors duration-500 mt-2">
                         {localized.title}
                       </h3>
                     </div>
 
                     {/* Card Body: Description */}
-                    <p className="relative z-10 text-sm sm:text-[15px] text-[#555555] leading-relaxed my-4 font-medium flex-1">
+                    <p className="relative z-10 text-sm sm:text-[15px] text-[#555555] group-hover:text-white/95 leading-relaxed my-4 font-medium flex-1 transition-colors duration-500">
                       {localized.description}
                     </p>
 
                     {/* Card Bottom: Read More Button with Magnetic Spring */}
-                    <div className="relative z-10 pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div className="relative z-10 pt-4 border-t border-gray-100 group-hover:border-white/20 flex items-center justify-between transition-colors duration-500">
                       <motion.button
                         type="button"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setActiveModalId(svc.id)}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gray-100 hover:bg-[#FF0A2B] text-[#0D0204] hover:text-white transition-all duration-300 shadow-xs group/btn"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gray-100 text-[#0D0204] group-hover:bg-[#0D0204] group-hover:text-white group-hover:shadow-md transition-all duration-500 shadow-xs group/btn"
                       >
                         <span>{t.services.readMore}</span>
                         {isRTL ? (

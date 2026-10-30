@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MessageCircle, MapPin } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface RegionalGlobeProps {
   highlightedBranch?: "egypt" | "ksa" | null;
@@ -13,6 +14,7 @@ export default function RegionalGlobe({
   highlightedBranch,
   onHoverBranch,
 }: RegionalGlobeProps) {
+  const { t, isRTL, dir } = useLanguage();
   const [activePin, setActivePin] = useState<"egypt" | "ksa" | null>(null);
 
   const effectivePin = activePin || highlightedBranch;
@@ -20,12 +22,12 @@ export default function RegionalGlobe({
   const pins = [
     {
       id: "egypt" as const,
-      name: "فرع جمهورية مصر العربية",
-      city: "مدينة 6 أكتوبر - الحصري",
-      country: "مصر",
+      name: t.contact.globeEgypt.name,
+      city: t.contact.globeEgypt.city,
+      country: isRTL ? "مصر" : "Egypt",
       phone: "+20 10 6454 4080",
       tel: "+201064544080",
-      wa: "https://wa.me/201064544080?text=مرحباً%20Duck%20Agency%20مصر،%20أود%20الاستفسار%20عن%20خدماتكم",
+      wa: `https://wa.me/201064544080?text=${encodeURIComponent(isRTL ? "مرحباً Duck Agency مصر، أود الاستفسار عن خدماتكم" : "Hello Duck Agency Egypt, I would like to inquire about your services")}`,
       // Exact geographic position of Egypt on the globe (Nile / Cairo / 6th October)
       left: "37.5%",
       top: "33.5%",
@@ -43,12 +45,12 @@ export default function RegionalGlobe({
     },
     {
       id: "ksa" as const,
-      name: "فرع المملكة العربية السعودية",
-      city: "الرياض، المملكة العربية السعودية",
-      country: "السعودية",
+      name: t.contact.globeSaudi.name,
+      city: t.contact.globeSaudi.city,
+      country: isRTL ? "السعودية" : "Saudi Arabia",
       phone: "+966 57 939 8098",
       tel: "+966579398098",
-      wa: "https://wa.me/966579398098?text=مرحباً%20Duck%20Agency%20السعودية،%20أود%20الاستفسار%20عن%20خدماتكم",
+      wa: `https://wa.me/966579398098?text=${encodeURIComponent(isRTL ? "مرحباً Duck Agency السعودية، أود الاستفسار عن خدماتكم" : "Hello Duck Agency Saudi Arabia, I would like to inquire about your services")}`,
       // Exact geographic position of Saudi Arabia on the globe (Riyadh / Najd)
       left: "49.5%",
       top: "37.5%",
@@ -71,7 +73,7 @@ export default function RegionalGlobe({
   return (
     <div
       className="relative w-full max-w-[460px] sm:max-w-[500px] aspect-square flex items-center justify-center select-none"
-      dir="rtl"
+      dir={dir}
     >
       {/* Ambient Red Glow Halo behind the Globe */}
       <div className="absolute w-[85%] h-[85%] rounded-full bg-[radial-gradient(circle,rgba(255,10,43,0.25)_0%,rgba(122,11,26,0.12)_45%,transparent_70%)] blur-2xl pointer-events-none animate-pulse" />
@@ -175,7 +177,9 @@ export default function RegionalGlobe({
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.9 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute -top-28 z-40 min-w-[210px] sm:min-w-[230px] p-3.5 rounded-2xl bg-white/95 border border-[#FF0A2B]/40 shadow-xl backdrop-blur-xl text-right"
+                      className={`absolute -top-28 z-40 min-w-[210px] sm:min-w-[230px] p-3.5 rounded-2xl bg-white/95 border border-[#FF0A2B]/40 shadow-xl backdrop-blur-xl ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
                     >
                       <div className="font-black text-xs sm:text-sm text-[#0D0204] leading-snug">
                         {pin.name}
@@ -192,7 +196,7 @@ export default function RegionalGlobe({
                           className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-1.5 px-2 rounded-lg font-bold text-[11px] transition-colors shadow-glow-red"
                         >
                           <Phone className="w-3 h-3" />
-                          <span>اتصال</span>
+                          <span>{t.contact.callAction}</span>
                         </a>
                         <a
                           href={pin.wa}
@@ -201,7 +205,7 @@ export default function RegionalGlobe({
                           className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#25D366] hover:bg-[#20BA5A] text-white py-1.5 px-2 rounded-lg font-bold text-[11px] transition-colors shadow-md"
                         >
                           <MessageCircle className="w-3 h-3" />
-                          <span>واتساب</span>
+                          <span>{t.contact.waAction}</span>
                         </a>
                       </div>
                     </motion.div>

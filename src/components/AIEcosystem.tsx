@@ -2,16 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Cpu } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AIEcosystem() {
-  const nodes = [
-    { title: "السوشيال", desc: "أتمتة النشر والتفاعل" },
-    { title: "الإعلانات", desc: "تحسين الميزانيات الذكي" },
-    { title: "الفيديو", desc: "توليد نصوص ومونتاج سريع" },
-    { title: "الهوية", desc: "توليد تصاميم وأفكار بصرية" },
-    { title: "المواقع", desc: "تخصيص تجربة كل زائر" },
-    { title: "المحتوى", desc: "تحليل نبرة الصوت والمشاعر" },
-  ];
+  const { t } = useLanguage();
+  const nodes = t.aiEcosystem.nodes;
 
   return (
     <section className="py-20 sm:py-28 bg-white relative overflow-hidden border-t border-gray-100">
@@ -26,15 +21,15 @@ export default function AIEcosystem() {
         >
           <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg">
             <Cpu className="w-5 h-5" />
-            <span>من يتبنّاه اليوم، يقود السوق غدًا</span>
+            <span>{t.aiEcosystem.kicker}</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight">
-            مستقبل التسويق يبدأ بالذكاء الاصطناعي
+            {t.aiEcosystem.heading}
           </h2>
 
           <p className="text-base sm:text-xl text-[#444444] leading-relaxed max-w-2xl font-normal">
-            الذكاء الاصطناعي لم يعد اختيارًا بل ضرورة: تحليل سلوك العملاء، تخصيص المحتوى، وتحسين الحملات لزيادة المبيعات بأقل تكلفة ممكنة.
+            {t.aiEcosystem.subtitle}
           </p>
         </motion.div>
 
@@ -163,12 +158,12 @@ export default function AIEcosystem() {
               textAnchor="middle"
               fontFamily="var(--font-cairo), Cairo, sans-serif"
             >
-              <text x="260" y="156">السوشيال</text>
-              <text x="840" y="156">الإعلانات</text>
-              <text x="150" y="316">الفيديو</text>
-              <text x="950" y="316">الهوية</text>
-              <text x="260" y="476">المواقع</text>
-              <text x="840" y="476">المحتوى</text>
+              <text x="260" y="156">{nodes[0]?.title}</text>
+              <text x="840" y="156">{nodes[1]?.title}</text>
+              <text x="150" y="316">{nodes[2]?.title}</text>
+              <text x="950" y="316">{nodes[3]?.title}</text>
+              <text x="260" y="476">{nodes[4]?.title}</text>
+              <text x="840" y="476">{nodes[5]?.title}</text>
             </g>
 
             {/* Service Icons inside boxes */}

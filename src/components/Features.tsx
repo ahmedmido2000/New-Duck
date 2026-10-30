@@ -2,28 +2,15 @@
 
 import { motion } from "framer-motion";
 import { Lightbulb, CheckCheck, Headphones } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Features() {
-  const features = [
-    {
-      num: "01",
-      title: "حلول مبتكرة",
-      desc: "خدمات رقمية حديثة تناسب احتياجات السوق وتواكب التطور السريع لأدوات التسويق.",
-      icon: Lightbulb,
-    },
-    {
-      num: "02",
-      title: "جودة عالية",
-      desc: "تنفيذ بأعلى معايير الجودة لتجربة مستخدم ممتعة ونتائج إعلانية متفوقة.",
-      icon: CheckCheck,
-    },
-    {
-      num: "03",
-      title: "دعم مستمر وشراكة حقيقية",
-      desc: "متابعة وتقارير وتحسين دائم لضمان استمرار نجاح مشروعك ونموه على المدى الطويل.",
-      icon: Headphones,
-    },
-  ];
+  const { t, isRTL } = useLanguage();
+  const icons = [Lightbulb, CheckCheck, Headphones];
+  const features = t.features.items.map((item, idx) => ({
+    ...item,
+    icon: icons[idx] || Lightbulb,
+  }));
 
   return (
     <section className="py-20 sm:py-28 bg-white overflow-hidden border-t border-gray-100">
@@ -38,18 +25,18 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="p-6 sm:p-10 border-b border-gray-200"
+              className={`p-6 sm:p-10 border-b border-gray-200 ${isRTL ? "text-right" : "text-left"}`}
             >
               <h2 className="text-3xl sm:text-5xl font-black text-[#FF0A2B] mb-3">
-                مميزات تصنع الفرق
+                {t.features.heading}
               </h2>
               <p className="text-base sm:text-lg text-[#444444] leading-relaxed max-w-xl">
-                نحوّل أفكارك إلى مشاريع ناجحة بخدمات احترافية تجمع بين الإبداع الفني والتقنية المتطورة والاستراتيجية المدروسة.
+                {t.features.subtitle}
               </p>
             </motion.div>
 
             {/* Features 01 & 02 */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x sm:divide-x-reverse divide-gray-200 border-b border-gray-200">
+            <div className={`grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x ${isRTL ? "sm:divide-x-reverse text-right" : "text-left"} divide-gray-200 border-b border-gray-200`}>
               {features.slice(0, 2).map((item, idx) => {
                 const Icon = item.icon;
                 return (
@@ -84,24 +71,24 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:bg-red-50/40 transition-colors group cursor-default"
+              className={`p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 hover:bg-red-50/40 transition-colors group cursor-default ${isRTL ? "text-right" : "text-left"}`}
             >
               <div className="w-12 h-12 rounded-xl bg-[#FF0A2B]/10 border border-[#FF0A2B]/30 flex items-center justify-center text-[#FF0A2B] font-black text-xl shadow-sm shrink-0 group-hover:scale-110 transition-transform">
-                03
+                {features[2]?.num || "03"}
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-black text-[#0D0204] group-hover:text-[#FF0A2B] transition-colors mb-1">
-                  دعم مستمر وشراكة حقيقية
+                  {features[2]?.title}
                 </h3>
                 <p className="text-sm sm:text-base text-[#555555] leading-relaxed">
-                  متابعة ودعم دائم لضمان نجاح مشروعك، مع تقارير أداء دورية واجتماعات استراتيجية منتظمة.
+                  {features[2]?.desc}
                 </p>
               </div>
             </motion.div>
           </div>
 
           {/* Cybernetic Duck AI Video Side */}
-          <div className="lg:w-[460px] xl:w-[500px] min-h-[380px] sm:min-h-[460px] bg-black border-t lg:border-t-0 lg:border-r border-gray-200 relative overflow-hidden flex items-center justify-center">
+          <div className={`lg:w-[460px] xl:w-[500px] min-h-[380px] sm:min-h-[460px] bg-black border-t lg:border-t-0 ${isRTL ? "lg:border-r" : "lg:border-l"} border-gray-200 relative overflow-hidden flex items-center justify-center`}>
             <video
               src="/videos/duck-contact.mp4"
               autoPlay

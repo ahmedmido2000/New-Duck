@@ -18,8 +18,15 @@ body {
   color: #ffffff;
   font-family: var(--font-cairo), 'Cairo', Tahoma, sans-serif;
   overflow-x: hidden;
-  direction: rtl;
   overscroll-behavior: none;
+}
+
+html[dir="rtl"], body[dir="rtl"] {
+  direction: rtl;
+}
+
+html[dir="ltr"], body[dir="ltr"] {
+  direction: ltr;
 }
 
 /* Custom Red Scrollbar */

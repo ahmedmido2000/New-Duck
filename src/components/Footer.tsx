@@ -4,9 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { useSmoothScroll } from "./SmoothScrollProvider";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
   const { scrollTo } = useSmoothScroll();
+  const { t, isRTL, dir } = useLanguage();
 
   const handleScrollToTop = () => {
     scrollTo(0, { duration: 1.4 });
@@ -66,81 +68,78 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-white border-t border-gray-200 py-16 text-neutral-800 overflow-hidden" dir="rtl">
+    <footer
+      dir={dir}
+      className="bg-white border-t border-gray-200 py-16 text-neutral-800 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-14 text-right">
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-14 ${
+            isRTL ? "text-right" : "text-left"
+          }`}
+        >
           {/* Brand Info & Slogan */}
           <div className="flex flex-col gap-3">
             <Link
               href="#top"
-              className="group text-5xl sm:text-6xl font-black text-[#0D0204] tracking-tight"
-              style={{ direction: "ltr", textAlign: "right" }}
+              className={`group text-5xl sm:text-6xl font-black text-[#0D0204] tracking-tight ${
+                isRTL ? "text-right" : "text-left"
+              }`}
             >
               <span className="text-[#FF0A2B] inline-block group-hover:scale-105 transition-transform">
                 d
               </span>
               uck
             </Link>
-            
+
             {/* Slogan from PDF: للرؤية أثر */}
-            <div className="flex items-center gap-2">
+            <div className={`flex items-center gap-2 ${isRTL ? "flex-row" : "flex-row"}`}>
               <span className="w-4 h-[2px] bg-[#FF0A2B]" />
               <span className="text-base font-black text-[#0D0204] tracking-wide">
-                للرؤية <span className="text-[#FF0A2B]">أثر</span>
+                {t.footer.sloganPart1}{" "}
+                <span className="text-[#FF0A2B]">{t.footer.sloganPart2}</span>
               </span>
             </div>
 
-            <div
-              className="text-xs tracking-[3px] text-[#FF0A2B] font-extrabold"
-              style={{ direction: "ltr", textAlign: "right" }}
-            >
-              DIGITAL MEDIA AGENCY
+            <div className="text-xs tracking-[3px] text-[#FF0A2B] font-extrabold uppercase">
+              {t.footer.tagline}
             </div>
             <p className="text-sm text-[#555555] leading-relaxed mt-1">
-              شركة دعاية وتسويق تقدم حلولاً متكاملة للشركات والمشاهير والأفراد، تبدأ من بناء الهوية وإدارة السوشيال ميديا وحتى المونتاج والتصميم والكورسات.
+              {t.footer.desc}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h4 className="text-xl sm:text-2xl font-black text-[#0D0204] mb-4">
-              روابط سريعة
+              {t.footer.quickLinksTitle}
             </h4>
             <ul className="space-y-2.5 text-base font-semibold">
-              {["الرئيسية", "من نحن", "الخدمات", "الأسئلة الشائعة", "تواصل معنا"].map((item, idx) => {
-                const hrefs = ["#top", "#about", "#services", "#faq", "#contact"];
-                return (
-                  <li key={idx}>
-                    <a
-                      href={hrefs[idx]}
-                      className="text-[#444444] hover:text-[#FF0A2B] transition-colors hover:translate-x-1 inline-block"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                );
-              })}
+              {t.nav.links.map((link) => (
+                <li key={link.id}>
+                  <a
+                    href={link.href}
+                    className="text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Our Services (خدماتنا) */}
           <div>
             <h4 className="text-xl sm:text-2xl font-black text-[#0D0204] mb-4">
-              خدماتنا
+              {t.footer.servicesTitle}
             </h4>
             <ul className="space-y-2.5 text-base font-semibold">
-              {[
-                "إنشاء المتاجر الإلكترونية",
-                "إدارة الحملات الإعلانية",
-                "تحسين محركات البحث (SEO)",
-                "تصميم وتطوير المواقع والتطبيقات",
-                "الهوية البصرية والموشن جرافيك",
-              ].map((svc, idx) => (
+              {t.footer.servicesList.map((svc, idx) => (
                 <li key={idx}>
                   <a
                     href="#services"
-                    className="text-[#444444] hover:text-[#FF0A2B] transition-colors hover:translate-x-1 inline-block"
+                    className="text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block"
                   >
                     {svc}
                   </a>
@@ -152,10 +151,10 @@ export default function Footer() {
           {/* Social Links & Back to top */}
           <div>
             <h4 className="text-xl sm:text-2xl font-black text-[#0D0204] mb-4">
-              وسائل التواصل
+              {t.footer.socialTitle}
             </h4>
             <p className="text-sm text-[#555555] mb-4">
-              تابعنا على منصات التواصل الاجتماعي لمشاهدة آخر أعمالنا الإبداعية.
+              {t.footer.socialDesc}
             </p>
             <div className="flex flex-wrap gap-2 mb-6">
               {socialLinks.map((social) => (
@@ -181,7 +180,7 @@ export default function Footer() {
               onClick={handleScrollToTop}
               className="inline-flex items-center gap-2 text-sm text-[#0D0204] hover:text-white bg-gray-100 hover:bg-[#FF0A2B] border border-gray-200 hover:border-[#FF0A2B] px-4 py-2.5 rounded-lg font-bold transition-all shadow-sm"
             >
-              <span>العودة للأعلى</span>
+              <span>{t.footer.backToTop}</span>
               <ArrowUp className="w-4 h-4" />
             </motion.button>
           </div>
@@ -190,16 +189,16 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-500">
           <div>
-            جميع الحقوق محفوظة © {new Date().getFullYear()}{" "}
-            <span className="text-[#FF0A2B] font-bold">Duck Agency</span> · للرؤية أثر.
+            {t.footer.rights} {new Date().getFullYear()}{" "}
+            <span className="text-[#FF0A2B] font-bold">Duck Agency</span> · {t.footer.rightsEnd}
           </div>
           <div className="flex gap-4">
             <span className="hover:text-black cursor-pointer transition-colors">
-              سياسة الخصوصية
+              {t.footer.privacy}
             </span>
             <span>·</span>
             <span className="hover:text-black cursor-pointer transition-colors">
-              الشروط والأحكام
+              {t.footer.terms}
             </span>
           </div>
         </div>

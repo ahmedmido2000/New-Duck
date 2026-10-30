@@ -2,37 +2,42 @@
 
 import { motion } from "framer-motion";
 import { Target, CheckCircle2, Compass } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function About() {
+  const { t, isRTL } = useLanguage();
+
   return (
     <section id="about" className="py-20 sm:py-28 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-        {/* Text Content (Enters from Right) */}
+        {/* Text Content */}
         <motion.div
-          initial={{ opacity: 0, x: 60 }}
+          initial={{ opacity: 0, x: isRTL ? 60 : -60 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
-          className="flex-1 w-full flex flex-col items-start gap-6 text-right"
+          className={`flex-1 w-full flex flex-col items-start gap-6 ${
+            isRTL ? "text-right" : "text-left"
+          }`}
         >
           <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg">
             <Compass className="w-5 h-5" />
-            <span>رؤيتنا ومنهجنا</span>
+            <span>{t.about.kicker}</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight">
-            من نحن؟
+            {t.about.heading}
           </h2>
 
           <p className="text-lg sm:text-2xl text-[#333333] leading-relaxed font-normal">
-            Duck شركة دعاية وتسويق تقدم حلولاً متكاملة للشركات والمشاهير والأفراد، تبدأ من بناء الهوية البصرية وإدارة الصفحات على السوشيال ميديا، وحتى المونتاج والتصميم وباقات الخدمات الجاهزة. كما تقدم الشركة أكاديمية تعليمية متخصصة.
+            {t.about.paragraph}
           </p>
 
           <motion.div
             whileHover={{ scale: 1.02 }}
             className="w-full bg-[#FF0A2B] text-white py-3.5 px-6 rounded-xl font-extrabold text-base sm:text-xl text-center shadow-glow-red shimmer-hover cursor-default"
           >
-            للرؤية أثر — شريكك الإبداعي لصناعة أثر حقيقي لعلامتك التجارية
+            {t.about.sloganBadge}
           </motion.div>
 
           {/* Core Values */}
@@ -43,8 +48,8 @@ export default function About() {
             >
               <CheckCircle2 className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-bold text-[#0D0204] text-base">استراتيجيات مبنية على بيانات</h4>
-                <p className="text-sm text-[#555555]">قرارات تسويقية تستند لأرقام حقيقية وسلوك الجمهور المستهدف.</p>
+                <h4 className="font-bold text-[#0D0204] text-base">{t.about.val1Title}</h4>
+                <p className="text-sm text-[#555555]">{t.about.val1Desc}</p>
               </div>
             </motion.div>
 
@@ -54,16 +59,16 @@ export default function About() {
             >
               <Target className="w-5 h-5 text-[#FF0A2B] shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-bold text-[#0D0204] text-base">تركيز كامل على العائد (ROI)</h4>
-                <p className="text-sm text-[#555555]">كل قرش يُنفق في الإعلانات محسوب بهدف مضاعفة الأرباح.</p>
+                <h4 className="font-bold text-[#0D0204] text-base">{t.about.val2Title}</h4>
+                <p className="text-sm text-[#555555]">{t.about.val2Desc}</p>
               </div>
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Circular Floating Brand Artwork — Real Photo (Enters from Left) */}
+        {/* Circular Floating Brand Artwork */}
         <motion.div
-          initial={{ opacity: 0, x: -60, scale: 0.9 }}
+          initial={{ opacity: 0, x: isRTL ? -60 : 60, scale: 0.9 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] as const }}
@@ -77,14 +82,14 @@ export default function About() {
           <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl shadow-[#FF0A2B]/25">
             <img
               src="/images/duck-path-about.jpg"
-              alt="Duck Agency – المسار الصحيح لنمو علامتك التجارية"
+              alt="Duck Agency"
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0D0204]/60 via-transparent to-transparent" />
             {/* Caption badge */}
-            <div className="absolute bottom-6 inset-x-0 flex justify-center">
-              <span className="text-xs sm:text-sm text-white font-extrabold bg-[#FF0A2B]/85 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-glow-red">
-                المسار الصحيح لنمو علامتك التجارية
+            <div className="absolute bottom-6 inset-x-0 flex justify-center px-4">
+              <span className="text-xs sm:text-sm text-white font-extrabold bg-[#FF0A2B]/85 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-glow-red text-center">
+                {t.about.artworkBadge}
               </span>
             </div>
           </div>

@@ -3,17 +3,20 @@
 import { motion } from "framer-motion";
 import { ShoppingBag, Globe, Share2, Video, Search, Smartphone, Layers, Check } from "lucide-react";
 import TiltCard from "./TiltCard";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Integrations() {
-  const platforms = [
-    { name: "Shopify", category: "متجر إلكتروني عالمي", icon: ShoppingBag },
-    { name: "WordPress", category: "مواقع ومتاجر متطورة", icon: Globe },
-    { name: "Salla", category: "منصة سلة السعودية", icon: Layers },
-    { name: "Zid", category: "منصة زد للتجارة", icon: Check },
-    { name: "Meta", category: "إعلانات فيسبوك وإنستغرام", icon: Share2 },
-    { name: "TikTok", category: "إعلانات تيك توك التفاعلية", icon: Video },
-    { name: "Google Ads", category: "إعلانات بحث ويوتيوب", icon: Search },
-    { name: "Snapchat", category: "إعلانات سناب شات المستهدفة", icon: Smartphone },
+  const { t } = useLanguage();
+
+  const platformIcons = [
+    { name: "Shopify", icon: ShoppingBag },
+    { name: "WordPress", icon: Globe },
+    { name: "Salla", icon: Layers },
+    { name: "Zid", icon: Check },
+    { name: "Meta", icon: Share2 },
+    { name: "TikTok", icon: Video },
+    { name: "Google Ads", icon: Search },
+    { name: "Snapchat", icon: Smartphone },
   ];
 
   const containerVariants = {
@@ -49,7 +52,7 @@ export default function Integrations() {
           transition={{ duration: 0.7 }}
           className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D0204] text-center leading-relaxed max-w-4xl mx-auto mb-10 sm:mb-14"
         >
-          ندعم تكاملك مع منصات التجارة الإلكترونية وأدوات الإدارة الذكية، كل ما تحتاجه في مسار واحد
+          {t.integrations.heading}
         </motion.h2>
 
         {/* Responsive Grid with Stagger & 3D TiltCards */}
@@ -61,8 +64,9 @@ export default function Integrations() {
           className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 lg:gap-6"
           style={{ direction: "ltr" }}
         >
-          {platforms.map((platform) => {
+          {platformIcons.map((platform, idx) => {
             const Icon = platform.icon;
+            const category = t.integrations.platforms[idx]?.category || "";
             return (
               <motion.div key={platform.name} variants={itemVariants}>
                 <TiltCard
@@ -79,7 +83,7 @@ export default function Integrations() {
                       {platform.name}
                     </span>
                     <span className="text-[11px] sm:text-xs text-gray-500 group-hover:text-[#FF0A2B] transition-colors mt-1 font-semibold text-center font-cairo">
-                      {platform.category}
+                      {category}
                     </span>
                   </div>
                 </TiltCard>

@@ -4,8 +4,11 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
 import MagneticButton from "./MagneticButton";
+import { useLanguage } from "@/context/LanguageContext";
+
 export default function Hero() {
   const heroRef = useRef<HTMLElement | null>(null);
+  const { t, isRTL } = useLanguage();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -145,7 +148,7 @@ export default function Hero() {
         >
           <span className="w-2.5 h-2.5 rounded-full bg-[#FF0A2B] animate-ping" />
           <span className="text-[#FF0A2B] font-extrabold text-sm sm:text-base tracking-wide text-glow-red">
-            من المتابعة إلى المبيعات
+            {t.hero.kicker}
           </span>
           <Sparkles className="w-4 h-4 text-[#FF0A2B]" />
         </motion.div>
@@ -153,21 +156,25 @@ export default function Hero() {
         {/* Hero Title */}
         <motion.h1
           variants={itemVariants}
-          className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.3] sm:leading-[1.28] tracking-tight max-w-4xl text-right"
+          className={`text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.3] sm:leading-[1.28] tracking-tight max-w-4xl ${
+            isRTL ? "text-right" : "text-left"
+          }`}
         >
-          في{" "}
+          {t.hero.titleLead}{" "}
           <span className="text-[#FF0A2B] text-glow-red inline-block hover:scale-105 transition-transform cursor-default">
-            Duck
+            {t.hero.brand}
           </span>{" "}
-          نصنع محتوى وإعلانات تبني حضور قوي لعلامتك وتوصلك للعملاء الصح وتحوّل الاهتمام إلى نتائج حقيقية
+          {t.hero.titleTail}
         </motion.h1>
 
         {/* Hero Subtitle */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-xl text-[#E6CDD0] max-w-2xl leading-relaxed text-right font-medium"
+          className={`text-base sm:text-xl text-[#E6CDD0] max-w-2xl leading-relaxed font-medium ${
+            isRTL ? "text-right" : "text-left"
+          }`}
         >
-          نحلل سلوك جمهورك، نصمم هويتك، وندير حملاتك الذكية لتحقيق أعلى عائد استثماري ونمو متواصل لمبيعاتك.
+          {t.hero.subtitle}
         </motion.p>
 
         {/* Action Buttons */}
@@ -181,32 +188,38 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="group flex items-center justify-center gap-3 bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-4 rounded-xl font-black text-lg sm:text-xl transition-all duration-300 shadow-glow-red shimmer-hover hover:-translate-y-1 active:translate-y-0 text-center"
           >
-            <span>خُد خطوتك الأولى معانا</span>
+            <span>{t.hero.ctaPrimary}</span>
           </MagneticButton>
 
           <a
             href="#services"
             className="flex items-center justify-center px-8 py-4 rounded-xl font-bold text-lg sm:text-xl text-white border-2 border-white/70 hover:bg-white/10 hover:border-white transition-all duration-300 text-center"
           >
-            شاهد ما صنعناه
+            {t.hero.ctaSecondary}
           </a>
         </motion.div>
 
         {/* Trust Badges */}
         <motion.div
           variants={itemVariants}
-          className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 pt-8 sm:pt-12 border-t border-[#3A0C15]/80 w-full text-right"
+          className={`grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 pt-8 sm:pt-12 border-t border-[#3A0C15]/80 w-full ${
+            isRTL ? "text-right" : "text-left"
+          }`}
         >
           <motion.div
             whileHover={{ y: -3 }}
             className="flex items-center gap-3 group cursor-default"
           >
-            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors shrink-0">
               <TrendingUp className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-black text-white text-glow-red">+380%</div>
-              <div className="text-xs sm:text-sm text-[#C9A4A8]">متوسط نمو مبيعات عملائنا</div>
+              <div className="text-xl sm:text-2xl font-black text-white text-glow-red">
+                {t.hero.badge1Num}
+              </div>
+              <div className="text-xs sm:text-sm text-[#C9A4A8]">
+                {t.hero.badge1Label}
+              </div>
             </div>
           </motion.div>
 
@@ -214,12 +227,16 @@ export default function Hero() {
             whileHover={{ y: -3 }}
             className="flex items-center gap-3 group cursor-default"
           >
-            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors shrink-0">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-black text-white">100% مخصص</div>
-              <div className="text-xs sm:text-sm text-[#C9A4A8]">استراتيجيات بدون قوالب جاهزة</div>
+              <div className="text-xl sm:text-2xl font-black text-white">
+                {t.hero.badge2Num}
+              </div>
+              <div className="text-xs sm:text-sm text-[#C9A4A8]">
+                {t.hero.badge2Label}
+              </div>
             </div>
           </motion.div>
 
@@ -227,12 +244,16 @@ export default function Hero() {
             whileHover={{ y: -3 }}
             className="col-span-2 sm:col-span-1 flex items-center gap-3 group cursor-default"
           >
-            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#2A0509] border border-[#FF0A2B]/40 flex items-center justify-center text-[#FF0A2B] group-hover:bg-[#FF0A2B] group-hover:text-white transition-colors shrink-0">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-black text-white">مصر والسعودية</div>
-              <div className="text-xs sm:text-sm text-[#C9A4A8]">خبرة عميقة بأسواق المنطقة</div>
+              <div className="text-xl sm:text-2xl font-black text-white">
+                {t.hero.badge3Num}
+              </div>
+              <div className="text-xs sm:text-sm text-[#C9A4A8]">
+                {t.hero.badge3Label}
+              </div>
             </div>
           </motion.div>
         </motion.div>

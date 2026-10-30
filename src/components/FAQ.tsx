@@ -3,28 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function FAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const faqs = [
-    {
-      q: "كيف تختلف Duck Agency عن أي وكالة تسويق أخرى؟",
-      a: "نحن لا نعتمد حلولاً جاهزة أو قوالب معلبة. نبدأ بدراسة عميقة لنشاطك التجاري ومنافسيك وسلوك جمهورك الحقيقي، ثم نصمم استراتيجية نمو مخصصة بالكامل تركز على تحقيق أعلى عائد استثماري (ROI).",
-    },
-    {
-      q: "كم يستغرق إطلاق الحملة الإعلانية أو المتجر الإلكتروني؟",
-      a: "يعتمد على حجم المشروع؛ فالحملات الإعلانية السريعة تبدأ خلال 48 إلى 72 ساعة بعد إعداد البنية التحتية والتحليلات. أما المتاجر الإلكترونية المتكاملة فتستغرق عادة بين 7 إلى 14 يوم عمل مع الاختبارات الكاملة.",
-    },
-    {
-      q: "هل تدعمون العملاء خارج مصر والمملكة العربية السعودية؟",
-      a: "نعم بكل تأكيد! نحن ندير حملات ومشاريع لعملاء في مصر، السعودية، الإمارات، والكويت وقطر، ونفهم الطبيعة الاستهلاكية لكل سوق عربي بعناية.",
-    },
-    {
-      q: "كيف أضمن متابعة نتائج الإعلانات والمبيعات؟",
-      a: "نوفر لوحات تحكم تفاعلية وتقارير دورية شفافة توضح كل دولار أُنفق، عدد الزيارات، تكلفة الاكتساب (CPA)، والمبيعات المباشرة المحققة.",
-    },
-  ];
+  const { t, isRTL } = useLanguage();
+  const faqs = t.faq.items;
 
   return (
     <section id="faq" className="py-20 sm:py-28 bg-white overflow-hidden border-t border-gray-100">
@@ -38,7 +22,7 @@ export default function FAQ() {
           className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-base sm:text-lg mb-2"
         >
           <HelpCircle className="w-5 h-5" />
-          <span>الأسئلة الشائعة</span>
+          <span>{t.faq.kicker}</span>
         </motion.div>
 
         {/* Heading */}
@@ -49,11 +33,11 @@ export default function FAQ() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight mb-10 text-center"
         >
-          الأسئلة الأكثر شيوعاً
+          {t.faq.heading}
         </motion.h2>
 
         {/* FAQ Accordion */}
-        <div className="w-full text-right space-y-4 max-w-3xl mx-auto">
+        <div className={`w-full space-y-4 max-w-3xl mx-auto ${isRTL ? "text-right" : "text-left"}`}>
           {faqs.map((faq, index) => {
             const isOpen = openFaq === index;
             return (
@@ -68,7 +52,9 @@ export default function FAQ() {
                 <button
                   type="button"
                   onClick={() => setOpenFaq(isOpen ? null : index)}
-                  className="w-full flex items-center justify-between p-5 text-right font-extrabold text-base sm:text-lg text-[#0D0204] hover:text-[#FF0A2B] transition-colors focus:outline-none"
+                  className={`w-full flex items-center justify-between p-5 font-extrabold text-base sm:text-lg text-[#0D0204] hover:text-[#FF0A2B] transition-colors focus:outline-none ${
+                    isRTL ? "text-right" : "text-left"
+                  }`}
                 >
                   <span>{faq.q}</span>
                   <ChevronDown

@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { useSmoothScroll } from "./SmoothScrollProvider";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const { scrollTo } = useSmoothScroll();
+  const { isRTL } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,8 +40,10 @@ export default function BackToTop() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          aria-label="الرجوع للأعلى"
-          className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-white border border-gray-200 text-[#0D0204] flex items-center justify-center shadow-lg hover:border-[#FF0A2B] hover:text-[#FF0A2B] transition-colors group cursor-pointer"
+          aria-label={isRTL ? "الرجوع للأعلى" : "Back to top"}
+          className={`fixed bottom-6 ${
+            isRTL ? "right-6" : "left-6"
+          } z-40 w-12 h-12 rounded-full bg-white border border-gray-200 text-[#0D0204] flex items-center justify-center shadow-lg hover:border-[#FF0A2B] hover:text-[#FF0A2B] transition-colors group cursor-pointer`}
         >
           {/* Circular progress SVG */}
           <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none p-0.5">

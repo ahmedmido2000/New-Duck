@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useId } from "react";
 import { motion } from "framer-motion";
 import TiltCard from "./TiltCard";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Helpers for Gauge SVG calculations
 const CX = 150;
@@ -278,7 +279,15 @@ const SPIKES = SPIKE_HEIGHTS.map((y, i) => ({
   isHot: i === HOT_INDEX,
 }));
 
-function DuckSpikesCard() {
+function DuckSpikesCard({
+  title,
+  subtitle,
+  stat,
+}: {
+  title: string;
+  subtitle: string;
+  stat: string;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [slaData, setSlaData] = useState({ pct: 40, left: 10, top: 22 });
@@ -351,15 +360,15 @@ function DuckSpikesCard() {
           </div>
           <div>
             <div className="font-bold text-[16px] text-[#0D0204] leading-snug">
-              حجم المبيعات المباشرة
+              {title}
             </div>
             <div className="text-[12.5px] text-[#555555] mt-1 leading-relaxed">
-              التصاعد الربحي السنوي لعملائنا
+              {subtitle}
             </div>
           </div>
         </div>
         <div className="font-mono text-[12px] text-[#FF0A2B] font-bold tracking-wider shrink-0 pt-0.5">
-          99.99%
+          {stat}
         </div>
       </div>
 
@@ -450,6 +459,8 @@ function DuckSpikesCard() {
 }
 
 export default function Metrics() {
+  const { t, dir } = useLanguage();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -473,7 +484,7 @@ export default function Metrics() {
   };
 
   return (
-    <section className="py-20 sm:py-24 bg-white overflow-hidden border-t border-gray-100" dir="rtl">
+    <section className="py-20 sm:py-24 bg-white overflow-hidden border-t border-gray-100" dir={dir}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
@@ -482,13 +493,13 @@ export default function Metrics() {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
         >
-          {/* Card 1 (Right in RTL): الميزانيات المدارة */}
+          {/* Card 1: الميزانيات المدارة / Managed Budgets */}
           <motion.div variants={itemVariants} className="h-full">
             <TiltCard maxTilt={6} glare={true} className="rounded-[20px] h-full">
               <DuckGaugeCard
-                title="الميزانيات المدارة"
-                subtitle="ذروة المواسم البيعية لتحقيق أقصى ربح"
-                stat="8.4M"
+                title={t.metrics.card1.title}
+                subtitle={t.metrics.card1.subtitle}
+                stat={t.metrics.card1.stat}
                 target={40}
                 suffix="M"
                 litPercent={82}
@@ -508,20 +519,24 @@ export default function Metrics() {
             </TiltCard>
           </motion.div>
 
-          {/* Card 2 (Middle in RTL): حجم المبيعات المباشرة */}
+          {/* Card 2: حجم المبيعات المباشرة / Direct Sales Volume */}
           <motion.div variants={itemVariants} className="h-full">
             <TiltCard maxTilt={6} glare={true} className="rounded-[20px] h-full">
-              <DuckSpikesCard />
+              <DuckSpikesCard
+                title={t.metrics.card2.title}
+                subtitle={t.metrics.card2.subtitle}
+                stat={t.metrics.card2.stat}
+              />
             </TiltCard>
           </motion.div>
 
-          {/* Card 3 (Left in RTL): العائد على الإنفاق (ROAS) */}
+          {/* Card 3: العائد على الإنفاق / Return on Ad Spend */}
           <motion.div variants={itemVariants} className="h-full">
             <TiltCard maxTilt={6} glare={true} className="rounded-[20px] h-full">
               <DuckGaugeCard
-                title="العائد على الإنفاق (ROAS)"
-                subtitle="معدلات كفاءة الإعلانات"
-                stat="98.7%"
+                title={t.metrics.card3.title}
+                subtitle={t.metrics.card3.subtitle}
+                stat={t.metrics.card3.stat}
                 target={15}
                 suffix="X"
                 litPercent={92}

@@ -3,13 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, Globe } from "lucide-react";
 import MagneticButton from "./MagneticButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
+  const { lang, t, toggleLanguage, isRTL } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,13 +37,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "الرئيسية", href: "#top", id: "top" },
-    { name: "من نحن", href: "#about", id: "about" },
-    { name: "الخدمات", href: "#services", id: "services" },
-    { name: "الأسئلة الشائعة", href: "#faq", id: "faq" },
-    { name: "تواصل معنا", href: "#contact", id: "contact" },
-  ];
+  const navLinks = t.nav.links;
 
   return (
     <motion.header
@@ -77,7 +73,7 @@ export default function Navbar() {
         {/* Desktop Navigation Links */}
         <nav
           className="hidden md:flex items-center gap-6 lg:gap-8 text-[15px] lg:text-base font-semibold"
-          aria-label="القائمة الرئيسية"
+          aria-label="Navigation"
         >
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
@@ -104,28 +100,54 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* CTA Button (Desktop) with Magnetic Effect */}
+        {/* Language Switcher + CTA Button (Desktop) */}
         <div className="hidden sm:flex items-center gap-3">
+          {/* Language Switcher Button */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={`Switch language to ${lang === "ar" ? "English" : "العربية"}`}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#FF0A2B]/60 text-white font-bold text-xs sm:text-sm transition-all shadow-sm"
+          >
+            <Globe className="w-3.5 h-3.5 text-[#FF0A2B]" />
+            <span className="font-semibold tracking-wide">
+              {lang === "ar" ? "English" : "العربية"}
+            </span>
+          </button>
+
+          {/* CTA Button */}
           <MagneticButton
             href="https://wa.me/201064544080"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-2 bg-[#7A0B1A] hover:bg-[#FF0A2B] text-white px-5 py-2.5 rounded-lg font-bold text-sm lg:text-base transition-all duration-300 shadow-glow-red shimmer-hover"
           >
-            <span>ابدأ مسارك الآن</span>
+            <span>{t.nav.cta}</span>
           </MagneticButton>
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-lg text-neutral-300 hover:text-white hover:bg-[#2A0509] transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF0A2B]"
-          aria-expanded={isOpen}
-          aria-label={isOpen ? "إغلاق القائمة" : "فتح القائمة"}
-        >
-          {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-        </button>
+        {/* Mobile Actions: Language toggle + Hamburger Button */}
+        <div className="flex md:hidden items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={`Switch language to ${lang === "ar" ? "English" : "العربية"}`}
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/15 text-white font-bold text-xs"
+          >
+            <Globe className="w-3.5 h-3.5 text-[#FF0A2B]" />
+            <span>{lang === "ar" ? "EN" : "عربي"}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 rounded-lg text-neutral-300 hover:text-white hover:bg-[#2A0509] transition-colors focus:outline-none focus:ring-2 focus:ring-[#FF0A2B]"
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Menu with AnimatePresence */}
@@ -145,7 +167,7 @@ export default function Navbar() {
                   <motion.a
                     key={link.id}
                     href={link.href}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
                     onClick={() => setIsOpen(false)}
@@ -163,7 +185,19 @@ export default function Navbar() {
                 );
               })}
 
-              <div className="pt-3 border-t border-[#3A0C15] mt-2">
+              <div className="pt-3 border-t border-[#3A0C15] mt-2 flex flex-col gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleLanguage();
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-white/20 text-white font-bold text-sm bg-white/5"
+                >
+                  <Globe className="w-4 h-4 text-[#FF0A2B]" />
+                  <span>{lang === "ar" ? "تبديل إلى English" : "Switch to العربية"}</span>
+                </button>
+
                 <a
                   href="https://wa.me/201064544080"
                   target="_blank"
@@ -172,7 +206,7 @@ export default function Navbar() {
                   className="flex items-center justify-center gap-2 w-full bg-[#FF0A2B] hover:bg-[#E00020] text-white py-3 rounded-lg font-extrabold text-base transition-colors shadow-glow-red shimmer-hover"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  <span>ابدأ مسارك الآن عبر واتساب</span>
+                  <span>{t.nav.cta}</span>
                 </a>
               </div>
             </div>

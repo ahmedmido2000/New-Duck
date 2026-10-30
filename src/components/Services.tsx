@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Check, Sparkles, X, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, X, MessageCircle } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceItem {
   id: number;
@@ -156,7 +157,8 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardFrameRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeModal, setActiveModal] = useState<ServiceItem | null>(null);
+  const [activeModalId, setActiveModalId] = useState<number | null>(null);
+  const { t, isRTL } = useLanguage();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -269,23 +271,25 @@ export default function Services() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
 
-          {/* ═══════════════ RIGHT COLUMN: Stationary Section Info & CTA (Right in RTL) ═══════════════ */}
-          <div className="w-full lg:w-[46%] flex flex-col items-start text-right gap-4 sm:gap-6 order-1 lg:order-1 shrink-0">
+          {/* ═══════════════ RIGHT COLUMN: Stationary Section Info & CTA ═══════════════ */}
+          <div className={`w-full lg:w-[46%] flex flex-col items-start gap-4 sm:gap-6 order-1 shrink-0 ${
+            isRTL ? "text-right" : "text-left"
+          }`}>
             {/* Kicker */}
             <div className="inline-flex items-center gap-2 text-[#FF0A2B] font-extrabold text-sm sm:text-base">
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF0A2B]" />
-              <span>حوّل ميزانيتك إلى نمو</span>
+              <span>{t.services.kicker}</span>
               <span className="w-6 h-[2px] bg-[#FF0A2B]" />
             </div>
 
             {/* Main Section Heading */}
             <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-black text-[#0D0204] leading-[1.3] tracking-tight">
-              في عالم التسويق الرقمي، نكون الشريك الذي يبدأ معك من الفكرة الأولى، لا من مرحلة التنفيذ فقط
+              {t.services.heading}
             </h2>
 
             {/* Subtitle / Description */}
             <p className="text-sm sm:text-base lg:text-lg text-[#444444] leading-relaxed font-normal max-w-xl">
-              حيث نبدأ بفهم لطبيعة نشاطك والسوق السعودي وجمهورك المستهدف، لنرسم لك اتجاهًا واضحًا نحو النمو المستدام.
+              {t.services.subtitle}
             </p>
 
             {/* CTA Button without Arrow */}
@@ -296,13 +300,13 @@ export default function Services() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[#FF0A2B] hover:bg-[#E00020] text-white px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base transition-all shadow-glow-red shimmer-hover"
               >
-                <span>خُذ خطوتك الأولى معنا</span>
+                <span>{t.services.cta}</span>
               </MagneticButton>
             </div>
           </div>
 
-          {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame (Left in RTL) ═══════════════ */}
-          <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2 lg:order-2">
+          {/* ═══════════════ LEFT COLUMN: Masar Stacking Cards Frame ═══════════════ */}
+          <div className="w-full lg:w-[54%] flex justify-center lg:justify-start order-2">
             {/* Card Frame: Clips cards outside its bounds, keeping cards close and cohesive */}
             <div
               ref={cardFrameRef}
@@ -310,6 +314,7 @@ export default function Services() {
             >
               {services.map((svc, index) => {
                 const zIndex = (index + 1) * 10;
+                const localized = t.services.items.find((item) => item.id === svc.id) || svc;
 
                 return (
                   <div
@@ -320,27 +325,29 @@ export default function Services() {
                     className="absolute inset-x-0 top-0 will-change-transform"
                     style={{ zIndex }}
                   >
-                    {/* The Visual Card: Compact, cohesive spacing, button 100% visible */}
+                    {/* The Visual Card */}
                     <div
-                      className="group relative w-full h-[310px] sm:h-[335px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
+                      className={`group relative w-full h-[310px] sm:h-[335px] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
                       style={{
                         background: svc.gradient,
                         border: `1.5px solid ${svc.borderColor}`,
                         boxShadow:
-                          "0 -10px 28px rgba(0, 0, 0, 0.65), 0 14px 32px rgba(0, 0, 0, 0.45)",
+                          "0 10px 25px rgba(0, 0, 0, 0.1), 0 20px 48px -10px rgba(0, 0, 0, 0.15)",
                       }}
                     >
                       {/* Head Content */}
                       <div className="relative z-10 flex flex-col items-start gap-2 sm:gap-2.5">
-                        {/* "خـــــــــــدمـــــــــــــــــــة" Pill Badge */}
+                        {/* Pill Badge */}
                         <div
-                          className="inline-block px-4 sm:px-5 py-1 sm:py-1.5 rounded-lg font-black text-xs tracking-[3px] shadow-sm"
+                          className="inline-block px-4 sm:px-5 py-1 sm:py-1.5 rounded-lg font-black text-xs tracking-[3px] shadow-sm uppercase"
                           style={{
                             backgroundColor: svc.pillBg,
                             color: svc.pillColor,
                           }}
                         >
-                          خـــــــــــدمـــــــــــــــــــة
+                          {t.services.pill}
                         </div>
 
                         {/* Service Title */}
@@ -348,32 +355,36 @@ export default function Services() {
                           className="text-lg sm:text-2xl font-black leading-snug mt-0.5"
                           style={{ color: svc.titleColor }}
                         >
-                          {svc.title}
+                          {localized.title}
                         </h3>
                       </div>
 
-                      {/* Body Content: Description + Read More Button fully visible and unobstructed */}
+                      {/* Body Content */}
                       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-black/10 dark:border-white/10">
                         {/* Description */}
                         <p
                           className="text-xs sm:text-[13px] leading-relaxed max-w-full sm:max-w-[70%] font-medium"
                           style={{ color: svc.descColor }}
                         >
-                          {svc.description}
+                          {localized.description}
                         </p>
 
                         {/* Read More Button */}
                         <button
                           type="button"
-                          onClick={() => setActiveModal(svc)}
+                          onClick={() => setActiveModalId(svc.id)}
                           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-xs transition-all duration-300 shadow-md shrink-0 active:scale-95 group/btn"
                           style={{
                             backgroundColor: svc.btnBg,
                             color: svc.btnColor,
                           }}
                         >
-                          <span>اقرأ المزيد</span>
-                          <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover/btn:-translate-x-1" />
+                          <span>{t.services.readMore}</span>
+                          {isRTL ? (
+                            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover/btn:-translate-x-1" />
+                          ) : (
+                            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
+                          )}
                         </button>
                       </div>
                     </div>
@@ -388,72 +399,82 @@ export default function Services() {
 
       {/* ═══════════════ Service Details Modal ═══════════════ */}
       <AnimatePresence>
-        {activeModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-              className="relative bg-white border border-gray-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 text-right shadow-2xl"
-              role="dialog"
-              aria-modal="true"
-            >
-              <button
-                type="button"
-                onClick={() => setActiveModal(null)}
-                className="absolute top-4 left-4 p-2 text-neutral-400 hover:text-black rounded-lg hover:bg-gray-100 transition-colors"
-                aria-label="إغلاق النافذة"
+        {activeModalId !== null && (() => {
+          const activeSvc = services.find((s) => s.id === activeModalId);
+          const activeLocalized = t.services.items.find((item) => item.id === activeModalId);
+          if (!activeSvc || !activeLocalized) return null;
+
+          return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
+                className={`relative bg-white border border-gray-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl ${
+                  isRTL ? "text-right" : "text-left"
+                }`}
+                role="dialog"
+                aria-modal="true"
               >
-                <X className="w-6 h-6" />
-              </button>
-
-              <div className="inline-block bg-[#FF0A2B]/10 text-[#FF0A2B] px-3.5 py-1 rounded-full text-xs font-bold mb-3 border border-[#FF0A2B]/20">
-                تفاصيل الخدمة
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl font-black text-[#0D0204] mb-3">
-                {activeModal.title}
-              </h3>
-
-              <p className="text-base text-[#444444] leading-relaxed mb-6">
-                {activeModal.description}
-              </p>
-
-              <div className="space-y-3 mb-8">
-                <h4 className="font-bold text-[#0D0204] text-base">ماذا يشمل تنفيذ الخدمة؟</h4>
-                {activeModal.details.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2.5 text-sm sm:text-base text-[#333333]">
-                    <Check className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href={`https://wa.me/201064544080?text=${encodeURIComponent(
-                    `مرحباً Duck Agency، أود الاستفسار عن خدمة: ${activeModal.title}`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-3 px-5 rounded-xl font-bold transition-all shadow-glow-red shimmer-hover"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  <span>طلب الخدمة عبر واتساب</span>
-                </a>
-
                 <button
                   type="button"
-                  onClick={() => setActiveModal(null)}
-                  className="px-5 py-3 rounded-xl border border-gray-300 hover:bg-gray-50 font-bold text-[#0D0204]"
+                  onClick={() => setActiveModalId(null)}
+                  className={`absolute top-4 p-2 text-neutral-400 hover:text-black rounded-lg hover:bg-gray-100 transition-colors ${
+                    isRTL ? "left-4" : "right-4"
+                  }`}
+                  aria-label="Close"
                 >
-                  إغلاق
+                  <X className="w-6 h-6" />
                 </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
+
+                <div className="inline-block bg-[#FF0A2B]/10 text-[#FF0A2B] px-3.5 py-1 rounded-full text-xs font-bold mb-3 border border-[#FF0A2B]/20">
+                  {t.services.modalKicker}
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-black text-[#0D0204] mb-3">
+                  {activeLocalized.title}
+                </h3>
+
+                <p className="text-base text-[#444444] leading-relaxed mb-6">
+                  {activeLocalized.description}
+                </p>
+
+                <div className="space-y-3 mb-8">
+                  <h4 className="font-bold text-[#0D0204] text-base">{t.services.modalIncludes}</h4>
+                  {activeLocalized.details.map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-sm sm:text-base text-[#333333]">
+                      <Check className="w-5 h-5 text-[#FF0A2B] shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href={`https://wa.me/201064544080?text=${encodeURIComponent(
+                      `Hello Duck Agency, I would like to inquire about: ${activeLocalized.title}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-3 px-5 rounded-xl font-bold transition-all shadow-glow-red shimmer-hover"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>{t.services.modalWaCta}</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => setActiveModalId(null)}
+                    className="px-5 py-3 rounded-xl border border-gray-300 hover:bg-gray-50 font-bold text-[#0D0204]"
+                  >
+                    {t.services.modalClose}
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          );
+        })()}
       </AnimatePresence>
     </section>
   );

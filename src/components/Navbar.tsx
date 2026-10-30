@@ -69,7 +69,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation Links */}
         <nav
-          className="hidden md:flex items-center gap-5 lg:gap-7 text-[14px] lg:text-[15px] font-semibold"
+          className="hidden xl:flex items-center gap-3.5 2xl:gap-5 text-[13px] 2xl:text-[14px] font-bold"
           aria-label="Navigation"
         >
           {navLinks.map((link) => {
@@ -78,7 +78,7 @@ export default function Navbar() {
               <Link
                 key={link.id}
                 href={link.href}
-                className={`relative py-1 transition-colors duration-200 group ${
+                className={`relative py-1 px-1 transition-colors duration-200 group whitespace-nowrap ${
                   active
                     ? "text-[#FF0A2B]"
                     : "text-neutral-300 hover:text-white"
@@ -98,7 +98,7 @@ export default function Navbar() {
         </nav>
 
         {/* Language Switcher + CTA Button (Desktop) */}
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           {/* Language Switcher Button */}
           <motion.button
             type="button"
@@ -106,7 +106,7 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
             onClick={toggleLanguage}
             aria-label={`Switch language to ${lang === "ar" ? "English" : "العربية"}`}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#FF0A2B]/60 text-white font-bold text-xs sm:text-sm transition-all shadow-sm cursor-pointer group"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#FF0A2B]/60 text-white font-bold text-xs sm:text-sm transition-all shadow-sm cursor-pointer group shrink-0"
           >
             <Globe className="w-3.5 h-3.5 text-[#FF0A2B] group-hover:rotate-45 transition-transform duration-300" />
             <span className="font-semibold tracking-wide">
@@ -119,14 +119,14 @@ export default function Navbar() {
             href="https://wa.me/201064544080"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 bg-[#7A0B1A] hover:bg-[#FF0A2B] text-white px-5 py-2.5 rounded-lg font-bold text-sm lg:text-base transition-all duration-300 shadow-glow-red shimmer-hover"
+            className="group flex items-center gap-2 bg-[#7A0B1A] hover:bg-[#FF0A2B] text-white px-4 py-2 rounded-lg font-bold text-xs 2xl:text-sm transition-all duration-300 shadow-glow-red shimmer-hover whitespace-nowrap shrink-0"
           >
             <span>{t.nav.cta}</span>
           </MagneticButton>
         </div>
 
-        {/* Mobile Actions: Language toggle + Hamburger Button */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Mobile / Tablet Actions: Language toggle + Hamburger Button */}
+        <div className="flex xl:hidden items-center gap-2">
           <button
             type="button"
             onClick={toggleLanguage}
@@ -157,7 +157,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
-            className="md:hidden bg-[#12030A]/95 backdrop-blur-xl border-b border-[#3A0C15] overflow-hidden shadow-2xl"
+            className="xl:hidden bg-[#12030A]/95 backdrop-blur-xl border-b border-[#3A0C15] overflow-hidden shadow-2xl max-h-[85vh] overflow-y-auto"
           >
             <div className="flex flex-col px-6 py-6 gap-3">
               {navLinks.map((link, idx) => {

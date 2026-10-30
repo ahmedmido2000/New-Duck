@@ -4,6 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import About from "@/components/About";
 import Features from "@/components/Features";
 import Metrics from "@/components/Metrics";
+import Contact from "@/components/Contact";
 import Consultation from "@/components/Consultation";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -29,6 +30,8 @@ export default function AboutPage() {
         <About />
         <Features />
         <Metrics />
+        {/* Regional Branches: Egypt & Saudi Arabia */}
+        <Contact />
         <Consultation />
       </div>
     </div>

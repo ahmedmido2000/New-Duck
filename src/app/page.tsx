@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import AIEcosystem from "@/components/AIEcosystem";
 import Features from "@/components/Features";
 import Metrics from "@/components/Metrics";
+import Portfolio from "@/components/Portfolio";
 import Partners from "@/components/Partners";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
@@ -38,6 +39,9 @@ export default function Home() {
 
         {/* Metrics & Performance Stats */}
         <Metrics />
+
+        {/* Portfolio & Case Studies */}
+        <Portfolio />
 
         {/* Success Partners - Strategic Regional Clients */}
         <Partners />

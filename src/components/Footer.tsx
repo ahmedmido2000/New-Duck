@@ -143,13 +143,13 @@ export default function Footer() {
             <ul className="space-y-2.5 text-base font-semibold">
               {t.footer.servicesList.map((svc, idx) => (
                 <li key={idx}>
-                  <a
-                    href="#services"
+                  <Link
+                    href="/services"
                     className="relative text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block group/link"
                   >
                     <span>{svc}</span>
                     <span className="absolute bottom-0 right-0 rtl:right-0 rtl:left-auto left-0 w-0 group-hover/link:w-full h-[2px] bg-[#FF0A2B] transition-all duration-300" />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

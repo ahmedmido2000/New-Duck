@@ -1,6 +1,7 @@
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import { LanguageProvider } from "@/context/LanguageContext";
 import ScrollProgress from "@/components/ScrollProgress";
+import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -22,6 +23,9 @@ export default function Home() {
       <SmoothScrollProvider>
         {/* Top Red Glow Scroll Progress */}
         <ScrollProgress />
+
+        {/* Global Creative Agency Interactive Custom Cursor (Desktop Only) */}
+        <CustomCursor />
 
         <main className="min-h-screen bg-[#0D0204] text-white overflow-hidden selection:bg-[#FF0A2B] selection:text-white relative">
           {/* Header / Navbar with fast Lenis integration */}

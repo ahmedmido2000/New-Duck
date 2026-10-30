@@ -1,18 +1,54 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Headphones, MessageCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Mail, MapPin, Headphones, MessageCircle, Copy, Check } from "lucide-react";
 import RegionalGlobe from "./RegionalGlobe";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
   const [hoveredBranch, setHoveredBranch] = useState<"egypt" | "ksa" | null>(null);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const { t, isRTL, dir } = useLanguage();
+
+  const handleCopy = (text: string, key: string) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 2200);
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
 
   return (
     <section id="contact" className="py-20 sm:py-28 bg-white relative overflow-hidden border-t border-gray-100" dir={dir}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8 sm:gap-10">
+      {/* Background Ambience */}
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#FF0A2B]/4 rounded-full blur-[140px] pointer-events-none" />
+
+      {/* Copy Feedback Toast */}
+      <AnimatePresence>
+        {copiedKey && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+            className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-[#0D0204] text-white px-5 py-2.5 rounded-full border border-[#FF0A2B]/60 shadow-2xl flex items-center gap-2 text-sm font-bold backdrop-blur-md"
+          >
+            <Check className="w-4 h-4 text-[#FF0A2B]" />
+            <span>{isRTL ? "تم نسخ البيانات إلى الحافظة بنجاح!" : "Copied to clipboard successfully!"}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8 sm:gap-10 relative z-10">
         {/* Header Block */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,7 +63,7 @@ export default function Contact() {
               <span>{t.contact.kicker}</span>
               <span className="w-5 h-[2px] bg-[#FF0A2B]" />
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#0D0204] leading-tight tracking-tight">
               {t.contact.heading}
             </h2>
             <p className="text-[#444444] text-sm sm:text-base mt-2">
@@ -50,23 +86,24 @@ export default function Contact() {
           >
             {/* Egypt Branch */}
             <motion.div
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -4 }}
+              onMouseMove={handleMouseMove}
               onMouseEnter={() => setHoveredBranch("egypt")}
               onMouseLeave={() => setHoveredBranch(null)}
-              className={`border rounded-2xl p-6 bg-white flex flex-col gap-4 text-base transition-all shadow-lg ${
+              className={`spotlight-card border rounded-3xl p-6 sm:p-7 bg-white flex flex-col gap-4 text-base transition-all duration-300 shadow-md ${
                 hoveredBranch === "egypt"
-                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.2)]"
-                  : "border-gray-200 hover:border-[#FF0A2B]/60"
+                  ? "border-[#FF0A2B] shadow-[0_15px_35px_-5px_rgba(255,10,43,0.2)]"
+                  : "border-gray-200/90 hover:border-[#FF0A2B]/60"
               }`}
             >
               <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   <span className="text-2xl">🇪🇬</span>
                   <span className="font-black text-lg sm:text-xl text-[#0D0204]">
                     {t.contact.egypt.title}
                   </span>
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF0A2B] bg-[#FF0A2B]/10 px-2.5 py-1 rounded-md border border-[#FF0A2B]/20">
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF0A2B] bg-[#FF0A2B]/10 px-3 py-1 rounded-full border border-[#FF0A2B]/20">
                   <span>{t.contact.egypt.badge}</span>
                   <Headphones className="w-3.5 h-3.5" />
                 </span>
@@ -85,40 +122,60 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Phone */}
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-                <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
-                  {t.contact.phoneLabel}
-                </span>
-                <a
-                  href="tel:+201064544080"
-                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
-                  style={{ direction: "ltr" }}
+              {/* Phone with Click-to-Copy */}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
+                  <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
+                    {t.contact.phoneLabel}
+                  </span>
+                  <a
+                    href="tel:+201064544080"
+                    className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
+                    style={{ direction: "ltr" }}
+                  >
+                    +20 10 6454 4080
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy("+201064544080", "eg-phone")}
+                  aria-label="Copy phone"
+                  className="p-1.5 text-gray-400 hover:text-[#FF0A2B] hover:bg-gray-100 rounded-lg transition-colors"
                 >
-                  +20 10 6454 4080
-                </a>
+                  <Copy className="w-4 h-4" />
+                </button>
               </div>
 
-              {/* Email */}
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-                <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
-                  {t.contact.emailLabel}
-                </span>
-                <a
-                  href="mailto:info@duckagency.com"
-                  className="hover:text-[#FF0A2B] transition-colors font-sans text-[#444444] text-sm sm:text-base"
+              {/* Email with Click-to-Copy */}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-[#FF0A2B] shrink-0" />
+                  <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
+                    {t.contact.emailLabel}
+                  </span>
+                  <a
+                    href="mailto:info@duckagency.com"
+                    className="hover:text-[#FF0A2B] transition-colors font-sans text-[#444444] text-sm sm:text-base"
+                  >
+                    info@duckagency.com
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy("info@duckagency.com", "eg-email")}
+                  aria-label="Copy email"
+                  className="p-1.5 text-gray-400 hover:text-[#FF0A2B] hover:bg-gray-100 rounded-lg transition-colors"
                 >
-                  info@duckagency.com
-                </a>
+                  <Copy className="w-4 h-4" />
+                </button>
               </div>
 
               {/* Direct Quick Action Buttons */}
               <div className="pt-2 grid grid-cols-2 gap-3">
                 <a
                   href="tel:+201064544080"
-                  className="inline-flex items-center justify-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-2.5 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-glow-red shimmer-hover"
+                  className="inline-flex items-center justify-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-3 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-glow-red shimmer-hover active:scale-95"
                 >
                   <Phone className="w-4 h-4" />
                   <span>{t.contact.egypt.callBtn}</span>
@@ -127,7 +184,7 @@ export default function Contact() {
                   href="https://wa.me/201064544080?text=مرحباً%20Duck%20Agency%20مصر،%20أود%20الاستفسار%20عن%20خدماتكم"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-2.5 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-md"
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-3 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-md active:scale-95"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>{t.contact.egypt.waBtn}</span>
@@ -137,23 +194,24 @@ export default function Contact() {
 
             {/* KSA Branch */}
             <motion.div
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -4 }}
+              onMouseMove={handleMouseMove}
               onMouseEnter={() => setHoveredBranch("ksa")}
               onMouseLeave={() => setHoveredBranch(null)}
-              className={`border rounded-2xl p-6 bg-white flex flex-col gap-4 text-base transition-all shadow-lg ${
+              className={`spotlight-card border rounded-3xl p-6 sm:p-7 bg-white flex flex-col gap-4 text-base transition-all duration-300 shadow-md ${
                 hoveredBranch === "ksa"
-                  ? "border-[#FF0A2B] shadow-[0_10px_30px_-5px_rgba(255,10,43,0.2)]"
-                  : "border-gray-200 hover:border-[#FF0A2B]/60"
+                  ? "border-[#FF0A2B] shadow-[0_15px_35px_-5px_rgba(255,10,43,0.2)]"
+                  : "border-gray-200/90 hover:border-[#FF0A2B]/60"
               }`}
             >
               <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   <span className="text-2xl">🇸🇦</span>
                   <span className="font-black text-lg sm:text-xl text-[#0D0204]">
                     {t.contact.saudi.title}
                   </span>
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF0A2B] bg-[#FF0A2B]/10 px-2.5 py-1 rounded-md border border-[#FF0A2B]/20">
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF0A2B] bg-[#FF0A2B]/10 px-3 py-1 rounded-full border border-[#FF0A2B]/20">
                   <span>{t.contact.saudi.badge}</span>
                   <Headphones className="w-3.5 h-3.5" />
                 </span>
@@ -172,40 +230,60 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Phone */}
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-                <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
-                  {t.contact.phoneLabel}
-                </span>
-                <a
-                  href="tel:+966579398098"
-                  className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
-                  style={{ direction: "ltr" }}
+              {/* Phone with Click-to-Copy */}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-[#FF0A2B] shrink-0" />
+                  <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
+                    {t.contact.phoneLabel}
+                  </span>
+                  <a
+                    href="tel:+966579398098"
+                    className="hover:text-[#FF0A2B] transition-colors font-mono font-bold text-[#0D0204] text-sm sm:text-base"
+                    style={{ direction: "ltr" }}
+                  >
+                    +966 57 939 8098
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy("+966579398098", "ksa-phone")}
+                  aria-label="Copy phone"
+                  className="p-1.5 text-gray-400 hover:text-[#FF0A2B] hover:bg-gray-100 rounded-lg transition-colors"
                 >
-                  +966 57 939 8098
-                </a>
+                  <Copy className="w-4 h-4" />
+                </button>
               </div>
 
-              {/* Email */}
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#FF0A2B] shrink-0" />
-                <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
-                  {t.contact.emailLabel}
-                </span>
-                <a
-                  href="mailto:info@duckagency.com"
-                  className="hover:text-[#FF0A2B] transition-colors font-sans text-[#444444] text-sm sm:text-base"
+              {/* Email with Click-to-Copy */}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-[#FF0A2B] shrink-0" />
+                  <span className="font-extrabold text-[#FF0A2B] text-sm sm:text-base">
+                    {t.contact.emailLabel}
+                  </span>
+                  <a
+                    href="mailto:info@duckagency.com"
+                    className="hover:text-[#FF0A2B] transition-colors font-sans text-[#444444] text-sm sm:text-base"
+                  >
+                    info@duckagency.com
+                  </a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy("info@duckagency.com", "ksa-email")}
+                  aria-label="Copy email"
+                  className="p-1.5 text-gray-400 hover:text-[#FF0A2B] hover:bg-gray-100 rounded-lg transition-colors"
                 >
-                  info@duckagency.com
-                </a>
+                  <Copy className="w-4 h-4" />
+                </button>
               </div>
 
               {/* Direct Quick Action Buttons */}
               <div className="pt-2 grid grid-cols-2 gap-3">
                 <a
                   href="tel:+966579398098"
-                  className="inline-flex items-center justify-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-2.5 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-glow-red shimmer-hover"
+                  className="inline-flex items-center justify-center gap-2 bg-[#FF0A2B] hover:bg-[#E00020] text-white py-3 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-glow-red shimmer-hover active:scale-95"
                 >
                   <Phone className="w-4 h-4" />
                   <span>{t.contact.saudi.callBtn}</span>
@@ -214,7 +292,7 @@ export default function Contact() {
                   href="https://wa.me/966579398098?text=مرحباً%20Duck%20Agency%20السعودية،%20أود%20الاستفسار%20عن%20خدماتكم"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-2.5 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-md"
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white py-3 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-md active:scale-95"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>{t.contact.saudi.waBtn}</span>

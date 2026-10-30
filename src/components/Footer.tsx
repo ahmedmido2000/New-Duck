@@ -70,9 +70,9 @@ export default function Footer() {
   return (
     <footer
       dir={dir}
-      className="bg-white border-t border-gray-200 py-16 text-neutral-800 overflow-hidden"
+      className="bg-white border-t border-gray-200 py-16 sm:py-20 text-neutral-800 overflow-hidden relative"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Grid */}
         <div
           className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-14 ${
@@ -83,18 +83,22 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <Link
               href="#top"
-              className={`group text-5xl sm:text-6xl font-black text-[#0D0204] tracking-tight ${
+              className={`group text-5xl sm:text-6xl font-black text-[#0D0204] tracking-tight inline-block ${
                 isRTL ? "text-right" : "text-left"
               }`}
             >
-              <span className="text-[#FF0A2B] inline-block group-hover:scale-105 transition-transform">
+              <motion.span
+                whileHover={{ scale: 1.15, rotate: -6 }}
+                transition={{ type: "spring", stiffness: 350, damping: 12 }}
+                className="text-[#FF0A2B] inline-block"
+              >
                 d
-              </span>
+              </motion.span>
               uck
             </Link>
 
-            {/* Slogan from PDF: للرؤية أثر */}
-            <div className={`flex items-center gap-2 ${isRTL ? "flex-row" : "flex-row"}`}>
+            {/* Slogan */}
+            <div className="flex items-center gap-2">
               <span className="w-4 h-[2px] bg-[#FF0A2B]" />
               <span className="text-base font-black text-[#0D0204] tracking-wide">
                 {t.footer.sloganPart1}{" "}
@@ -110,7 +114,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links with Sliding Animated Underline */}
           <div>
             <h4 className="text-xl sm:text-2xl font-black text-[#0D0204] mb-4">
               {t.footer.quickLinksTitle}
@@ -120,9 +124,10 @@ export default function Footer() {
                 <li key={link.id}>
                   <a
                     href={link.href}
-                    className="text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block"
+                    className="relative text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block group/link"
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    <span className="absolute bottom-0 right-0 rtl:right-0 rtl:left-auto left-0 w-0 group-hover/link:w-full h-[2px] bg-[#FF0A2B] transition-all duration-300" />
                   </a>
                 </li>
               ))}
@@ -139,9 +144,10 @@ export default function Footer() {
                 <li key={idx}>
                   <a
                     href="#services"
-                    className="text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block"
+                    className="relative text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block group/link"
                   >
-                    {svc}
+                    <span>{svc}</span>
+                    <span className="absolute bottom-0 right-0 rtl:right-0 rtl:left-auto left-0 w-0 group-hover/link:w-full h-[2px] bg-[#FF0A2B] transition-all duration-300" />
                   </a>
                 </li>
               ))}
@@ -156,7 +162,7 @@ export default function Footer() {
             <p className="text-sm text-[#555555] mb-4">
               {t.footer.socialDesc}
             </p>
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-2.5 mb-6">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.name}
@@ -164,9 +170,10 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  whileHover={{ y: -4, scale: 1.1, backgroundColor: "#FF0A2B", color: "#ffffff" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-200 text-[#0D0204] flex items-center justify-center transition-colors shadow-sm hover:border-[#FF0A2B]"
+                  whileHover={{ y: -5, scale: 1.15, backgroundColor: "#FF0A2B", color: "#ffffff" }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-200 text-[#0D0204] flex items-center justify-center transition-colors shadow-sm hover:border-[#FF0A2B] hover:shadow-lg hover:shadow-red-500/20"
                 >
                   {social.icon}
                 </motion.a>
@@ -175,10 +182,10 @@ export default function Footer() {
 
             <motion.button
               type="button"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleScrollToTop}
-              className="inline-flex items-center gap-2 text-sm text-[#0D0204] hover:text-white bg-gray-100 hover:bg-[#FF0A2B] border border-gray-200 hover:border-[#FF0A2B] px-4 py-2.5 rounded-lg font-bold transition-all shadow-sm"
+              className="inline-flex items-center gap-2 text-sm text-[#0D0204] hover:text-white bg-gray-100 hover:bg-[#FF0A2B] border border-gray-200 hover:border-[#FF0A2B] px-4 py-2.5 rounded-xl font-bold transition-all shadow-sm cursor-pointer"
             >
               <span>{t.footer.backToTop}</span>
               <ArrowUp className="w-4 h-4" />

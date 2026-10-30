@@ -103,17 +103,19 @@ export default function Navbar() {
         {/* Language Switcher + CTA Button (Desktop) */}
         <div className="hidden sm:flex items-center gap-3">
           {/* Language Switcher Button */}
-          <button
+          <motion.button
             type="button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={toggleLanguage}
             aria-label={`Switch language to ${lang === "ar" ? "English" : "العربية"}`}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#FF0A2B]/60 text-white font-bold text-xs sm:text-sm transition-all shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#FF0A2B]/60 text-white font-bold text-xs sm:text-sm transition-all shadow-sm cursor-pointer group"
           >
-            <Globe className="w-3.5 h-3.5 text-[#FF0A2B]" />
+            <Globe className="w-3.5 h-3.5 text-[#FF0A2B] group-hover:rotate-45 transition-transform duration-300" />
             <span className="font-semibold tracking-wide">
               {lang === "ar" ? "English" : "العربية"}
             </span>
-          </button>
+          </motion.button>
 
           {/* CTA Button */}
           <MagneticButton

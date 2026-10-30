@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -17,6 +17,7 @@ import {
   Palette,
 } from "lucide-react";
 import MagneticButton from "./MagneticButton";
+import TiltCard from "./TiltCard";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceItem {
@@ -112,6 +113,15 @@ export default function Services() {
   const [activeModalId, setActiveModalId] = useState<number | null>(null);
   const { t, isRTL, dir } = useLanguage();
 
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
     <section
       id="services"
@@ -184,7 +194,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* ═══════════════ Responsive Cards Grid: 2 Rows of 3 Cards on Desktop ═══════════════ */}
+        {/* ═══════════════ Responsive Cards Grid with 3D Tilt & Spotlights ═══════════════ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
           {services.map((svc, index) => {
             const localized =
@@ -198,66 +208,78 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.55, delay: index * 0.08 }}
-                whileHover={{ y: -6 }}
-                className={`group relative rounded-[26px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-white via-white to-red-50/20 border border-gray-200/90 hover:border-[#FF0A2B] transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_45px_-12px_rgba(255,10,43,0.14)] min-h-[350px] sm:min-h-[370px] ${
-                  isRTL ? "text-right" : "text-left"
-                }`}
+                className="h-full"
               >
-                {/* Top Subtle Radial Highlight on Hover */}
-                <div className="absolute inset-0 pointer-events-none rounded-[26px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.08),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <TiltCard maxTilt={8} glare={false} className="rounded-[26px] h-full">
+                  <div
+                    onMouseMove={handleCardMouseMove}
+                    className={`spotlight-card group relative rounded-[26px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-white via-white to-red-50/20 border border-gray-200/90 hover:border-[#FF0A2B] transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_45px_-12px_rgba(255,10,43,0.15)] min-h-[350px] sm:min-h-[370px] h-full ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
+                  >
+                    {/* Top Subtle Radial Highlight on Hover */}
+                    <div className="absolute inset-0 pointer-events-none rounded-[26px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.08),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Card Top: Icon & Clean Pill Badge */}
-                <div className="relative z-10 flex flex-col items-start gap-4">
-                  <div className="w-full flex items-center justify-between">
-                    {/* Service Icon Box */}
-                    <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 group-hover:border-[#FF0A2B]/40 group-hover:bg-[#FF0A2B]/10 text-[#FF0A2B] flex items-center justify-center transition-all duration-300 shadow-sm group-hover:scale-110">
-                      <Icon className="w-6 h-6 text-[#FF0A2B]" />
+                    {/* Card Top: Icon & Clean Pill Badge */}
+                    <div className="relative z-10 flex flex-col items-start gap-4">
+                      <div className="w-full flex items-center justify-between">
+                        {/* Service Icon Box with Spring Morph */}
+                        <motion.div
+                          whileHover={{ scale: 1.15, rotate: -4 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                          className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 group-hover:border-[#FF0A2B]/40 group-hover:bg-[#FF0A2B]/10 text-[#FF0A2B] flex items-center justify-center transition-all duration-300 shadow-sm"
+                        >
+                          <Icon className="w-6 h-6 text-[#FF0A2B]" />
+                        </motion.div>
+
+                        {/* Clean Pill Badge + Number */}
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-xs font-bold text-[#0D0204] group-hover:border-[#FF0A2B]/30 group-hover:text-[#FF0A2B] transition-colors shadow-xs">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#FF0A2B] animate-pulse" />
+                          <span>{t.services.pill}</span>
+                          <span className="text-gray-300">·</span>
+                          <span className="font-mono text-gray-400 group-hover:text-[#FF0A2B] font-bold">
+                            0{svc.id}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Service Title */}
+                      <h3 className="text-xl sm:text-2xl font-black text-[#0D0204] group-hover:text-[#FF0A2B] leading-snug transition-colors mt-2">
+                        {localized.title}
+                      </h3>
                     </div>
 
-                    {/* Clean Pill Badge + Number */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-xs font-bold text-[#0D0204] group-hover:border-[#FF0A2B]/30 group-hover:text-[#FF0A2B] transition-colors shadow-xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF0A2B]" />
-                      <span>{t.services.pill}</span>
-                      <span className="text-gray-300">·</span>
-                      <span className="font-mono text-gray-400 group-hover:text-[#FF0A2B] font-bold">
-                        0{svc.id}
-                      </span>
+                    {/* Card Body: Description */}
+                    <p className="relative z-10 text-sm sm:text-[15px] text-[#555555] leading-relaxed my-4 font-medium flex-1">
+                      {localized.description}
+                    </p>
+
+                    {/* Card Bottom: Read More Button with Magnetic Spring */}
+                    <div className="relative z-10 pt-4 border-t border-gray-100 flex items-center justify-between">
+                      <motion.button
+                        type="button"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setActiveModalId(svc.id)}
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gray-100 hover:bg-[#FF0A2B] text-[#0D0204] hover:text-white transition-all duration-300 shadow-xs group/btn"
+                      >
+                        <span>{t.services.readMore}</span>
+                        {isRTL ? (
+                          <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
+                        ) : (
+                          <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                        )}
+                      </motion.button>
                     </div>
                   </div>
-
-                  {/* Service Title */}
-                  <h3 className="text-xl sm:text-2xl font-black text-[#0D0204] group-hover:text-[#FF0A2B] leading-snug transition-colors mt-2">
-                    {localized.title}
-                  </h3>
-                </div>
-
-                {/* Card Body: Description */}
-                <p className="relative z-10 text-sm sm:text-[15px] text-[#555555] leading-relaxed my-4 font-medium flex-1">
-                  {localized.description}
-                </p>
-
-                {/* Card Bottom: Read More Button */}
-                <div className="relative z-10 pt-4 border-t border-gray-100 flex items-center justify-between">
-                  <button
-                    type="button"
-                    onClick={() => setActiveModalId(svc.id)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gray-100 hover:bg-[#FF0A2B] text-[#0D0204] hover:text-white transition-all duration-300 active:scale-95 group/btn shadow-xs"
-                  >
-                    <span>{t.services.readMore}</span>
-                    {isRTL ? (
-                      <ArrowLeft className="w-4 h-4 transition-transform group-hover/btn:-translate-x-1" />
-                    ) : (
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                    )}
-                  </button>
-                </div>
+                </TiltCard>
               </motion.div>
             );
           })}
         </div>
       </div>
 
-      {/* ═══════════════ Service Details Modal ═══════════════ */}
+      {/* ═══════════════ Service Details Modal with Spring Physics ═══════════════ */}
       <AnimatePresence>
         {activeModalId !== null && (() => {
           const activeSvc = services.find((s) => s.id === activeModalId);
@@ -268,11 +290,11 @@ export default function Services() {
           return (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                initial={{ opacity: 0, scale: 0.92, y: 25 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-                className={`relative bg-white border border-gray-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl ${
+                exit={{ opacity: 0, scale: 0.92, y: 25 }}
+                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] as const }}
+                className={`relative bg-white border border-gray-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl ${
                   isRTL ? "text-right" : "text-left"
                 }`}
                 role="dialog"
@@ -281,7 +303,7 @@ export default function Services() {
                 <button
                   type="button"
                   onClick={() => setActiveModalId(null)}
-                  className={`absolute top-4 p-2 text-neutral-400 hover:text-black rounded-lg hover:bg-gray-100 transition-colors ${
+                  className={`absolute top-4 p-2 text-neutral-400 hover:text-black rounded-xl hover:bg-gray-100 transition-colors ${
                     isRTL ? "left-4" : "right-4"
                   }`}
                   aria-label="Close"
@@ -306,13 +328,16 @@ export default function Services() {
                     {t.services.modalIncludes}
                   </h4>
                   {activeLocalized.details.map((item, idx) => (
-                    <div
+                    <motion.div
                       key={idx}
+                      initial={{ opacity: 0, x: isRTL ? 15 : -15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.15 + idx * 0.05 }}
                       className="flex items-center gap-2.5 text-sm sm:text-base text-[#333333]"
                     >
                       <Check className="w-5 h-5 text-[#FF0A2B] shrink-0" />
                       <span>{item}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 

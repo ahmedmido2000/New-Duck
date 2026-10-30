@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, MessageCircle, Globe } from "lucide-react";
 import MagneticButton from "./MagneticButton";
@@ -11,27 +12,12 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("top");
+  const pathname = usePathname();
   const { lang, t, toggleLanguage, isRTL } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
-
-      const sections = ["top", "about", "services", "partners", "faq", "contact"];
-      const scrollPosition = window.scrollY + 120;
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -39,6 +25,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = t.nav.links;
+
+  const isLinkActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <motion.header
@@ -54,7 +45,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <Link
-          href="#top"
+          href="/"
           className="group focus:outline-none flex items-center select-none"
           style={{ direction: "ltr" }}
           aria-label="Duck Agency"
@@ -78,30 +69,30 @@ export default function Navbar() {
 
         {/* Desktop Navigation Links */}
         <nav
-          className="hidden md:flex items-center gap-6 lg:gap-8 text-[15px] lg:text-base font-semibold"
+          className="hidden md:flex items-center gap-5 lg:gap-7 text-[14px] lg:text-[15px] font-semibold"
           aria-label="Navigation"
         >
           {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
+            const active = isLinkActive(link.href);
             return (
-              <a
+              <Link
                 key={link.id}
                 href={link.href}
                 className={`relative py-1 transition-colors duration-200 group ${
-                  isActive
+                  active
                     ? "text-[#FF0A2B]"
                     : "text-neutral-300 hover:text-white"
                 }`}
               >
                 <span>{link.name}</span>
-                {isActive && (
+                {active && (
                   <motion.span
                     layoutId="activeNavIndicator"
                     className="absolute bottom-0 right-0 left-0 h-[2.5px] bg-[#FF0A2B] rounded-full shadow-glow-red"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -170,26 +161,23 @@ export default function Navbar() {
           >
             <div className="flex flex-col px-6 py-6 gap-3">
               {navLinks.map((link, idx) => {
-                const isActive = activeSection === link.id;
+                const active = isLinkActive(link.href);
                 return (
-                  <motion.a
+                  <Link
                     key={link.id}
                     href={link.href}
-                    initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 }}
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center justify-between py-2.5 px-3 rounded-lg text-lg font-bold transition-all ${
-                      isActive
+                      active
                         ? "text-[#FF0A2B] bg-[#2A0509]"
                         : "text-neutral-200 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     <span>{link.name}</span>
-                    {isActive && (
+                    {active && (
                       <span className="w-2 h-2 rounded-full bg-[#FF0A2B] shadow-glow-red" />
                     )}
-                  </motion.a>
+                  </Link>
                 );
               })}
 

@@ -109,6 +109,52 @@ export interface Translations {
     heading: string;
     items: { q: string; a: string }[];
   };
+  packages: {
+    kicker: string;
+    heading: string;
+    subtitle: string;
+    monthly: string;
+    requestBtn: string;
+    customInquiry: string;
+    items: {
+      id: string;
+      tier: string;
+      name: string;
+      price: string;
+      popular?: boolean;
+      features: string[];
+    }[];
+    calculator: {
+      title: string;
+      subtitle: string;
+      serviceTypeLabel: string;
+      scopeLabel: string;
+      timelineLabel: string;
+      standard: string;
+      fast: string;
+      estimateTotal: string;
+      sarApprox: string;
+      egpApprox: string;
+      bookBtn: string;
+    };
+  };
+  academy: {
+    kicker: string;
+    heading: string;
+    subtitle: string;
+    enrollBtn: string;
+    certifiedBadge: string;
+    courses: {
+      id: string;
+      title: string;
+      desc: string;
+      oldPrice: string;
+      price: string;
+      discount: string;
+      features: string[];
+    }[];
+    features: { title: string; desc: string }[];
+  };
   contact: {
     kicker: string;
     heading: string;
@@ -178,12 +224,13 @@ export const translations: Record<Language, Translations> = {
   ar: {
     nav: {
       links: [
-        { name: "الرئيسية", href: "#top", id: "top" },
-        { name: "من نحن", href: "#about", id: "about" },
-        { name: "الخدمات", href: "#services", id: "services" },
-        { name: "الشركاء", href: "#partners", id: "partners" },
-        { name: "الأسئلة الشائعة", href: "#faq", id: "faq" },
-        { name: "تواصل معنا", href: "#contact", id: "contact" },
+        { name: "الرئيسية", href: "/", id: "home" },
+        { name: "من نحن", href: "/about", id: "about" },
+        { name: "الخدمات", href: "/services", id: "services" },
+        { name: "شركاء النجاح", href: "/partners", id: "partners" },
+        { name: "الباقات", href: "/packages", id: "packages" },
+        { name: "الأكاديمية", href: "/academy", id: "academy" },
+        { name: "تواصل معنا", href: "/contact", id: "contact" },
       ],
       cta: "ابدأ مسارك الآن",
       langButton: "English",
@@ -402,6 +449,146 @@ export const translations: Record<Language, Translations> = {
         },
       ],
     },
+    packages: {
+      kicker: "حلول نمو مرنة",
+      heading: "باقات التسويق والنمو المتكاملة",
+      subtitle: "اختر الباقة المناسبة لحجم ونشاط شركتك مع إمكانية التخصيص الكامل لتحقيق أعلى عائد استثماري.",
+      monthly: "/ شهرياً",
+      requestBtn: "طلب الباقة الآن",
+      customInquiry: "أو احسب تكلفة مشروعك بدقة عبر الحاسبة الذكية أدناه",
+      items: [
+        {
+          id: "basic",
+          tier: "الشركات الناشئة والمتاجر",
+          name: "الباقة الأساسية Basic",
+          price: "$490",
+          features: [
+            "إدارة منصتين للتواصل الاجتماعي",
+            "12 تصميماً جرافيكياً احترافياً مخصصاً",
+            "إدارة وضبط حملتين إعلانيتين ممولتين",
+            "كتابة محتوى إبداعي وجذاب",
+            "تقرير شهري مفصل بالأرقام والتحليلات",
+          ],
+        },
+        {
+          id: "advanced",
+          tier: "الشركات المتنامية والعلامات التجارية",
+          name: "باقة النمو الاحترافية Pro",
+          price: "$890",
+          popular: true,
+          features: [
+            "إدارة 4 منصات تواصل اجتماعي",
+            "24 تصميماً جرافيكياً وموشن جرافيك",
+            "إنتاج ومونتاج 4 فيديوهات Reels / TikTok",
+            "إدارة حملات إعلانية متقدمة على Meta و Google و TikTok",
+            "تحسين مستمر لمعدل التحويل (CRO) وتتبع البكسل",
+            "دعم فني واستشاري مخصص 24/7",
+          ],
+        },
+        {
+          id: "enterprise",
+          tier: "المؤسسات والبراندات الكبرى",
+          name: "الباقة المؤسسية الشاملة Enterprise",
+          price: "$1,690",
+          features: [
+            "إدارة شاملة لجميع المنصات الرقمية",
+            "إنتاج فيديو إعلاني سينمائي بدقة 4K",
+            "استراتيجية تسويق كاملة وخطة نمو ربع سنوية",
+            "حملات إعادة استهداف ذكية وبناء قمع مبيعات (Funnel)",
+            "مدير حسابات تنفيذي مخصص ومباشر",
+            "تقارير أسبوعية حية ولوحة تحكم تفاعلية",
+          ],
+        },
+      ],
+      calculator: {
+        title: "الحاسبة التقديرية لتكلفة المشاريع",
+        subtitle: "حدد نوع الخدمة ونطاق العمل لتحصل على تسعير فوري وتقديري لمشروعك مع إمكانية الحجز المباشر.",
+        serviceTypeLabel: "نوع المشروع الأساسي:",
+        scopeLabel: "نطاق وحجم العمل المطلوب:",
+        timelineLabel: "سرعة التنفيذ المطلوبة:",
+        standard: "تنفيذ قياسي (طبيعي)",
+        fast: "تنفيذ سريع فائق الأولوية (+30%)",
+        estimateTotal: "التكلفة التقديرية للاستثمار:",
+        sarApprox: "ريال سعودي تقريباً",
+        egpApprox: "جنيه مصري تقريباً",
+        bookBtn: "تأكيد وبدء التنفيذ عبر واتساب",
+      },
+    },
+    academy: {
+      kicker: "بناء الكفاءات والمهارات الاحترافية",
+      heading: "أكاديمية Duck للتعليم والتدريب الرقمي",
+      subtitle: "برامج تدريبية متخصصة ومكثفة معتمدة دولياً تؤهلك لسوق العمل الحر والشركات الإقليمية الكبرى.",
+      enrollBtn: "الالتحاق بالبرنامج الآن",
+      certifiedBadge: "شهادة معتمدة مع تدريب عملي حي",
+      courses: [
+        {
+          id: "graphic-design",
+          title: "دبلوم الجرافيك ديزاين الاحترافي",
+          desc: "إتقان الفوتوشوب والإليستريتور وتصميم الهويات البصرية للشركات والمتاجر.",
+          oldPrice: "$465",
+          price: "$130",
+          discount: "خصم 72%",
+          features: [
+            "إتقان Photoshop & Illustrator بالكامل",
+            "تصميم الإعلانات والهويات التجارية",
+            "مشاريع حية وبناء بورتفوليو قوي",
+          ],
+        },
+        {
+          id: "ui-ux",
+          title: "تصميم واجهات وتجربة المستخدم UI/UX",
+          desc: "Figma، أبحاث سلوك المستخدم، ونماذج التفاعل عالية الدقة للأنظمة والمتاجر.",
+          oldPrice: "$345",
+          price: "$155",
+          discount: "خصم 55%",
+          features: [
+            "احتراف أداة Figma وتصميم النماذج التفاعلية",
+            "أبحاث المستخدم ورسم تدفقات العمل Wireframing",
+            "بناء أنظمة التصميم Design Systems المتكاملة",
+          ],
+        },
+        {
+          id: "fullstack",
+          title: "تطوير الويب الشامل Full-Stack Web Development",
+          desc: "Next.js، React، Node.js، وقواعد البيانات السحابية مع مشاريع برمجية تجارية.",
+          oldPrice: "$200",
+          price: "$150",
+          discount: "خصم 25%",
+          features: [
+            "بناء متاجر وتطبيقات متطورة وسريعة",
+            "ربط واجهات برمجة التطبيقات APIs السحابية",
+            "استضافة ونشر مشاريع فعلية على السحابة",
+          ],
+        },
+        {
+          id: "design-systems",
+          title: "تخصص أنظمة التصميم Design Systems",
+          desc: "بناء وإدارة مكتبات المكونات الموحدة للشركات الناشئة والفرق الكبيرة.",
+          oldPrice: "$160",
+          price: "$120",
+          discount: "خصم 25%",
+          features: [
+            "هيكلة المكونات القابلة لإعادة الاستخدام",
+            "توثيق المعايير القياسية للفرق البرمجية",
+            "اختبار القابلية والمواءمة لمختلف الشاشات",
+          ],
+        },
+      ],
+      features: [
+        {
+          title: "شهادات تدريبية معتمدة",
+          desc: "شهادة موثقة تثبت كفاءتك وخبرتك العملية للتقديم في كبرى الشركات.",
+        },
+        {
+          title: "تطبيق عملي على مشاريع واقعية",
+          desc: "لن تدرس نظرياً فقط؛ بل ستبني مشاريع فعلية تضعها في معرض أعمالك من اليوم الأول.",
+        },
+        {
+          title: "إرشاد ومتابعة مباشرة مع خبراء Duck",
+          desc: "جلسات مراجعة وتقييم دوري لأعمالك للإجابة على جميع استفساراتك وتوجيهك المهني.",
+        },
+      ],
+    },
     contact: {
       kicker: "تواصل مباشر",
       heading: "أينما كان نشاطك، نحن قريبون منك",
@@ -476,12 +663,13 @@ export const translations: Record<Language, Translations> = {
   en: {
     nav: {
       links: [
-        { name: "Home", href: "#top", id: "top" },
-        { name: "About Us", href: "#about", id: "about" },
-        { name: "Services", href: "#services", id: "services" },
-        { name: "Partners", href: "#partners", id: "partners" },
-        { name: "FAQ", href: "#faq", id: "faq" },
-        { name: "Contact Us", href: "#contact", id: "contact" },
+        { name: "Home", href: "/", id: "home" },
+        { name: "About Us", href: "/about", id: "about" },
+        { name: "Services", href: "/services", id: "services" },
+        { name: "Partners", href: "/partners", id: "partners" },
+        { name: "Packages", href: "/packages", id: "packages" },
+        { name: "Academy", href: "/academy", id: "academy" },
+        { name: "Contact Us", href: "/contact", id: "contact" },
       ],
       cta: "Start Your Journey",
       langButton: "العربية",
@@ -697,6 +885,146 @@ export const translations: Record<Language, Translations> = {
         {
           q: "How do I monitor advertising performance and sales metrics?",
           a: "You receive transparent real-time dashboards detailing every currency unit spent, traffic quality, customer acquisition cost (CAC), and direct verified revenue.",
+        },
+      ],
+    },
+    packages: {
+      kicker: "Flexible Scaling Solutions",
+      heading: "Integrated Marketing & Growth Packages",
+      subtitle: "Select the ideal tier engineered for your organization's stage with full modular customization to maximize ROI.",
+      monthly: "/ monthly",
+      requestBtn: "Request This Package",
+      customInquiry: "Or calculate your bespoke project investment via our live calculator below",
+      items: [
+        {
+          id: "basic",
+          tier: "Startups & Emerging Stores",
+          name: "Basic Growth Tier",
+          price: "$490",
+          features: [
+            "Management of 2 social media platforms",
+            "12 custom brand graphics & creatives",
+            "2 managed & optimized paid advertising campaigns",
+            "Compelling copywriting & audience engagement",
+            "Comprehensive monthly performance analytics report",
+          ],
+        },
+        {
+          id: "advanced",
+          tier: "Scaling Brands & Businesses",
+          name: "Professional Pro Tier",
+          price: "$890",
+          popular: true,
+          features: [
+            "Management of 4 social media platforms",
+            "24 high-converting graphics & motion assets",
+            "4 edited high-impact Reels / TikTok video productions",
+            "Omnichannel ad management across Meta, Google & TikTok",
+            "Conversion rate optimization (CRO) & pixel tracking",
+            "Dedicated 24/7 strategic account support",
+          ],
+        },
+        {
+          id: "enterprise",
+          tier: "Enterprises & Leading Brands",
+          name: "Enterprise Mastery Tier",
+          price: "$1,690",
+          features: [
+            "Full-spectrum digital presence management",
+            "Bespoke 4K cinematic commercial video production",
+            "Quarterly omni-channel growth strategy & funnel architecture",
+            "Smart retargeting & lifetime customer value optimization",
+            "Dedicated senior executive account director",
+            "Live real-time dashboards & bi-weekly executive reviews",
+          ],
+        },
+      ],
+      calculator: {
+        title: "Dynamic Project Cost Calculator",
+        subtitle: "Select your project core requirements and scope to compute an instant transparent estimate with direct reservation.",
+        serviceTypeLabel: "Core Project Domain:",
+        scopeLabel: "Scope & Deliverable Magnitude:",
+        timelineLabel: "Delivery Priority Velocity:",
+        standard: "Standard Quality Delivery",
+        fast: "Priority Fast-Track (+30%)",
+        estimateTotal: "Estimated Investment Benchmark:",
+        sarApprox: "SAR approx.",
+        egpApprox: "EGP approx.",
+        bookBtn: "Confirm & Initiate on WhatsApp",
+      },
+    },
+    academy: {
+      kicker: "Cultivating Elite Digital Talent",
+      heading: "Duck Academy for Digital Excellence",
+      subtitle: "Industry-accredited, intensive training programs preparing you for top-tier agency roles and high-earning freelance careers.",
+      enrollBtn: "Enroll in Program Now",
+      certifiedBadge: "Accredited Certificate with Real Client Practicums",
+      courses: [
+        {
+          id: "graphic-design",
+          title: "Professional Graphic Design Diploma",
+          desc: "Mastery of Photoshop, Illustrator, and corporate brand identity crafting.",
+          oldPrice: "$465",
+          price: "$130",
+          discount: "72% OFF",
+          features: [
+            "Comprehensive Photoshop & Illustrator mastery",
+            "High-conversion ad creative design",
+            "Real-client portfolio development",
+          ],
+        },
+        {
+          id: "ui-ux",
+          title: "UI/UX Product Design Specialization",
+          desc: "Figma mastery, behavioral user research, and high-fidelity interactive prototyping.",
+          oldPrice: "$345",
+          price: "$155",
+          discount: "55% OFF",
+          features: [
+            "Advanced interactive prototyping in Figma",
+            "User journey mapping & wireframe architecture",
+            "Complete scalable Design System creation",
+          ],
+        },
+        {
+          id: "fullstack",
+          title: "Full-Stack Web & E-Commerce Engineering",
+          desc: "Next.js, React, Node.js, and cloud database architectures with real-world deployments.",
+          oldPrice: "$200",
+          price: "$150",
+          discount: "25% OFF",
+          features: [
+            "High-speed modern e-commerce stores",
+            "Cloud APIs & payment gateway integrations",
+            "Production cloud hosting and continuous deployment",
+          ],
+        },
+        {
+          id: "design-systems",
+          title: "Design Systems & Component Architecture",
+          desc: "Building and governing cohesive component libraries for scaling tech teams.",
+          oldPrice: "$160",
+          price: "$120",
+          discount: "25% OFF",
+          features: [
+            "Reusable atomic component tokenization",
+            "Developer documentation and handoff governance",
+            "Accessibility and cross-device compliance testing",
+          ],
+        },
+      ],
+      features: [
+        {
+          title: "Accredited Professional Credentials",
+          desc: "Verified certifications demonstrating proven competence to premier regional employers.",
+        },
+        {
+          title: "100% Real-World Project Practicums",
+          desc: "You graduate with a live portfolio of verified client projects, not dry theoretical slides.",
+        },
+        {
+          title: "Direct Mentorship from Senior Duck Specialists",
+          desc: "One-on-one code and design reviews with the actual creative directors behind Duck's campaigns.",
         },
       ],
     },

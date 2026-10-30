@@ -1,7 +1,5 @@
-import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import { LanguageProvider } from "@/context/LanguageContext";
-import ScrollProgress from "@/components/ScrollProgress";
-import Navbar from "@/components/Navbar";
+"use client";
+
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Integrations from "@/components/Integrations";
@@ -14,66 +12,48 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Consultation from "@/components/Consultation";
 import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
-    <LanguageProvider>
-      <SmoothScrollProvider>
-        {/* Top Red Glow Scroll Progress */}
-        <ScrollProgress />
+    <main className="min-h-screen bg-[#0D0204] text-white overflow-hidden selection:bg-[#FF0A2B] selection:text-white relative">
+      {/* Hero Section with Interactive Canvas Physics Grid */}
+      <Hero />
 
-        <main className="min-h-screen bg-[#0D0204] text-white overflow-hidden selection:bg-[#FF0A2B] selection:text-white relative">
-          {/* Header / Navbar with fast Lenis integration */}
-          <Navbar />
+      {/* Light Theme Section Wrapper: From About to Consultation */}
+      <div className="bg-white text-[#0D0204]">
+        {/* About Section */}
+        <About />
 
-          {/* Hero Section with Interactive Canvas Physics Grid */}
-          <Hero />
+        {/* Integrations & Supported Platforms */}
+        <Integrations />
 
-          {/* Light Theme Section Wrapper: From About to Footer */}
-          <div className="bg-white text-[#0D0204]">
-            {/* About Section */}
-            <About />
+        {/* Services Section with 3D Stack Cards & Modal */}
+        <Services />
 
-            {/* Integrations & Supported Platforms */}
-            <Integrations />
+        {/* AI Marketing Ecosystem Network */}
+        <AIEcosystem />
 
-            {/* Services Section with 3D Stack Cards & Modal */}
-            <Services />
+        {/* Features & Cybernetic AI Visual */}
+        <Features />
 
-            {/* AI Marketing Ecosystem Network */}
-            <AIEcosystem />
+        {/* Metrics & Performance Stats */}
+        <Metrics />
 
-            {/* Features & Cybernetic AI Visual */}
-            <Features />
+        {/* Success Partners - Strategic Regional Clients */}
+        <Partners />
 
-            {/* Metrics & Performance Stats */}
-            <Metrics />
+        {/* FAQ Section */}
+        <FAQ />
 
-            {/* Success Partners - Strategic Regional Clients */}
-            <Partners />
+        {/* Contact & Regional Branches */}
+        <Contact />
 
-            {/* FAQ Section */}
-            <FAQ />
+        {/* Free Consultation */}
+        <Consultation />
 
-            {/* Contact & Regional Branches */}
-            <Contact />
-
-            {/* Free Consultation & FAQ */}
-            <Consultation />
-
-            {/* Footer */}
-            <Footer />
-          </div>
-
-          {/* Floating Quick WhatsApp Button */}
-          <FloatingWhatsApp />
-
-          {/* Floating Back to Top with Scroll Ring */}
-          <BackToTop />
-        </main>
-      </SmoothScrollProvider>
-    </LanguageProvider>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </main>
   );
 }

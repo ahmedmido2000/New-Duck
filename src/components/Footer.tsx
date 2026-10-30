@@ -82,7 +82,7 @@ export default function Footer() {
           {/* Brand Info & Slogan */}
           <div className="flex flex-col gap-3">
             <Link
-              href="#top"
+              href="/"
               className={`group text-5xl sm:text-6xl font-black text-[#0D0204] tracking-tight inline-block ${
                 isRTL ? "text-right" : "text-left"
               }`}
@@ -122,13 +122,13 @@ export default function Footer() {
             <ul className="space-y-2.5 text-base font-semibold">
               {t.nav.links.map((link) => (
                 <li key={link.id}>
-                  <a
+                  <Link
                     href={link.href}
                     className="relative text-[#444444] hover:text-[#FF0A2B] transition-colors inline-block group/link"
                   >
                     <span>{link.name}</span>
                     <span className="absolute bottom-0 right-0 rtl:right-0 rtl:left-auto left-0 w-0 group-hover/link:w-full h-[2px] bg-[#FF0A2B] transition-all duration-300" />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

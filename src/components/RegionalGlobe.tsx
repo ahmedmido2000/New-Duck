@@ -32,15 +32,7 @@ export default function RegionalGlobe({
       left: "37.5%",
       top: "33.5%",
       flagSvg: (
-        // Egypt Flag Tricolor (Red, White with Eagle, Black)
-        <svg viewBox="0 0 36 36" className="w-full h-full rounded-full">
-          <rect width="36" height="12" fill="#CE1126" />
-          <rect y="12" width="36" height="12" fill="#FFFFFF" />
-          <rect y="24" width="36" height="12" fill="#000000" />
-          {/* Golden Eagle emblem in center */}
-          <circle cx="18" cy="18" r="3.2" fill="#C09300" />
-          <path d="M16.5 16.5 L19.5 16.5 L18 19.5 Z" fill="#7D6000" />
-        </svg>
+        <img src="/images/flag-egypt.svg" alt="Egypt Flag" className="w-full h-full object-cover rounded-full" />
       ),
     },
     {
@@ -55,17 +47,7 @@ export default function RegionalGlobe({
       left: "49.5%",
       top: "37.5%",
       flagSvg: (
-        // Saudi Arabia Flag (Green with White Palm & Swords emblem)
-        <svg viewBox="0 0 36 36" className="w-full h-full rounded-full bg-[#006C35]">
-          <circle cx="18" cy="18" r="18" fill="#006C35" />
-          {/* White emblem */}
-          <path
-            d="M18 10 C18 12 16 13 15 14 C17 14 18 15 18 16 C18 15 19 14 21 14 C20 13 18 12 18 10 Z"
-            fill="#FFFFFF"
-          />
-          <line x1="18" y1="14" x2="18" y2="21" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M13 22 L23 22 M14 24 L22 24" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
-        </svg>
+        <img src="/images/flag-saudi.svg" alt="Saudi Arabia Flag" className="w-full h-full object-cover rounded-full" />
       ),
     },
   ];

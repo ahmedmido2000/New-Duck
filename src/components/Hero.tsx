@@ -237,11 +237,11 @@ export default function Hero() {
 
         {/* Hero Title with Cinematic Word Split Masking */}
         <h1
-          className={`text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.3] sm:leading-[1.28] tracking-tight max-w-4xl ${
+          className={`text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.45] sm:leading-[1.42] tracking-tight max-w-4xl ${
             isRTL ? "text-right" : "text-left"
           }`}
         >
-          <span className="inline-block overflow-hidden mr-[0.25em] rtl:ml-[0.25em] rtl:mr-0 align-bottom">
+          <span className="inline-block overflow-hidden pb-[0.18em] mr-[0.25em] rtl:ml-[0.25em] rtl:mr-0 align-bottom">
             <motion.span
               variants={itemVariants}
               className="inline-block"
@@ -250,7 +250,7 @@ export default function Hero() {
             </motion.span>
           </span>
 
-          <span className="inline-block overflow-hidden mr-[0.25em] rtl:ml-[0.25em] rtl:mr-0 align-bottom">
+          <span className="inline-block overflow-hidden pb-[0.18em] mr-[0.25em] rtl:ml-[0.25em] rtl:mr-0 align-bottom">
             <motion.span
               variants={itemVariants}
               whileHover={{ scale: 1.12, rotate: -3 }}
@@ -264,7 +264,7 @@ export default function Hero() {
           {titleTailWords.map((word, idx) => (
             <span
               key={idx}
-              className="inline-block overflow-hidden mr-[0.25em] rtl:ml-[0.25em] rtl:mr-0 align-bottom"
+              className="inline-block overflow-hidden pb-[0.18em] mr-[0.25em] rtl:ml-[0.25em] rtl:mr-0 align-bottom"
             >
               <motion.span
                 variants={{

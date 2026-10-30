@@ -46,14 +46,24 @@ export default function Hero() {
       {/* Hero Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/duck-hero-city.jpg"
+          src={isRTL ? "/images/duck-hero-city.jpg" : "/images/duck-hero-en.jpg"}
           alt=""
-          className="w-full h-full object-cover object-center"
+          className={`w-full h-full object-cover ${
+            isRTL
+              ? "object-center"
+              : "object-[75%_center] sm:object-center"
+          }`}
           aria-hidden="true"
         />
         {/* Dark Overlay to keep text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0204]/70 via-[#0D0204]/55 to-[#0D0204]/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D0204]/60 via-transparent to-[#0D0204]/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0204]/70 via-[#0D0204]/50 to-[#0D0204]/90" />
+        <div
+          className={`absolute inset-0 ${
+            isRTL
+              ? "bg-gradient-to-r from-[#0D0204]/60 via-transparent to-[#0D0204]/30"
+              : "bg-gradient-to-r from-[#0D0204]/85 via-[#0D0204]/40 to-transparent"
+          }`}
+        />
       </div>
 
       {/* Background Animated SVG Laser Streams */}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, MessageCircle, Globe } from "lucide-react";
 import MagneticButton from "./MagneticButton";
@@ -54,20 +55,25 @@ export default function Navbar() {
         {/* Brand Logo */}
         <Link
           href="#top"
-          className="group text-3xl sm:text-4xl font-black tracking-tight select-none focus:outline-none flex items-center"
+          className="group focus:outline-none flex items-center select-none"
           style={{ direction: "ltr" }}
           aria-label="Duck Agency"
         >
-          <motion.span
-            whileHover={{ scale: 1.15, rotate: -5 }}
-            transition={{ type: "spring", stiffness: 300, damping: 10 }}
-            className="text-[#FF0A2B] inline-block text-glow-red"
+          <motion.div
+            whileHover={{ scale: 1.06, rotate: -1 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: "spring", stiffness: 350, damping: 15 }}
+            className="relative flex items-center"
           >
-            d
-          </motion.span>
-          <span className="text-white group-hover:text-neutral-200 transition-colors">
-            uck
-          </span>
+            <Image
+              src="/images/duck-logo.png"
+              alt="Duck Agency"
+              width={160}
+              height={59}
+              priority
+              className="h-9 sm:h-11 w-auto object-contain drop-shadow-[0_2px_12px_rgba(255,10,43,0.3)] transition-all duration-300 group-hover:drop-shadow-[0_4px_22px_rgba(255,10,43,0.65)]"
+            />
+          </motion.div>
         </Link>
 
         {/* Desktop Navigation Links */}

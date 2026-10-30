@@ -2,29 +2,35 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, Sparkles, X, MessageCircle } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Sparkles,
+  X,
+  MessageCircle,
+  ShoppingBag,
+  Layout,
+  Smartphone,
+  TrendingUp,
+  Search,
+  Palette,
+} from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface ServiceItem {
   id: number;
+  icon: React.ElementType;
   title: string;
   description: string;
   details: string[];
-  gradient: string;
-  borderColor: string;
-  pillBg: string;
-  pillColor: string;
-  titleColor: string;
-  descColor: string;
-  btnBg: string;
-  btnColor: string;
-  btnHoverBg: string;
 }
 
 const services: ServiceItem[] = [
   {
     id: 1,
+    icon: ShoppingBag,
     title: "إنشاء المتاجر الإلكترونية",
     description:
       "نصمم متجرك باحترافية لعرض منتجاتك بطريقة جذابة وسهلة الاستخدام، مع ربط بوابات الدفع والشحن.",
@@ -34,18 +40,10 @@ const services: ServiceItem[] = [
       "ربط بوابات الدفع الإلكتروني وشركات الشحن",
       "تحسين سرعة التصفح وتجربة الشراء السريعة",
     ],
-    gradient: "linear-gradient(145deg, #FF0A2B 0%, #D60520 60%, #940010 100%)",
-    borderColor: "rgba(255, 255, 255, 0.35)",
-    pillBg: "#ffffff",
-    pillColor: "#FF0A2B",
-    titleColor: "#ffffff",
-    descColor: "rgba(255, 255, 255, 0.95)",
-    btnBg: "#ffffff",
-    btnColor: "#0D0204",
-    btnHoverBg: "#f0f0f0",
   },
   {
     id: 2,
+    icon: Layout,
     title: "تصميم واجهة موقع",
     description:
       "واجهات عصرية وتجربة مستخدم سلسة تحوّل الزائر لعميل، بتصاميم حديثة ومدروسة سيكولوجياً.",
@@ -55,18 +53,10 @@ const services: ServiceItem[] = [
       "تصاميم نماذج أولية تفاعلية على Figma",
       "مراعاة أعلى معايير سهولة الاستخدام والوصول",
     ],
-    gradient: "linear-gradient(145deg, #180306 0%, #0D0204 60%, #050001 100%)",
-    borderColor: "rgba(255, 10, 43, 0.55)",
-    pillBg: "#FF0A2B",
-    pillColor: "#ffffff",
-    titleColor: "#ffffff",
-    descColor: "rgba(255, 255, 255, 0.9)",
-    btnBg: "#FF0A2B",
-    btnColor: "#ffffff",
-    btnHoverBg: "#E00020",
   },
   {
     id: 3,
+    icon: Smartphone,
     title: "التطبيقات الإلكترونية",
     description:
       "نطوّر تطبيقات ذكية ومتجاوبة تناسب احتياجات عملك وتصل لعملائك بسهولة وسرعة فائقة.",
@@ -76,18 +66,10 @@ const services: ServiceItem[] = [
       "إشعارات فورية لزيادة تفاعل وإعادة شراء العملاء",
       "دعم فني وصيانة دورية وأمان عالي",
     ],
-    gradient: "linear-gradient(145deg, #FFFFFF 0%, #FAF5F6 100%)",
-    borderColor: "rgba(255, 10, 43, 0.35)",
-    pillBg: "#0D0204",
-    pillColor: "#ffffff",
-    titleColor: "#0D0204",
-    descColor: "#333333",
-    btnBg: "#0D0204",
-    btnColor: "#ffffff",
-    btnHoverBg: "#FF0A2B",
   },
   {
     id: 4,
+    icon: TrendingUp,
     title: "إدارة الحملات الإعلانية",
     description:
       "ندير حملاتك باحترافية للوصول لجمهورك المستهدف بأفضل نتيجة وبأعلى عائد استثماري ممكن.",
@@ -97,18 +79,10 @@ const services: ServiceItem[] = [
       "إعادة استهداف ذكية لزوار المتجر",
       "تقارير دورية وشفافة توضح العائد والمبيعات",
     ],
-    gradient: "linear-gradient(145deg, #FF0A2B 0%, #D60520 60%, #940010 100%)",
-    borderColor: "rgba(255, 255, 255, 0.35)",
-    pillBg: "#ffffff",
-    pillColor: "#FF0A2B",
-    titleColor: "#ffffff",
-    descColor: "rgba(255, 255, 255, 0.95)",
-    btnBg: "#ffffff",
-    btnColor: "#0D0204",
-    btnHoverBg: "#f0f0f0",
   },
   {
     id: 5,
+    icon: Search,
     title: "تحسين محركات البحث (SEO)",
     description:
       "يظهر نشاطك أمام العملاء اللي بيدوّروا على خدماتك، ونرتقي بترتيبه للصفحات الأولى في جوجل.",
@@ -118,18 +92,10 @@ const services: ServiceItem[] = [
       "بناء روابط خلفية قوية وموثوقة (Backlinks)",
       "تحسين محركات البحث المحلية (Local SEO)",
     ],
-    gradient: "linear-gradient(145deg, #180306 0%, #0D0204 60%, #050001 100%)",
-    borderColor: "rgba(255, 10, 43, 0.55)",
-    pillBg: "#FF0A2B",
-    pillColor: "#ffffff",
-    titleColor: "#ffffff",
-    descColor: "rgba(255, 255, 255, 0.9)",
-    btnBg: "#FF0A2B",
-    btnColor: "#ffffff",
-    btnHoverBg: "#E00020",
   },
   {
     id: 6,
+    icon: Palette,
     title: "تصميم الهوية البصرية",
     description:
       "نصمّم لك هوية مميزة تعكس شخصية علامتك وتجذب جمهورك وترسخ في أذهانهم لفترة طويلة.",
@@ -139,15 +105,6 @@ const services: ServiceItem[] = [
       "تصاميم السوشيال ميديا والمطبوعات الإعلانية",
       "نبرة الصوت والرسائل التسويقية للعلامة",
     ],
-    gradient: "linear-gradient(145deg, #FFFFFF 0%, #FAF5F6 100%)",
-    borderColor: "rgba(255, 10, 43, 0.35)",
-    pillBg: "#0D0204",
-    pillColor: "#ffffff",
-    titleColor: "#0D0204",
-    descColor: "#333333",
-    btnBg: "#0D0204",
-    btnColor: "#ffffff",
-    btnHoverBg: "#FF0A2B",
   },
 ];
 
@@ -161,9 +118,9 @@ export default function Services() {
       dir={dir}
       className="bg-white relative overflow-hidden py-20 sm:py-28 border-t border-gray-100"
     >
-      {/* Background Ambience */}
-      <div className="absolute top-10 right-0 w-[500px] h-[500px] bg-[#FF0A2B]/4 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-0 w-[450px] h-[450px] bg-[#FF0A2B]/4 rounded-full blur-[130px] pointer-events-none" />
+      {/* Ambient Red Glows in Background */}
+      <div className="absolute top-12 right-0 w-[550px] h-[550px] bg-[#FF0A2B]/4 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-12 left-0 w-[500px] h-[500px] bg-[#FF0A2B]/4 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-12 sm:gap-16">
         {/* ═══════════════ Section Header ═══════════════ */}
@@ -232,6 +189,7 @@ export default function Services() {
           {services.map((svc, index) => {
             const localized =
               t.services.items.find((item) => item.id === svc.id) || svc;
+            const Icon = svc.icon;
 
             return (
               <motion.div
@@ -241,70 +199,49 @@ export default function Services() {
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.55, delay: index * 0.08 }}
                 whileHover={{ y: -6 }}
-                className={`group relative rounded-[26px] p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-all duration-300 min-h-[340px] sm:min-h-[360px] ${
+                className={`group relative rounded-[26px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-white via-white to-red-50/20 border border-gray-200/90 hover:border-[#FF0A2B] transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_45px_-12px_rgba(255,10,43,0.14)] min-h-[350px] sm:min-h-[370px] ${
                   isRTL ? "text-right" : "text-left"
                 }`}
-                style={{
-                  background: svc.gradient,
-                  border: `1.5px solid ${svc.borderColor}`,
-                  boxShadow:
-                    "0 10px 30px -10px rgba(0, 0, 0, 0.1), 0 20px 40px -15px rgba(0, 0, 0, 0.08)",
-                }}
               >
-                {/* Card Top: Clean Pill Badge + Number Indicator */}
-                <div className="relative z-10 flex flex-col items-start gap-3">
+                {/* Top Subtle Radial Highlight on Hover */}
+                <div className="absolute inset-0 pointer-events-none rounded-[26px] bg-[radial-gradient(120%_90%_at_50%_-20%,rgba(255,10,43,0.08),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Card Top: Icon & Clean Pill Badge */}
+                <div className="relative z-10 flex flex-col items-start gap-4">
                   <div className="w-full flex items-center justify-between">
-                    {/* Clean Pill Badge without any dashes or kashidas */}
-                    <div
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full font-black text-xs tracking-wider shadow-sm uppercase"
-                      style={{
-                        backgroundColor: svc.pillBg,
-                        color: svc.pillColor,
-                      }}
-                    >
-                      <span
-                        className="w-1.5 h-1.5 rounded-full"
-                        style={{ backgroundColor: svc.pillColor }}
-                      />
-                      <span>{t.services.pill}</span>
+                    {/* Service Icon Box */}
+                    <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 group-hover:border-[#FF0A2B]/40 group-hover:bg-[#FF0A2B]/10 text-[#FF0A2B] flex items-center justify-center transition-all duration-300 shadow-sm group-hover:scale-110">
+                      <Icon className="w-6 h-6 text-[#FF0A2B]" />
                     </div>
 
-                    {/* Service Number */}
-                    <span
-                      className="font-mono font-black text-sm opacity-60 tracking-wider"
-                      style={{ color: svc.titleColor }}
-                    >
-                      0{svc.id}
-                    </span>
+                    {/* Clean Pill Badge + Number */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200 text-xs font-bold text-[#0D0204] group-hover:border-[#FF0A2B]/30 group-hover:text-[#FF0A2B] transition-colors shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF0A2B]" />
+                      <span>{t.services.pill}</span>
+                      <span className="text-gray-300">·</span>
+                      <span className="font-mono text-gray-400 group-hover:text-[#FF0A2B] font-bold">
+                        0{svc.id}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Service Title */}
-                  <h3
-                    className="text-xl sm:text-2xl font-black leading-snug mt-1"
-                    style={{ color: svc.titleColor }}
-                  >
+                  <h3 className="text-xl sm:text-2xl font-black text-[#0D0204] group-hover:text-[#FF0A2B] leading-snug transition-colors mt-2">
                     {localized.title}
                   </h3>
                 </div>
 
                 {/* Card Body: Description */}
-                <p
-                  className="relative z-10 text-sm sm:text-[15px] leading-relaxed my-4 font-medium flex-1"
-                  style={{ color: svc.descColor }}
-                >
+                <p className="relative z-10 text-sm sm:text-[15px] text-[#555555] leading-relaxed my-4 font-medium flex-1">
                   {localized.description}
                 </p>
 
                 {/* Card Bottom: Read More Button */}
-                <div className="relative z-10 pt-4 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+                <div className="relative z-10 pt-4 border-t border-gray-100 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => setActiveModalId(svc.id)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 shadow-md active:scale-95 group/btn"
-                    style={{
-                      backgroundColor: svc.btnBg,
-                      color: svc.btnColor,
-                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gray-100 hover:bg-[#FF0A2B] text-[#0D0204] hover:text-white transition-all duration-300 active:scale-95 group/btn shadow-xs"
                   >
                     <span>{t.services.readMore}</span>
                     {isRTL ? (

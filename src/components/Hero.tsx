@@ -90,16 +90,22 @@ export default function Hero() {
         style={{ x: bgX, y: bgY, scale: 1.05 }}
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <img
-          src={isRTL ? "/images/duck-hero-city.jpg" : "/images/duck-hero-en.jpg"}
-          alt=""
-          className={`w-full h-full object-cover ${
-            isRTL
-              ? "object-center"
-              : "object-[75%_center] sm:object-center"
-          }`}
-          aria-hidden="true"
-        />
+        <picture className="w-full h-full block">
+          {/* Mobile Background: Duck & Laptop centered and scaled for mobile */}
+          <source
+            media="(max-width: 639px)"
+            srcSet="/images/duck-hero-mobile.jpg"
+          />
+          {/* Desktop & Tablet Background */}
+          <img
+            src={isRTL ? "/images/duck-hero-city.jpg" : "/images/duck-hero-en.jpg"}
+            alt="Duck Agency Hero Background"
+            className={`w-full h-full object-cover object-center ${
+              !isRTL && "sm:object-[75%_center]"
+            }`}
+            aria-hidden="true"
+          />
+        </picture>
         {/* Dark Overlay to keep text readable */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0D0204]/70 via-[#0D0204]/50 to-[#0D0204]/90" />
         <div
@@ -136,16 +142,16 @@ export default function Hero() {
         />
       ))}
 
-      {/* Background Animated SVG Laser Streams */}
+      {/* Background Animated SVG Laser Streams (Orbital Oval Loops - 100% Responsive) */}
       <svg
-        viewBox="0 0 1360 640"
-        preserveAspectRatio="xMinYMax slice"
+        viewBox="0 0 1000 600"
+        preserveAspectRatio="none"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full opacity-90 pointer-events-none z-[2]"
       >
         <defs>
           <linearGradient id="laserGrad" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stopColor="#FF0A2B" stopOpacity="0" />
+            <stop offset="0%" stopColor="#FF0A2B" stopOpacity="0.7" />
             <stop offset="50%" stopColor="#FF0A2B" stopOpacity="1" />
             <stop offset="100%" stopColor="#FFB3BE" stopOpacity="1" />
           </linearGradient>
@@ -159,58 +165,73 @@ export default function Hero() {
         </defs>
 
         <g fill="none" stroke="url(#laserGrad)" strokeLinecap="round">
-          {/* Static Guides */}
+          {/* Static Orbital Guide Rings */}
           <path
-            d="M-40 640 C300 560 560 300 1360 90"
-            strokeWidth="2"
-            opacity="0.3"
+            d="M 135.9 449.8 C 158.7 509.1, 340.1 494.6, 541.2 417.4 C 742.3 340.2, 886.9 229.5, 864.1 170.2 C 841.3 110.9, 659.9 125.4, 458.8 202.6 C 257.7 279.8, 113.1 390.5, 135.9 449.8 Z"
+            strokeWidth="1.5"
+            opacity="0.22"
+            vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M-40 620 C340 520 640 250 1360 40"
-            strokeWidth="2"
-            opacity="0.3"
+            d="M 103.2 462.3 C 131.9 537.1, 332.8 529.5, 552.0 445.4 C 771.1 361.3, 925.5 232.5, 896.8 157.7 C 868.1 82.9, 667.2 90.5, 448.0 174.6 C 228.9 258.7, 74.5 387.5, 103.2 462.3 Z"
+            strokeWidth="1.5"
+            opacity="0.22"
+            vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M-40 600 C380 540 600 360 1360 150"
-            strokeWidth="2"
-            opacity="0.3"
+            d="M 70.6 474.8 C 105.2 565.1, 325.5 564.4, 562.7 473.4 C 799.9 382.3, 964.1 235.4, 929.4 145.2 C 894.8 54.9, 674.5 55.6, 437.3 146.6 C 200.1 237.7, 35.9 384.6, 70.6 474.8 Z"
+            strokeWidth="1.5"
+            opacity="0.22"
+            vectorEffect="non-scaling-stroke"
           />
 
-          {/* Animated Flowing Laser Lines with Blur Filter */}
+          {/* Animated Flowing Oval Laser Lines with Blur Filter */}
           <path
             className="st"
             pathLength="1"
-            d="M-40 640 C300 560 560 300 1360 90"
+            d="M 135.9 449.8 C 158.7 509.1, 340.1 494.6, 541.2 417.4 C 742.3 340.2, 886.9 229.5, 864.1 170.2 C 841.3 110.9, 659.9 125.4, 458.8 202.6 C 257.7 279.8, 113.1 390.5, 135.9 449.8 Z"
             strokeWidth="5"
             filter="url(#laserGlow)"
+            vectorEffect="non-scaling-stroke"
           />
           <path
             className="st st2"
             pathLength="1"
-            d="M-40 620 C340 520 640 250 1360 40"
+            d="M 103.2 462.3 C 131.9 537.1, 332.8 529.5, 552.0 445.4 C 771.1 361.3, 925.5 232.5, 896.8 157.7 C 868.1 82.9, 667.2 90.5, 448.0 174.6 C 228.9 258.7, 74.5 387.5, 103.2 462.3 Z"
             strokeWidth="4"
             filter="url(#laserGlow)"
+            vectorEffect="non-scaling-stroke"
           />
           <path
             className="st st3"
             pathLength="1"
-            d="M-40 600 C380 540 600 360 1360 150"
+            d="M 70.6 474.8 C 105.2 565.1, 325.5 564.4, 562.7 473.4 C 799.9 382.3, 964.1 235.4, 929.4 145.2 C 894.8 54.9, 674.5 55.6, 437.3 146.6 C 200.1 237.7, 35.9 384.6, 70.6 474.8 Z"
             strokeWidth="6"
             filter="url(#laserGlow)"
+            vectorEffect="non-scaling-stroke"
           />
 
           {/* Crisp Core Overlays */}
           <path
             className="st"
             pathLength="1"
-            d="M-40 640 C300 560 560 300 1360 90"
+            d="M 135.9 449.8 C 158.7 509.1, 340.1 494.6, 541.2 417.4 C 742.3 340.2, 886.9 229.5, 864.1 170.2 C 841.3 110.9, 659.9 125.4, 458.8 202.6 C 257.7 279.8, 113.1 390.5, 135.9 449.8 Z"
             strokeWidth="2"
+            vectorEffect="non-scaling-stroke"
           />
           <path
             className="st st2"
             pathLength="1"
-            d="M-40 620 C340 520 640 250 1360 40"
+            d="M 103.2 462.3 C 131.9 537.1, 332.8 529.5, 552.0 445.4 C 771.1 361.3, 925.5 232.5, 896.8 157.7 C 868.1 82.9, 667.2 90.5, 448.0 174.6 C 228.9 258.7, 74.5 387.5, 103.2 462.3 Z"
             strokeWidth="2"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path
+            className="st st3"
+            pathLength="1"
+            d="M 70.6 474.8 C 105.2 565.1, 325.5 564.4, 562.7 473.4 C 799.9 382.3, 964.1 235.4, 929.4 145.2 C 894.8 54.9, 674.5 55.6, 437.3 146.6 C 200.1 237.7, 35.9 384.6, 70.6 474.8 Z"
+            strokeWidth="2"
+            vectorEffect="non-scaling-stroke"
           />
         </g>
       </svg>

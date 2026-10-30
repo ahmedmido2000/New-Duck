@@ -251,10 +251,10 @@ html[dir="ltr"], body[dir="ltr"] {
   opacity: 1;
 }
 
-/* Original laser and custom styles */
+/* Hero Cyberpunk Orbital Lasers */
 @keyframes flow {
   from {
-    stroke-dashoffset: 1.4;
+    stroke-dashoffset: 1;
   }
   to {
     stroke-dashoffset: 0;
@@ -262,18 +262,20 @@ html[dir="ltr"], body[dir="ltr"] {
 }
 
 .st {
-  stroke-dasharray: 0.3 1.1;
-  animation: flow 5s linear infinite;
+  stroke-dasharray: 0.28 0.72;
+  animation: flow 6s linear infinite;
 }
 
 .st2 {
-  animation-duration: 7s;
-  animation-delay: -2s;
+  stroke-dasharray: 0.32 0.68;
+  animation-duration: 8.5s;
+  animation-delay: -3s;
 }
 
 .st3 {
-  animation-duration: 6s;
-  animation-delay: -4s;
+  stroke-dasharray: 0.24 0.76;
+  animation-duration: 7.2s;
+  animation-delay: -5s;
 }
 
 .svc-odd {
